@@ -1,0 +1,28 @@
+---
+const { title = 'Veterans Disability Network' } = Astro.props;
+---
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Merriweather:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="icon" type="image/svg+xml" href="/logo.png" />
+		<meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles/theme.css" />
+  </head>
+  <body>
+    <slot />
+    <script type="module" src="/scripts/theme-toggle.js"></script>
+  </body>
+</html>
+
+<style>
+  @import tailwindcss/base;
+  @import tailwindcss/components;
+  @import tailwindcss/utilities;
+</style>
