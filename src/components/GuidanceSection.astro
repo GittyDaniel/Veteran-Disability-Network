@@ -1,0 +1,177 @@
+---
+import GuideImg from '../assets/guide_img.jpg';
+---
+
+<section class="guidance" aria-labelledby="guidance-title">
+  <div class="guidance-inner">
+    <!-- TEXT COLUMN -->
+    <div class="guidance-text">
+      <h2 id="guidance-title" class="guidance-title">
+        Guiding Veterans To The Benefits They Deserve
+      </h2>
+
+      <div class="guidance-copy">
+        <p>
+          <strong>Veteran Adviser</strong> provides personalized assistance to Veterans seeking to increase their VA disability rating.
+          We understand that the complex and confusing VA system often leads to a reduced or unwanted rating, which is why our team of
+          expert case managers is here to help guide you through it all.
+        </p>
+
+        <p>
+          What makes us unique is our private network of doctors, making sure you receive an accurate rating based on your current
+          condition. At Veteran Adviser, our mission is to empower Veterans by guiding them through this challenging system while
+          providing knowledgeable resources and care along the way.
+        </p>
+
+        <a href="/get-started" class="action-btn">Get Started Today</a>
+      </div>
+    </div>
+
+    <!-- IMAGE COLUMN -->
+    <figure class="guidance-figure">
+      <img
+        src={GuideImg.src}
+        alt="Veteran Adviser holding American flag"
+        loading="lazy"
+        decoding="async"
+        width="960"
+        height="1200"
+        sizes="(min-width: 900px) 32vw, 100vw"
+      />
+    </figure>
+  </div>
+
+  <style>
+    /* ===== Section frame ===== */
+    .guidance {
+      background: var(--color-bg);
+      color: var(--color-text);
+      padding: 3.5rem 1rem;
+    }
+    .guidance-inner {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* ===== Text column ===== */
+    .guidance-text {
+      display: grid;
+      gap: 1rem;
+      max-width: 65ch;
+    }
+
+    /* ===== Title ===== */
+    .guidance-title {
+      font: 800 clamp(1.5rem, 2.2vw + 1rem, 2.25rem) "Merriweather", Georgia, serif;
+      line-height: 1.15;
+      margin: 0;
+      letter-spacing: .005em;
+      text-wrap: balance;
+      color: var(--color-primary);
+    }
+
+    /* ===== Copy ===== */
+    .guidance-copy {
+      display: grid;
+      gap: 1rem;
+      font-size: clamp(1rem, .25vw + 1rem, 1.0625rem);
+      line-height: 1.7;
+    }
+    .guidance-copy p { margin: 0; }
+
+    /* ===== CTA ===== */
+    .action-btn {
+      justify-self: start;
+      display: inline-block;
+      margin-top: .5rem;
+      padding: .9rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      background: var(--color-primary);
+      color: var(--color-bg);
+      box-shadow: 0 6px 15px rgba(0,0,0,.18);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
+    }
+    .action-btn:hover,
+    .action-btn:focus-visible {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 20px rgba(0,0,0,.22);
+    }
+    .action-btn:active {
+      transform: translateY(0) scale(.98);
+      box-shadow: 0 4px 10px rgba(0,0,0,.18);
+    }
+
+    /* ===== Image (rounded rectangle) ===== */
+    .guidance-figure {
+      margin: 0;
+      justify-self: center;
+    }
+    .guidance-figure img {
+      display: block;
+      width: min(100%, 32rem);
+      aspect-ratio: 4 / 5;      /* avoids CLS while loading */
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 1rem;      /* rounded box */
+      box-shadow: 0 12px 28px rgba(0,0,0,.12);
+      outline: 1px solid var(--color-border);
+      outline-offset: -1px;
+    }
+
+    /* Make the image shorter on mobile */
+@media (max-width: 899px) {
+  .guidance-figure img {
+    /* Shorter aspect and a height cap */
+    aspect-ratio: 4 / 3;                     /* was 4/5 (tall) */
+    max-height: clamp(12rem, 42vh, 18rem);   /* ~192–288px typical */
+    width: 100%;
+    object-fit: cover;
+    /* Optional: bias the crop if faces are high/low in the frame */
+    object-position: 50% 40%;
+  }
+}
+
+    /* ===== Large screens: two columns, text left / image right ===== */
+    @media (min-width: 900px) {
+      .guidance-inner {
+        grid-template-columns: 1.1fr .9fr;      /* slight bias to copy */
+        grid-template-areas: "text image";
+        align-items: center;
+        gap: 3rem;
+      }
+      .guidance-text { grid-area: text; }
+      .guidance-figure { grid-area: image; justify-self: end; }
+      .guidance-figure img { width: clamp(22rem, 30vw, 32rem); }
+
+      /* Tasteful drop cap on first paragraph (desktop only) */
+      .guidance-copy p:first-of-type::first-letter {
+        font-family: "Merriweather", Georgia, serif;
+        font-weight: 800;
+        color: var(--color-primary);
+        margin-right: .35rem;
+        line-height: 1;
+        -webkit-initial-letter: 2;
+        initial-letter: 2;
+      }
+      @supports not (initial-letter: 2) {
+        .guidance-copy p:first-of-type::first-letter {
+          float: left;
+          font-size: 2.6rem;
+          margin: .1rem .4rem 0 0;
+        }
+      }
+    }
+
+    /* ===== Reduced motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .action-btn { transition: background .2s ease, color .2s ease; }
+    }
+  </style>
+</section>
