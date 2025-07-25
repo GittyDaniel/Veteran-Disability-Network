@@ -17,62 +17,103 @@
   </div>
 
   <style>
-    /* ─── Hero layout ───────────────────────────────── */
+    /* ───────────────── Hero (mobile‑first) ───────────────── */
     .hero {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:12rem 2rem 4rem;
-      min-height:calc(100vh - 500px);
-    }
-    .hero-inner { max-width:55rem; animation:fade-slide-in .8s ease-out both; }
+      /* Use small viewport units so mobile browser UI doesn't squash the hero */
+      min-height: calc(100svh - var(--header-h, 500px));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
 
-    /* ─── Text styles ───────────────────────────────── */
+      /* Comfortable mobile spacing + notch awareness */
+      padding: clamp(3rem, 8vh, 5rem) 1rem
+               max(2rem, calc(2rem + env(safe-area-inset-bottom)));
+    }
+
+    .hero-inner {
+      /* Keep line length readable on small screens */
+      max-width: 42rem;
+      display: grid;
+      gap: 1rem;
+      animation: fade-slide-in .7s ease-out both;
+    }
+
+    /* ───────────────── Typography ───────────────── */
     .hero-heading {
-      font-size:clamp(2rem, 4.5vw, 3.5rem);
-      line-height:1.15;
-      font-weight:800;
-      font-family:"Merriweather", Georgia, serif;
-      color:var(--color-bg);
-      text-shadow:0 3px 6px rgba(0,0,0,.4);
-      margin-bottom:1rem;
-    }
-    .hero-highlight {
-      color:var(--color-primary);
-      text-decoration-color:currentColor;
-      text-decoration-thickness:3px;
-      text-underline-offset:4px;
-    }
-    .hero-tagline {
-      font-size:clamp(1.15rem, 1.6vw + .7rem, 1.5rem);
-      font-weight:400;
-      letter-spacing:.015em;
-      color:var(--color-bg);
-      margin-bottom:2.5rem;
+      /* Never too small on phones; scales up smoothly */
+      font-size: clamp(1.875rem, 6.5vw + 0.5rem, 3rem); /* ~30–48px */
+      line-height: 1.15;
+      font-weight: 800;
+      font-family: "Merriweather", Georgia, serif;
+      color: var(--color-bg);
+      text-shadow: 0 3px 6px rgba(0,0,0,.4);
+      margin: 0 0 .5rem;
+      text-wrap: balance; /* nicer multi-line wrapping where supported */
     }
 
-    /* ─── CTA button ───────────────────────────────── */
+    .hero-highlight {
+      color: var(--color-primary);
+      text-decoration-color: currentColor;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 4px;
+    }
+
+    .hero-tagline {
+      /* Clear, readable copy on phones; modest growth on larger viewports */
+      font-size: clamp(1rem, 3.2vw + .6rem, 1.25rem); /* ~16–20px */
+      font-weight: 600;
+      letter-spacing: .015em;
+      color: var(--color-bg);
+      margin: 0 0 1.75rem;
+    }
+
+    /* ───────────────── CTA ───────────────── */
     .hero-cta {
-      display:inline-block;
-      padding:.9rem 2.5rem;
-      border-radius:9999px;
-      font-weight:700; font-size:1rem;
-      background:var(--color-primary); color:var(--color-bg);
-      text-decoration:none;
-      box-shadow:0 6px 15px rgba(0,0,0,.25);
+      display: inline-block;
+      width: min(22rem, 100%);    /* full‑width on small screens, capped */
+      padding: 1rem 1.25rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 1rem;
+      background: var(--color-primary);
+      color: var(--color-bg);
+      text-decoration: none;
+      box-shadow: 0 6px 15px rgba(0,0,0,.25);
       transition:
         transform .3s cubic-bezier(.34,1.56,.64,1),
         box-shadow .3s ease;
+      margin-inline: auto;
     }
     .hero-cta:hover,
     .hero-cta:focus-visible {
-      transform:translateY(-3px) scale(1.04);
-      box-shadow:0 10px 20px rgba(0,0,0,.25);
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
     }
     .hero-cta:active {
-      transform:translateY(0) scale(.97);
-      box-shadow:0 4px 10px rgba(0,0,0,.2);
+      transform: translateY(0) scale(.97);
+      box-shadow: 0 4px 10px rgba(0,0,0,.2);
+    }
+
+    /* ───────────────── Breakpoints ───────────────── */
+    @media (min-width: 480px) {
+      .hero-cta { width: auto; padding: 1rem 2rem; }
+      .hero-inner { gap: 1.25rem; }
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        padding: clamp(6rem, 12vh, 9rem) 2rem 5rem;
+        min-height: calc(100vh - 500px);
+      }
+      .hero-inner { gap: 1.5rem; }
+      .hero-tagline { margin-bottom: 2.25rem; }
+    }
+
+    /* ───────────────── Reduced motion ───────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-inner { animation: none; }
+      .hero-cta { transition: background .25s ease, color .25s ease; }
     }
   </style>
 </div>
