@@ -1,5 +1,7 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import SiteHeader  from '../components/SiteHeader.astro';
+import HeroSection from '../components/HeroSection.astro';
+import StatsStrip  from '../components/StatsStrip.astro';
 import Layout from '../layouts/BaseLayout.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -7,5 +9,31 @@ import Layout from '../layouts/BaseLayout.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<section id="home" class="home_container">
+		<SiteHeader />          <!-- header component -->
+		<HeroSection />         <!-- hero component -->
+	</section>
+
+	<StatsStrip />            <!-- feature strip -->
 </Layout>
+
+<!--  Global effects that multiple components share  -->
+<style>
+	.home_container {
+		color: #fff;
+		background: var(--gradient-hero-overlay), url('../assets/hero_bg_3.webp') center/cover no-repeat;
+	}
+  @keyframes fade-slide-in {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:none; }
+  }
+
+  /*  Reduced‑motion rule kept global so it applies everywhere  */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation:none!important; transition:none!important; }
+    .cta:hover,
+    .cta:focus-visible,
+    .cta:active { transform:none!important; }
+    .nav a::after { transition:none!important; }
+  }
+</style>

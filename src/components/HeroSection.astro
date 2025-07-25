@@ -1,0 +1,78 @@
+---
+/* No props */
+---
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-heading">
+      Are You Tired of Not Getting the
+      <span class="hero-highlight">VA&nbsp;Benefits</span> You Deserve?
+    </h1>
+
+    <p class="hero-tagline">
+      Ensure accurate filing on your first try with our guidance.
+    </p>
+
+    <a href="/get-started" class="hero-cta">Get Started Today</a>
+  </div>
+
+  <style>
+    /* ─── Hero layout ───────────────────────────────── */
+    .hero {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:12rem 2rem 4rem;
+      min-height:calc(100vh - 500px);
+    }
+    .hero-inner { max-width:55rem; animation:fade-slide-in .8s ease-out both; }
+
+    /* ─── Text styles ───────────────────────────────── */
+    .hero-heading {
+      font-size:clamp(2rem, 4.5vw, 3.5rem);
+      line-height:1.15;
+      font-weight:800;
+      font-family:"Merriweather", Georgia, serif;
+      color:var(--color-bg);
+      text-shadow:0 3px 6px rgba(0,0,0,.4);
+      margin-bottom:1rem;
+    }
+    .hero-highlight {
+      color:var(--color-primary);
+      text-decoration-color:currentColor;
+      text-decoration-thickness:3px;
+      text-underline-offset:4px;
+    }
+    .hero-tagline {
+      font-size:clamp(1.15rem, 1.6vw + .7rem, 1.5rem);
+      font-weight:400;
+      letter-spacing:.015em;
+      color:var(--color-bg);
+      margin-bottom:2.5rem;
+    }
+
+    /* ─── CTA button ───────────────────────────────── */
+    .hero-cta {
+      display:inline-block;
+      padding:.9rem 2.5rem;
+      border-radius:9999px;
+      font-weight:700; font-size:1rem;
+      background:var(--color-primary); color:var(--color-bg);
+      text-decoration:none;
+      box-shadow:0 6px 15px rgba(0,0,0,.25);
+      transition:
+        transform .3s cubic-bezier(.34,1.56,.64,1),
+        box-shadow .3s ease;
+    }
+    .hero-cta:hover,
+    .hero-cta:focus-visible {
+      transform:translateY(-3px) scale(1.04);
+      box-shadow:0 10px 20px rgba(0,0,0,.25);
+    }
+    .hero-cta:active {
+      transform:translateY(0) scale(.97);
+      box-shadow:0 4px 10px rgba(0,0,0,.2);
+    }
+  </style>
+</div>
