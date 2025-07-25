@@ -10,11 +10,10 @@
   --color-focus: #ffc94d;
   --color-border: #d4dae2;
 
-  --gradient-hero: linear-gradient(
-    135deg,
-    #2e3f73 0%,
-    #5672c9 50%,
-    #b91d35 100%
+  --gradient-hero-overlay: linear-gradient(
+    21deg,
+    #5672c9b8 14%,
+    #b91d35f2 100%
   );
   --gradient-accent: linear-gradient(90deg, #b91d35, #ffc94d);
 
@@ -34,11 +33,10 @@
   --color-focus: #ffd873;
   --color-border: #324152;
 
-  --gradient-hero: linear-gradient(
-    135deg,
-    #0f1621 0%,
-    #2e3f73 40%,
-    #b91d35 100%
+  --gradient-hero-overlay: linear-gradient(
+    21deg,
+    #2e3f7312 14%,
+    #b91d3567 100%
   );
   --gradient-accent: linear-gradient(90deg, #ff6b7c, #ffd873);
 

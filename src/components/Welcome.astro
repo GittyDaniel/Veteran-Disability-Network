@@ -1,9 +1,28 @@
 
 
-<div id="container">
+<div id="hero">
 <h1>Welcome to the Veterans Disability Network</h1>
 </div>
 
 <style>
-	
+	 #hero {
+    display: flex;
+    align-items: center;
+    padding: 4rem 2rem;
+    height: 100vh;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,.6);
+
+    /* Gradient first, image second */
+    background:
+      var(--gradient-hero-overlay),
+      url('../assets/hero_bg_3.webp') center/cover no-repeat;
+  }
+
+  #hero h1 {
+    max-width: 45ch;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    margin: 0;
+  }
 </style>
