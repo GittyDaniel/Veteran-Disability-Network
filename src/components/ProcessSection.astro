@@ -1,0 +1,220 @@
+---
+/* Update image paths as needed */
+import Step1Img from '../assets/step_1.webp';
+import Step2Img from '../assets/step_2.webp';
+import Step3Img from '../assets/step_3.webp';
+---
+
+<section class="process" aria-labelledby="process-title">
+  <div class="process-inner">
+    <header class="process-header">
+      <h2 id="process-title" class="process-title">Our Process</h2>
+      <span class="process-accent" aria-hidden="true"></span>
+    </header>
+
+    <ul class="cards" role="list">
+      <!-- Card 1 -->
+      <li class="card">
+        <figure class="card-figure">
+          <img
+            src={Step1Img?.src}
+            alt="Infographic for Step 1: In‑Depth Consultation"
+            width="640" height="400"
+            loading="lazy" decoding="async"
+          />
+          <span class="step-badge" aria-hidden="true">Step&nbsp;1</span>
+        </figure>
+        <div class="card-body">
+          <h3 class="card-heading">In‑Depth Consultation</h3>
+          <p class="card-text">
+            Get matched with a dedicated case manager for a review of your service‑connected disabilities.
+            Learn about our streamlined process and what you can expect.
+          </p>
+        </div>
+      </li>
+
+      <!-- Card 2 -->
+      <li class="card">
+        <figure class="card-figure">
+          <img
+            src={Step2Img?.src}
+            alt="Infographic for Step 2: Network of Medical Providers"
+            width="640" height="400"
+            loading="lazy" decoding="async"
+          />
+          <span class="step-badge" aria-hidden="true">Step&nbsp;2</span>
+        </figure>
+        <div class="card-body">
+          <h3 class="card-heading">Network Of Medical Providers</h3>
+          <p class="card-text">
+            We will thoroughly assess your conditions and medical records and connect you with our private
+            network of medical providers when necessary.
+          </p>
+        </div>
+      </li>
+
+      <!-- Card 3 -->
+      <li class="card">
+        <figure class="card-figure">
+          <img
+            src={Step3Img?.src}
+            alt="Infographic for Step 3: VA Claim Support"
+            width="640" height="400"
+            loading="lazy" decoding="async"
+          />
+          <span class="step-badge" aria-hidden="true">Step&nbsp;3</span>
+        </figure>
+        <div class="card-body">
+          <h3 class="card-heading">VA Claim Support</h3>
+          <p class="card-text">
+            Receive expert guidance and consultation throughout the entire VA disability claim process.
+            We are here to support and give you the best chance of success!
+          </p>
+        </div>
+      </li>
+    </ul>
+
+    <a href="/get-started" class="process-cta">Get Started Today</a>
+  </div>
+
+  <style>
+    /* ===== Section (dark patriotic backdrop) ===== */
+    .process {
+      /* deep navy gradient with a subtle primary glow */
+      background:
+        radial-gradient(120% 80% at 50% -20%, color-mix(in srgb, var(--color-primary) 22%, #0b162b) 0%, transparent 60%),
+        linear-gradient(180deg, #0b162b 0%, #0a1430 100%);
+      color: #fff;
+      padding: clamp(2.5rem, 6vw, 4rem) 1rem clamp(2rem, 5vw, 3rem);
+      border-top: 1px solid rgba(255,255,255,.06);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .process-inner { max-width: 72rem; margin: 0 auto; }
+
+    .process-header { text-align: center; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
+    .process-title {
+      font: 800 clamp(1.5rem, 2.2vw + 1rem, 2.25rem) "Merriweather", Georgia, serif;
+      line-height: 1.15;
+      margin: 0;
+      text-wrap: balance;
+    }
+    .process-accent {
+      display: inline-block;
+      width: 96px; height: 4px; border-radius: 999px;
+      margin-top: .75rem;
+      background: linear-gradient(90deg, #b22234 0%, var(--color-primary) 100%);
+    }
+
+    /* ===== Cards ===== */
+    .cards {
+      --gap: clamp(1rem, 2.5vw, 1.5rem);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap);
+      margin: 0; padding: 0; list-style: none;
+    }
+    @media (min-width: 900px) {
+      .cards { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .card {
+      background: var(--color-bg);        /* light surface to pop on dark */
+      color: var(--color-text);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 18px 36px rgba(0,0,0,.25);
+      outline: 1px solid var(--color-border);
+      outline-offset: -1px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      transition: transform .25s ease, box-shadow .25s ease;
+      will-change: transform;
+    }
+    .card:where(:hover, :focus-within) {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 44px rgba(0,0,0,.3);
+    }
+
+    /* Image area */
+    .card-figure {
+      position: relative;
+      margin: 0;
+      aspect-ratio: 16 / 10;
+      background: #0e1a2f;
+      overflow: hidden;
+    }
+    .card-figure img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+    }
+    .step-badge {
+      position: absolute;
+      top: .75rem; left: .75rem;
+      font-weight: 800;
+      font-size: .8125rem;
+      letter-spacing: .02em;
+      padding: .35rem .6rem;
+      border-radius: 9999px;
+      color: var(--color-bg);
+      background: linear-gradient(90deg, var(--color-primary), #264b9b);
+      box-shadow: 0 6px 14px rgba(0,0,0,.22);
+    }
+
+    /* Content */
+    .card-body {
+      display: grid;
+      gap: .5rem;
+      padding: 1rem 1rem 1.25rem;
+    }
+    .card-heading {
+      font: 800 clamp(1.05rem, .6vw + 1rem, 1.25rem) "Merriweather", Georgia, serif;
+      margin: .25rem 0 .25rem;
+      line-height: 1.25;
+      color: var(--color-primary);
+      text-wrap: balance;
+    }
+    .card-text {
+      margin: 0;
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    /* CTA */
+   /* Center the CTA under the cards */
+.process-cta {
+  display: block;                      /* was inline-block */
+  width: fit-content;                  /* shrink to content width */
+  margin: clamp(1.25rem, 3vw, 1.75rem) auto 0;  /* auto centers horizontally */
+  padding: .9rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
+}
+
+/* Optional: stronger keyboard focus on dark background */
+.process-cta:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-primary) 70%, #ffffff);
+  outline-offset: 3px;
+}
+
+    .process-cta:hover,
+    .process-cta:focus-visible {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 16px 32px rgba(0,0,0,.4);
+    }
+    .process-cta:active { transform: translateY(0) scale(.98); }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .card, .process-cta { transition: background .2s ease, color .2s ease, box-shadow .2s ease; }
+      .card:where(:hover, :focus-within) { transform: none; }
+      .process-cta:hover, .process-cta:focus-visible, .process-cta:active { transform: none; }
+    }
+  </style>
+</section>
