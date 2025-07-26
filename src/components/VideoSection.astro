@@ -1,0 +1,287 @@
+---
+import PromoVideo from '../assets/promo.mp4';
+import PromoPoster from '../assets/promo_poster.jpg'; 
+---
+
+<section class="video-section" aria-labelledby="video-title">
+  <div class="video-block" data-autoplay>
+    <h2 id="video-title" class="video-title">
+      How We Guide Your VA Claim
+    </h2>
+
+    <div class="video-frame" tabindex="0">
+      <video
+        class="video"
+        src={PromoVideo}
+        poster={PromoPoster?.src}
+        preload="metadata"
+        playsinline
+        muted
+        loop
+      ></video>
+
+      <!-- Custom controls -->
+      <div class="controls" role="group" aria-label="Video controls">
+        <!-- Play / Pause -->
+        <button class="btn btn-play" type="button"
+        aria-label="Play" aria-pressed="false" aria-keyshortcuts="Space,Enter"
+        data-tip="Play">
+          <!-- PLAY -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M5 2.99999V21C5 21.7912 5.87525 22.269 6.54076 21.8412L20.5408 12.8412C21.1531 12.4475 21.1531 11.5524 20.5408 11.1588L6.54076 2.15881C5.87525 1.73098 5 2.20882 5 2.99999ZM18.1507 12L7 19.1683V4.83165L18.1507 12Z"/>
+          </svg>
+          <!-- PAUSE -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icon alt">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M9 2H7C5.89543 2 5 2.89543 5 4V20C5 21.1046 5.89543 22 7 22H9C10.1046 22 11 21.1046 11 20V4C11 2.89543 10.1046 2 9 2ZM7 4V20H9V4H7Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M17 2H15C13.8954 2 13 2.89543 13 4V20C13 21.1046 13.8954 22 15 22H17C18.1046 22 19 21.1046 19 20V4C19 2.89543 18.1046 2 17 2ZM15 20V4H17V20H15Z"/>
+          </svg>
+        </button>
+
+        <!-- Seek -->
+        <input class="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek position" />
+
+        <!-- Time -->
+        <div class="time" aria-live="off">
+          <span class="current">0:00</span>
+          <span aria-hidden="true">/</span>
+          <span class="duration">0:00</span>
+        </div>
+
+        <!-- Mute / Unmute -->
+        <button class="btn btn-mute" type="button"
+        aria-label="Unmute" aria-pressed="true" aria-keyshortcuts="M"
+        data-tip="Unmute">
+          <!-- MUTE (speaker) -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M14 3.38196V20.618L6.764 17L3 17C1.89543 17 1 16.1046 1 15V8.99999C1 7.89542 1.89543 6.99999 3 6.99999L6.762 6.99996L14 3.38196ZM12 6.61803L8 8.61796V15.382L12 17.382V6.61803ZM3 8.99999H6V15H3V8.99999Z"/>
+            <path d="M19.6791 3.45671C21.7136 5.48074 23 8.5681 23 12C23 15.4319 21.7136 18.5192 19.6791 20.5433L18.1031 19.2825C19.8488 17.6536 21 15.0122 21 12C21 8.98782 19.8488 6.34635 18.1031 4.71747L19.6791 3.45671Z"/>
+            <path d="M19 12C19 9.58933 18.0649 7.41237 16.5748 5.94019L14.9973 7.20218C16.2072 8.2917 17 10.0257 17 12C17 13.9743 16.2072 15.7083 14.9973 16.7978L16.5748 18.0598C18.0649 16.5876 19 14.4107 19 12Z"/>
+          </svg>
+          <!-- UNMUTE (muted state icon) -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icon alt">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M22.7071 21.2929L2.70711 1.29291L1.29289 2.70712L5.585 6.99991L3 7.00001C1.89543 7.00001 1 7.89544 1 9.00001V15C1 16.1046 1.89543 17 3 17L6.764 16.9999L14 20.618V15.4149L21.2929 22.7071L22.7071 21.2929ZM8 15.3819V9.41491L12 13.4149V17.382L8 15.3819ZM6 9.00001H3V15H6V9.00001Z"/>
+            <path d="M14 9.78691V3.38198L9.73 5.51691L11.221 7.00791L12 6.61805V7.78691L14 9.78691Z"/>
+            <path d="M19.6791 3.45674C21.7136 5.48076 23 8.56812 23 12C23 14.0207 22.554 15.922 21.7719 17.5571L20.2542 16.04C20.7304 14.8287 21 13.4578 21 12C21 8.98784 19.8488 6.34637 18.1031 4.71749L19.6791 3.45674Z"/>
+            <path d="M19 12C19 9.58935 18.0649 7.4124 16.5748 5.94021L14.9973 7.2022C16.2072 8.29172 17 10.0257 17 12C17 12.2533 16.987 12.5026 16.9617 12.7471L18.6656 14.4505C18.8829 13.6769 19 12.8531 19 12Z"/>
+          </svg>
+        </button>
+
+        <!-- Fullscreen / Minimise -->
+        <button class="btn btn-fs" type="button"
+        aria-label="Enter fullscreen" aria-pressed="false" aria-keyshortcuts="F"
+        data-tip="Enter fullscreen">
+          <!-- FULLSCREEN -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+            <path d="M4 4V12H2V2H12V4H4Z"/>
+            <path d="M15.7071 9.70711L20 5.41421V9H22V2H15V4H18.5858L14.2929 8.29289L15.7071 9.70711Z"/>
+            <path d="M20 12V20H12V22H22V12H20Z"/>
+            <path d="M9 22V20H5.41421L9.70711 15.7071L8.29289 14.2929L4 18.5858V15H2V22H9Z"/>
+          </svg>
+          <!-- MINIMISE -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="icon alt">
+            <path d="M21 10V8.00001H17.4142L21.7071 3.70712L20.2929 2.29291L16 6.5858V3.00001H14V10H21Z"/>
+            <path d="M7.00001 7.00001V12H5.00001V5.00001H12V7.00001H7.00001Z"/>
+            <path d="M17 12V17H12V19H19V12H17Z"/>
+            <path d="M3.70712 21.7071L8.00001 17.4142V21H10V14H3.00001V16H6.5858L2.29291 20.2929L3.70712 21.7071Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .video-section {
+      background: var(--color-bg);
+      color: var(--color-text);
+      padding: 3.5rem 1rem;
+    }
+    .video-block {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      gap: 1rem;
+    }
+    .video-title {
+      font: 800 clamp(1.5rem, 2vw + 1rem, 2.25rem) "Merriweather", Georgia, serif;
+      line-height: 1.15;
+      margin: 0 0 .5rem;
+      color: var(--color-primary);
+      text-wrap: balance;
+    }
+
+    /* Frame */
+    .video-frame {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0,0,0,.15);
+      outline: 1px solid var(--color-border);
+      outline-offset: -1px;
+      background: #000;
+    }
+    .video {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      max-height: clamp(14rem, 48vw, 22rem);
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Controls overlay */
+    .controls {
+      position: absolute;
+      inset: auto 0 0 0;
+      display: grid;
+      grid-template-columns: auto 1fr auto auto auto;
+      align-items: center;
+      gap: .75rem;
+      padding: .6rem .8rem;
+      background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
+      color: #fff;
+      transition: opacity .25s ease;
+    }
+    .video-frame.idle .controls { opacity: 0; pointer-events: none; }
+    .video-frame:focus-within .controls,
+    .video-frame:hover .controls { opacity: 1; pointer-events: auto; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: .65rem;
+      background: rgba(0,0,0,.25);
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+      color: #fff; /* icons inherit this */
+    }
+    .btn:hover, .btn:focus-visible {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.35);
+    }
+    .btn .icon { width: 24px; height: 24px; display:block; }
+    .btn .icon path { fill: currentColor; }  /* override inline black fill */
+    /* .btn .alt { display: none; }
+    .btn.is-alt .alt { display: block; }
+    .btn.is-alt .icon:not(.alt) { display: none; } */
+    /* Ensure any icon with [hidden] is fully removed (no flicker) */
+.controls svg[hidden] { display: none !important; }
+
+
+    .seek {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.35);
+      outline: none;
+      cursor: pointer;
+    }
+    .seek::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--color-primary);
+      border: 2px solid #fff;
+      margin-top: -4px;
+    }
+    .seek::-moz-range-thumb {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--color-primary);
+      border: 2px solid #fff;
+    }
+
+    .time {
+      font-size: .875rem;
+      color: rgba(255,255,255,.9);
+      display: inline-grid;
+      grid-auto-flow: column;
+      gap: .35rem;
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .video { max-height: none; aspect-ratio: 16 / 9; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .video-frame.idle .controls { opacity: 1; }
+      .btn, .controls { transition: none; }
+    }
+
+    /* === Bigger, centered control icons === */
+.controls {
+  /* scale icons by breakpoint without changing button size */
+  --icon-size: 16px;              /* mobile */
+}
+
+@media (min-width: 600px) {
+  .controls { --icon-size: 20px; } /* tablet */
+}
+@media (min-width: 900px) {
+  .controls { --icon-size: 20px; } /* desktop */
+}
+
+.btn {
+  /* buttons already 40x40 — keep that */
+  width: 40px;
+  height: 40px;
+  padding: 0;          /* ensure the icon sits dead-center */
+  line-height: 0;      /* remove inline baseline that can nudge SVGs */
+}
+
+.btn .icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: block;      /* avoid inline SVG whitespace */
+}
+
+.btn .icon path {
+  fill: currentColor;  /* override inline black fills to follow button color */
+}
+
+/* Hide any icon we mark as [hidden] instantly (no flicker) */
+.controls svg[hidden] { display: none !important; }
+
+/* Accessible, lightweight tooltips driven by [data-tip] */
+.btn[data-tip] { position: relative; }
+.btn[data-tip]:hover::after,
+.btn[data-tip]:focus-visible::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 110%; left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: .75rem;
+  line-height: 1;
+  padding: .45rem .6rem;
+  border-radius: .45rem;
+  color: #fff;
+  background: rgba(0,0,0,.85);
+  box-shadow: 0 4px 10px rgba(0,0,0,.25);
+  pointer-events: none;
+}
+.btn[data-tip]:hover::before,
+.btn[data-tip]:focus-visible::before {
+  content: "";
+  position: absolute;
+  bottom: 103%; left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(0,0,0,.85);
+  pointer-events: none;
+}
+
+
+  </style>
+
+  <script src='../scripts/autoVideo.ts'></script>
+</section>
