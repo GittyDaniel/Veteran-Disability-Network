@@ -216,5 +216,62 @@ import Step3Img from '../assets/step_3.webp';
       .card:where(:hover, :focus-within) { transform: none; }
       .process-cta:hover, .process-cta:focus-visible, .process-cta:active { transform: none; }
     }
+
+    /* ── Mobile ergonomic pass ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* tighten outer padding a bit on phones */
+  .process { padding: 2rem .75rem 2rem; }
+
+  /* give the list breathing room and stop it stretching edge‑to‑edge */
+  .cards {
+    gap: clamp(1rem, 4.5vw, 1.25rem);
+    max-width: 25rem;               /* comfortable reading width */
+    margin-inline: auto;            /* center the single column */
+  }
+
+  /* smaller, lighter cards on small screens */
+  .card {
+    border-radius: .75rem;
+    box-shadow: 0 10px 24px rgba(0,0,0,.28);
+  }
+
+  /* shorter media area to reduce perceived card height */
+  .card-figure {
+    object-fit: cover;
+    width: 100%;                     /* was 16/10 (taller) */
+    max-height: clamp(160px, 45vw, 220px);     /* safety cap */
+  }
+
+  /* compact content padding & type size */
+  .card-body {
+    padding: .875rem .9rem 1rem;
+  }
+  .card-heading {
+    font-size: 1.0625rem;                      /* ~17px, still strong */
+  }
+  .card-text {
+    font-size: .95rem;                         /* ~15px for phones */
+    line-height: 1.6;
+  }
+
+  /* smaller badge so it doesn’t crowd the image */
+  .step-badge {
+    top: .5rem; left: .5rem;
+    font-size: .72rem;
+    padding: .28rem .5rem;
+  }
+
+  /* optional: slightly shorter accent under the section title */
+  .process-accent { width: 80px; }
+}
+
+/* ── Small tablets: go 2‑up to avoid tall stacks ─────────────────────── */
+@media (min-width: 680px) and (max-width: 899px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cards { gap: clamp(1rem, 3vw, 1.25rem); }
+}
+
+
+
   </style>
 </section>
