@@ -2,37 +2,44 @@
 import GuideImg from '../assets/guide_img.jpg';
 ---
 
-<section class="guidance" aria-labelledby="guidance-title">
-  <div class="guidance-inner">
+<section class="about" aria-labelledby="about-title">
+  <div class="about-inner">
     <!-- TEXT COLUMN -->
-    <div class="guidance-text">
-      <h2 id="guidance-title" class="guidance-title">
-        Guiding Veterans To The Benefits They Deserve
-      </h2>
-      <span class="guidance-accent" aria-hidden="true"></span>
+    <div class="about-text">
+      <h2 id="about-title" class="about-title">About Us</h2>
+      <span class="about-accent" aria-hidden="true"></span>
 
-      <div class="guidance-copy">
+      <div class="about-copy">
         <p>
-          <strong>Veteran Adviser</strong> provides personalized assistance to Veterans seeking to increase their VA disability rating.
-          We understand that the complex and confusing VA system often leads to a reduced or unwanted rating, which is why our team of
-          expert case managers is here to help guide you through it all.
+          Veterans Disability Network is dedicated to Educating and providing detailed Consultation for men and women in our
+          military on how to navigate the VA disability claims process successfully.
         </p>
 
         <p>
-          What makes us unique is our private network of doctors, making sure you receive an accurate rating based on your current
-          condition. At Veteran Adviser, our mission is to empower Veterans by guiding them through this challenging system while
-          providing knowledgeable resources and care along the way.
+          Our mission is simple: to empower veterans with the knowledge, support, and expert resources they need to secure the
+          benefits they’ve earned. We partner with top professionals across the country — Doctors, Attorneys, and Claim Advisors
+          who are focused solely on Veteran Disability claims.
         </p>
 
-        <a href="/get-started" class="action-btn">Get Started Today</a>
+        <p>
+          Whether your case requires a fresh medical opinion, a tailored plan of action, or in-depth legal analysis, we are
+          committed to going the distance for you. Don’t let the process frustrate you or confuse you. Call Veterans Disability
+          Network today. Our Advisors will listen to you and explain the process.
+        </p>
+
+        <p>Veterans’ disability is not just what we do but what we believe in.</p>
+
+        <a href="tel:+18005551234" class="action-btn" aria-label="Call Veterans Disability Network now">
+          Call Us Now
+        </a>
       </div>
     </div>
 
     <!-- IMAGE COLUMN -->
-    <figure class="guidance-figure">
+    <figure class="about-figure">
       <img
         src={GuideImg.src}
-        alt="Veteran Adviser holding American flag"
+        alt="Advisor supporting a Veteran with an American flag backdrop"
         loading="lazy"
         decoding="async"
         width="960"
@@ -44,12 +51,12 @@ import GuideImg from '../assets/guide_img.jpg';
 
   <style>
     /* ===== Section frame ===== */
-    .guidance {
+    .about {
       background: var(--color-bg);
       color: var(--color-text);
       padding: 3.5rem 1rem;
     }
-    .guidance-inner {
+    .about-inner {
       max-width: 72rem;
       margin: 0 auto;
       display: grid;
@@ -58,14 +65,14 @@ import GuideImg from '../assets/guide_img.jpg';
     }
 
     /* ===== Text column ===== */
-    .guidance-text {
+    .about-text {
       display: grid;
-      gap: .75rem; /* tighter gap so accent sits close to title */
+      gap: .75rem; /* accent sits close to title */
       max-width: 65ch;
     }
 
     /* ===== Title ===== */
-    .guidance-title {
+    .about-title {
       font: 800 clamp(1.5rem, 2.2vw + 1rem, 2.25rem) "Merriweather", Georgia, serif;
       line-height: 1.15;
       margin: 0;
@@ -74,8 +81,8 @@ import GuideImg from '../assets/guide_img.jpg';
       color: var(--color-primary);
     }
 
-    /* Title accent (matches Process section style) */
-    .guidance-accent {
+    /* Title accent (shared motif) */
+    .about-accent {
       display: inline-block;
       width: 96px;
       height: 4px;
@@ -85,13 +92,13 @@ import GuideImg from '../assets/guide_img.jpg';
     }
 
     /* ===== Copy ===== */
-    .guidance-copy {
+    .about-copy {
       display: grid;
       gap: 1rem;
       font-size: clamp(1rem, .25vw + 1rem, 1.0625rem);
       line-height: 1.7;
     }
-    .guidance-copy p { margin: 0; }
+    .about-copy p { margin: 0; }
 
     /* ===== CTA ===== */
     .action-btn {
@@ -112,6 +119,7 @@ import GuideImg from '../assets/guide_img.jpg';
     .action-btn:focus-visible {
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 10px 20px rgba(0,0,0,.22);
+      outline: none;
     }
     .action-btn:active {
       transform: translateY(0) scale(.98);
@@ -119,11 +127,11 @@ import GuideImg from '../assets/guide_img.jpg';
     }
 
     /* ===== Image (rounded rectangle) ===== */
-    .guidance-figure {
+    .about-figure {
       margin: 0;
       justify-self: center;
     }
-    .guidance-figure img {
+    .about-figure img {
       display: block;
       width: min(100%, 32rem);
       aspect-ratio: 4 / 5;      /* avoids CLS while loading */
@@ -138,8 +146,8 @@ import GuideImg from '../assets/guide_img.jpg';
 
     /* Make the image shorter on mobile */
     @media (max-width: 899px) {
-      .guidance-figure img {
-        aspect-ratio: 4 / 3;                     /* was 4/5 (tall) */
+      .about-figure img {
+        aspect-ratio: 4 / 3;
         max-height: clamp(12rem, 42vh, 18rem);
         width: 100%;
         object-fit: cover;
@@ -149,18 +157,18 @@ import GuideImg from '../assets/guide_img.jpg';
 
     /* ===== Large screens: two columns, text left / image right ===== */
     @media (min-width: 900px) {
-      .guidance-inner {
-        grid-template-columns: 1.1fr .9fr;      /* slight bias to copy */
+      .about-inner {
+        grid-template-columns: 1.1fr .9fr;  /* slight bias to copy */
         grid-template-areas: "text image";
         align-items: center;
         gap: 3rem;
       }
-      .guidance-text { grid-area: text; }
-      .guidance-figure { grid-area: image; justify-self: end; }
-      .guidance-figure img { width: clamp(22rem, 30vw, 32rem); }
+      .about-text { grid-area: text; }
+      .about-figure { grid-area: image; justify-self: end; }
+      .about-figure img { width: clamp(22rem, 30vw, 32rem); }
 
-      /* Tasteful drop cap on first paragraph (desktop only) */
-      .guidance-copy p:first-of-type::first-letter {
+      /* Subtle drop cap on first paragraph (desktop only) */
+      .about-copy p:first-of-type::first-letter {
         font-family: "Merriweather", Georgia, serif;
         font-weight: 800;
         color: var(--color-primary);
@@ -170,7 +178,7 @@ import GuideImg from '../assets/guide_img.jpg';
         initial-letter: 2;
       }
       @supports not (initial-letter: 2) {
-        .guidance-copy p:first-of-type::first-letter {
+        .about-copy p:first-of-type::first-letter {
           float: left;
           font-size: 2.6rem;
           margin: .1rem .4rem 0 0;
