@@ -1,277 +1,288 @@
----
-/* Update image paths as needed */
-import Step1Img from '../assets/step_1.webp';
-import Step2Img from '../assets/step_2.webp';
-import Step3Img from '../assets/step_3.webp';
----
+<div class="container">
+        
+        <!-- Header Section -->
+        <header class="process-header">
+          <h2 id="process-title" class="process-title">8‑Step VA Claim Process</h2>
+          <span class="process-accent" aria-hidden="true"></span>
+        </header>
 
-<section class="process" aria-labelledby="process-title">
-  <div class="process-inner">
-    <header class="process-header">
-      <h2 id="process-title" class="process-title">Our Process</h2>
-      <span class="process-accent" aria-hidden="true"></span>
-    </header>
+        <!-- Timeline Container -->
+        <div class="timeline-container">
 
-    <ul class="cards" role="list">
-      <!-- Card 1 -->
-      <li class="card">
-        <figure class="card-figure">
-          <img
-            src={Step1Img?.src}
-            alt="Infographic for Step 1: In‑Depth Consultation"
-            width="640" height="400"
-            loading="lazy" decoding="async"
-          />
-          <span class="step-badge" aria-hidden="true">Step&nbsp;1</span>
-        </figure>
-        <div class="card-body">
-          <h3 class="card-heading">In‑Depth Consultation</h3>
-          <p class="card-text">
-            Get matched with a dedicated case manager for a review of your service‑connected disabilities.
-            Learn about our streamlined process and what you can expect.
-          </p>
+            <!-- Timeline Item 1 -->
+            <div class="timeline-item right">
+                <div class="timeline-spacer"></div>
+                <div class="step-circle"><h1>1</h1></div>
+                <div class="card">
+                    <h3>STEP 1</h3>
+                    <h4>Claim Received at VA</h4>
+                    <p>Your claim has been successfully submitted and is now in our system.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="timeline-item left">
+                <div class="card">
+                    <h3>STEP 2</h3>
+                    <h4>Initial Review & Consultation</h4>
+                    <p>A reviewer is assigned and begins the initial assessment of your documents.</p>
+                </div>
+                <div class="step-circle"><h1>2</h1></div>
+                <div class="timeline-spacer"></div>
+            </div>
+            
+            <!-- Timeline Item 3 -->
+            <div class="timeline-item right">
+                <div class="timeline-spacer"></div>
+                <div class="step-circle"><h1>3</h1></div>
+                <div class="card">
+                    <h3>STEP 3</h3>
+                    <h4>Evidence Collection</h4>
+                    <p>We gather necessary evidence, such as service records and medical documents.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 4 -->
+            <div class="timeline-item left">
+                <div class="card">
+                    <h3>STEP 4</h3>
+                    <h4>Evidence Review</h4>
+                    <p>All collected evidence is thoroughly reviewed and analyzed by the claims processor.</p>
+                </div>
+                <div class="step-circle"><h1>4</h1></div>
+                <div class="timeline-spacer"></div>
+            </div>
+
+            <!-- Timeline Item 5 -->
+            <div class="timeline-item right">
+                <div class="timeline-spacer"></div>
+                <div class="step-circle"><h1>5</h1></div>
+                <div class="card">
+                    <h3>STEP 5</h3>
+                    <h4>Rating</h4>
+                    <p>A rating decision is proposed based on the evidence and regulations.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 6 -->
+            <div class="timeline-item left">
+                <div class="card">
+                    <h3>STEP 6</h3>
+                    <h4>Preparing Decision Letter</h4>
+                    <p>The detailed decision letter explaining the outcome is drafted.</p>
+                </div>
+                <div class="step-circle"><h1>6</h1></div>
+                <div class="timeline-spacer"></div>
+            </div>
+
+            <!-- Timeline Item 7 -->
+            <div class="timeline-item right">
+                <div class="timeline-spacer"></div>
+                <div class="step-circle"><h1>7</h1></div>
+                <div class="card">
+                    <h3>STEP 7</h3>
+                    <h4>Final Review</h4>
+                    <p>A senior reviewer conducts a final quality check on the claim and decision letter.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 8 -->
+            <div class="timeline-item left">
+                <div class="card">
+                    <h3 class="final">STEP 8</h3>
+                    <h4>Decision Letter Available</h4>
+                    <p>Your claim is complete, and the final decision letter is mailed and available online.</p>
+                </div>
+                <div class="step-circle final">
+                    <svg class="checkmark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div class="timeline-spacer"></div>
+            </div>
         </div>
-      </li>
+    </div>
 
-      <!-- Card 2 -->
-      <li class="card">
-        <figure class="card-figure">
-          <img
-            src={Step2Img?.src}
-            alt="Infographic for Step 2: Network of Medical Providers"
-            width="640" height="400"
-            loading="lazy" decoding="async"
-          />
-          <span class="step-badge" aria-hidden="true">Step&nbsp;2</span>
-        </figure>
-        <div class="card-body">
-          <h3 class="card-heading">Network Of Medical Providers</h3>
-          <p class="card-text">
-            We will thoroughly assess your conditions and medical records and connect you with our private
-            network of medical providers when necessary.
-          </p>
-        </div>
-      </li>
+    <style>
 
-      <!-- Card 3 -->
-      <li class="card">
-        <figure class="card-figure">
-          <img
-            src={Step3Img?.src}
-            alt="Infographic for Step 3: VA Claim Support"
-            width="640" height="400"
-            loading="lazy" decoding="async"
-          />
-          <span class="step-badge" aria-hidden="true">Step&nbsp;3</span>
-        </figure>
-        <div class="card-body">
-          <h3 class="card-heading">VA Claim Support</h3>
-          <p class="card-text">
-            Receive expert guidance and consultation throughout the entire VA disability claim process.
-            We are here to support and give you the best chance of success!
-          </p>
-        </div>
-      </li>
-    </ul>
+        /* Container */
+        .container {
+            max-width: 80rem;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 3rem 1rem;
+        }
 
-    <a href="/get-started" class="process-cta">Get Started Today</a>
-  </div>
+       
 
-  <style>
-    /* ===== Section (dark patriotic backdrop) ===== */
-    .process {
-      /* deep navy gradient with a subtle primary glow */
-      background:
-        radial-gradient(120% 80% at 50% -20%, color-mix(in srgb, var(--color-primary) 22%, #0b162b) 0%, transparent 60%),
-        linear-gradient(180deg, #0b162b 0%, #0a1430 100%);
-      color: #fff;
-      padding: clamp(2.5rem, 6vw, 4rem) 1rem clamp(2rem, 5vw, 3rem);
-      border-top: 1px solid rgba(255,255,255,.06);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .process-inner { max-width: 72rem; margin: 0 auto; }
-
-    .process-header { text-align: center; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
+        .process-header { text-align: center; margin-bottom: clamp(1.25rem, 3vw, 2rem); }
     .process-title {
       font: 800 clamp(1.5rem, 2.2vw + 1rem, 2.25rem) "Merriweather", Georgia, serif;
-      line-height: 1.15;
       margin: 0;
-      text-wrap: balance;
+      line-height: 1.15;
+      color: var(--color-primary);
     }
     .process-accent {
-      display: inline-block;
-      width: 96px; height: 4px; border-radius: 999px;
+      display: inline-block; width: 96px; height: 4px; border-radius: 999px;
       margin-top: .75rem;
       background: linear-gradient(90deg, #b22234 0%, var(--color-primary) 100%);
     }
 
-    /* ===== Cards ===== */
-    .cards {
-      --gap: clamp(1rem, 2.5vw, 1.5rem);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--gap);
-      margin: 0; padding: 0; list-style: none;
-    }
-    @media (min-width: 900px) {
-      .cards { grid-template-columns: repeat(3, 1fr); }
-    }
 
-    .card {
-      background: var(--color-bg);        /* light surface to pop on dark */
-      color: var(--color-text);
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 18px 36px rgba(0,0,0,.25);
-      outline: 1px solid var(--color-border);
-      outline-offset: -1px;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      transition: transform .25s ease, box-shadow .25s ease;
-      will-change: transform;
-    }
-    .card:where(:hover, :focus-within) {
-      transform: translateY(-4px);
-      box-shadow: 0 24px 44px rgba(0,0,0,.3);
-    }
+        .header h1 {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 700;
+            
+        }
 
-    /* Image area */
-    .card-figure {
-      position: relative;
-      margin: 0;
-      aspect-ratio: 16 / 10;
-      background: #0e1a2f;
-      overflow: hidden;
-    }
-    .card-figure img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-      display: block;
-    }
-    .step-badge {
-      position: absolute;
-      top: .75rem; left: .75rem;
-      font-weight: 800;
-      font-size: .8125rem;
-      letter-spacing: .02em;
-      padding: .35rem .6rem;
-      border-radius: 9999px;
-      color: var(--color-bg);
-      background: linear-gradient(90deg, var(--color-primary), #264b9b);
-      box-shadow: 0 6px 14px rgba(0,0,0,.22);
-    }
+        .header p {
+            margin-top: 0.75rem;
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+            color: var(--color-muted);
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    /* Content */
-    .card-body {
-      display: grid;
-      gap: .5rem;
-      padding: 1rem 1rem 1.25rem;
-    }
-    .card-heading {
-      font: 800 clamp(1.05rem, .6vw + 1rem, 1.25rem) "Merriweather", Georgia, serif;
-      margin: .25rem 0 .25rem;
-      line-height: 1.25;
-      color: var(--color-primary);
-      text-wrap: balance;
-    }
-    .card-text {
-      margin: 0;
-      line-height: 1.65;
-      font-size: 1rem;
-    }
+        /* Timeline Container */
+        .timeline-container {
+            position: relative;
+            max-width: 56rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    /* CTA */
-   /* Center the CTA under the cards */
-.process-cta {
-  display: block;                      /* was inline-block */
-  width: fit-content;                  /* shrink to content width */
-  margin: clamp(1.25rem, 3vw, 1.75rem) auto 0;  /* auto centers horizontally */
-  padding: .9rem 1.75rem;
-  border-radius: 9999px;
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  background: var(--color-primary);
-  color: var(--color-bg);
-  box-shadow: 0 10px 24px rgba(0,0,0,.35);
-  transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
-}
+        /* The vertical line for the timeline */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background-color: #d1d5db; /* A lighter gray is used here for aesthetics as --color-muted is too dark for this element */
+        }
 
-/* Optional: stronger keyboard focus on dark background */
-.process-cta:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--color-primary) 70%, #ffffff);
-  outline-offset: 3px;
-}
+        /* Timeline Item Styles */
+        .timeline-item {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .timeline-spacer {
+            order: 1;
+            width: calc(50% - 4rem);
+        }
 
-    .process-cta:hover,
-    .process-cta:focus-visible {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 16px 32px rgba(0,0,0,.4);
-    }
-    .process-cta:active { transform: translateY(0) scale(.98); }
+        .timeline-item.left .timeline-spacer {
+            order: 3;
+        }
+        
+        /* Step Circle */
+        .step-circle {
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            order: 2;
+            background-color: var(--color-primary);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            flex-shrink: 0;
+        }
+        
+        .step-circle h1 {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--color-primary-contrast);
+            margin: 0;
+        }
 
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .card, .process-cta { transition: background .2s ease, color .2s ease, box-shadow .2s ease; }
-      .card:where(:hover, :focus-within) { transform: none; }
-      .process-cta:hover, .process-cta:focus-visible, .process-cta:active { transform: none; }
-    }
+        /* Step Card */
+        .card {
+            order: 3;
+            background-color: var(--color-surface);
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            width: calc(50% - 4rem);
+            padding: 1.25rem 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .timeline-item.left .card {
+            order: 1;
+        }
 
-    /* ── Mobile ergonomic pass ───────────────────────────────────────────── */
-@media (max-width: 640px) {
-  /* tighten outer padding a bit on phones */
-  .process { padding: 2rem .75rem 2rem; }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        .card h3 {
+            font-weight: 700;
+            color: var(--color-primary);
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .card h4 {
+            font-weight: 600;
+            color: var(--color-text);
+            font-size: 1.125rem;
+            margin-top: 0.25rem;
+        }
+        
+        .card p {
+            font-size: 0.875rem;
+            color: var(--color-muted);
+            margin-top: 0.5rem;
+        }
+        
+        /* Final Step Styles - These colors indicate a status (success) and are kept separate from the theme. */
+        .step-circle.final {
+             background-color: #22c55e;
+        }
+        
+        .card h3.final {
+            color: #15803d;
+        }
+        
+        .checkmark {
+             width: 1.5rem;
+             height: 1.5rem;
+             color: var(--color-primary-contrast);
+        }
 
-  /* give the list breathing room and stop it stretching edge‑to‑edge */
-  .cards {
-    gap: clamp(1rem, 4.5vw, 1.25rem);
-    max-width: 25rem;               /* comfortable reading width */
-    margin-inline: auto;            /* center the single column */
-  }
-
-  /* smaller, lighter cards on small screens */
-  .card {
-    border-radius: .75rem;
-    box-shadow: 0 10px 24px rgba(0,0,0,.28);
-  }
-
-  /* shorter media area to reduce perceived card height */
-  .card-figure {
-    object-fit: cover;
-    width: 100%;                     /* was 16/10 (taller) */
-    max-height: clamp(160px, 45vw, 220px);     /* safety cap */
-  }
-
-  /* compact content padding & type size */
-  .card-body {
-    padding: .875rem .9rem 1rem;
-  }
-  .card-heading {
-    font-size: 1.0625rem;                      /* ~17px, still strong */
-  }
-  .card-text {
-    font-size: .95rem;                         /* ~15px for phones */
-    line-height: 1.6;
-  }
-
-  /* smaller badge so it doesn’t crowd the image */
-  .step-badge {
-    top: .5rem; left: .5rem;
-    font-size: .72rem;
-    padding: .28rem .5rem;
-  }
-
-  /* optional: slightly shorter accent under the section title */
-  .process-accent { width: 80px; }
-}
-
-/* ── Small tablets: go 2‑up to avoid tall stacks ─────────────────────── */
-@media (min-width: 680px) and (max-width: 899px) {
-  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .cards { gap: clamp(1rem, 3vw, 1.25rem); }
-}
-
-
-
-  </style>
-</section>
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                left: 1.5rem;
+                transform: translateX(0);
+            }
+            .timeline-item, .timeline-item.left {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+            .timeline-spacer {
+                display: none;
+            }
+            .step-circle {
+                order: 1;
+                margin-right: 2rem;
+                position: relative;
+                left: 0;
+                transform: translateX(-50%);
+                margin-left: 1.5rem;
+            }
+            .card, .timeline-item.left .card {
+                order: 2;
+                width: calc(100% - 6rem);
+            }
+        }
+    </style>
