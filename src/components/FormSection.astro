@@ -1,0 +1,333 @@
+---
+/* No props — wire up `action`/`method` as needed */
+---
+
+<section class="lead" aria-labelledby="lead-title">
+  <div class="lead-inner">
+    <header class="lead-header">
+      <h2 id="lead-title" class="lead-title">Get The <span class="em">FULL</span> Benefits You Deserve!</h2>
+      <span class="lead-accent" aria-hidden="true"></span>
+      <p class="lead-note"><span aria-hidden="true">*</span> indicates required fields</p>
+    </header>
+
+    <form class="leadform" action="#" method="post" novalidate>
+      <!-- Honeypot (basic spam trap) -->
+      <div class="hp" aria-hidden="true">
+        <label for="company">Company</label>
+        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <!-- ===== Your existing form grid (kept) ===== -->
+      <div class="grid">
+        <!-- First / Last -->
+        <div class="field col-6">
+          <label class="flabel" for="firstName">First <span class="req" aria-hidden="true">*</span></label>
+          <input id="firstName" name="firstName" type="text" required autocomplete="given-name" autocapitalize="words" />
+          <small id="firstHelp" class="hint">As it appears on your VA records</small>
+        </div>
+
+        <div class="field col-6">
+          <label class="flabel" for="lastName">Last <span class="req" aria-hidden="true">*</span></label>
+          <input id="lastName" name="lastName" type="text" required autocomplete="family-name" autocapitalize="words" />
+          <small class="hint" aria-hidden="true"></small>
+        </div>
+
+        <!-- Phone / Email -->
+        <div class="field col-6">
+          <label class="flabel" for="phone">Phone <span class="req" aria-hidden="true">*</span></label>
+          <input id="phone" name="phone" type="tel" required inputmode="tel" autocomplete="tel"
+                 pattern="^\+?\d[\d\s().-]{7,}$" aria-describedby="phoneHelp" />
+          <small id="phoneHelp" class="hint">Include area code</small>
+        </div>
+
+        <div class="field col-6">
+          <label class="flabel" for="email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" required inputmode="email" autocomplete="email" />
+          <small class="hint" aria-hidden="true"></small>
+        </div>
+
+        <!-- State / Zip -->
+        <div class="field col-6">
+          <label class="flabel" for="state">Select Your State <span class="req" aria-hidden="true">*</span></label>
+          <select id="state" name="state" required>
+            <option value="" selected disabled>Select</option>
+            <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+            <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+            <option>DC</option><option>FL</option><option>GA</option><option>HI</option>
+            <option>ID</option><option>IL</option><option>IN</option><option>IA</option>
+            <option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+            <option>MD</option><option>MA</option><option>MI</option><option>MN</option>
+            <option>MS</option><option>MO</option><option>MT</option><option>NE</option>
+            <option>NV</option><option>NH</option><option>NJ</option><option>NM</option>
+            <option>NY</option><option>NC</option><option>ND</option><option>OH</option>
+            <option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+            <option>SC</option><option>SD</option><option>TN</option><option>TX</option>
+            <option>UT</option><option>VT</option><option>VA</option><option>WA</option>
+            <option>WV</option><option>WI</option><option>WY</option>
+          </select>
+          <small class="hint" aria-hidden="true"></small>
+        </div>
+
+        <div class="field col-6">
+          <label class="flabel" for="zip">Zip Code <span class="req" aria-hidden="true">*</span></label>
+          <input id="zip" name="zip" type="text" required inputmode="numeric" autocomplete="postal-code"
+                 pattern="^\d{5}(?:-\d{4})?$" aria-describedby="zipHelp" />
+          <small id="zipHelp" class="hint">5‑digit (or 5‑4)</small>
+        </div>
+
+        <!-- Referral (full width) -->
+        <div class="field col-12">
+          <label class="flabel" for="ref">How did you hear about us? <span class="req" aria-hidden="true">*</span></label>
+          <select id="ref" name="referral" required>
+            <option value="" selected disabled>Select</option>
+            <option>Google Search</option>
+            <option>Friend / Family</option>
+            <option>Social Media</option>
+            <option>VA Clinic / Provider</option>
+            <option>Advertisement</option>
+            <option>Other</option>
+          </select>
+          <small class="hint" aria-hidden="true"></small>
+        </div>
+
+        <!-- Message -->
+        <div class="field col-12">
+          <label class="flabel" for="message">Question or Comment</label>
+          <textarea id="message" name="message" rows="6" aria-describedby="msgHelp"></textarea>
+          <small id="msgHelp" class="hint">Optional — share any details you’d like us to review</small>
+        </div>
+      </div>
+
+      <!-- ===== Consent & Legal ===== -->
+      <fieldset class="consent">
+        <legend class="consent-title">
+          By selecting the boxes you understand the following: <span class="req" aria-hidden="true">*</span>
+        </legend>
+
+        <p class="consent-copy">
+          You authorize Veteran Adviser Consulting to contact you by SMS and message and data rates may apply.
+          See our <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms">Terms and Conditions</a> for more info.
+          We are not affiliated with the U.S. Department of Veterans Affairs (VA), any state VA office, or any other
+          veterans’ service organization. Other organizations may offer similar services at no cost. Our products and
+          services are not necessarily endorsed by any veterans’ organization. Veterans may be eligible for additional
+          benefits beyond those offered by our programs.
+        </p>
+
+        <div class="consent-items">
+          <label class="check">
+            <input type="checkbox" id="agree-privacy" name="agreePrivacy" required />
+            <span class="box" aria-hidden="true"></span>
+            <span class="text">I agree to the Privacy Policy.</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" id="agree-release" name="agreeRelease" required />
+            <span class="box" aria-hidden="true"></span>
+            <span class="text">I agree to the Release of Information.</span>
+          </label>
+        </div>
+
+        <p class="legal-links">
+          <a href="/terms">Terms and Conditions</a>,
+          <a href="/release-of-information">Release of Information</a>, and
+          <a href="/privacy-policy">Privacy Policy</a>
+        </p>
+      </fieldset>
+
+      <!-- ===== Submit ===== -->
+      <div class="actions">
+        <button class="submit" type="submit">Start My Risk‑Free Consultation</button>
+      </div>
+    </form>
+  </div>
+
+  <style>
+    /* ---------- Layout safety ---------- */
+    .lead, .lead * { box-sizing: border-box; }
+    .lead {
+      background:
+        radial-gradient(110% 70% at 50% -20%, color-mix(in srgb, var(--color-primary) 14%, transparent) 0%, transparent 60%),
+        var(--color-bg);
+      color: var(--color-text);
+      padding: clamp(2.25rem, 5vw, 3.25rem) 1rem;
+      border-top: 1px solid var(--color-border);
+    }
+    .lead-inner { max-width: 72rem; margin: 0 auto; }
+
+    .lead-header { text-align: center; margin-bottom: clamp(1.25rem, 3vw, 2rem); }
+    .lead-title {
+      margin: 0;
+      font: 800 clamp(1.5rem, 2.2vw + 1rem, 2.25rem) "Merriweather", Georgia, serif;
+      line-height: 1.15; text-wrap: balance; color: var(--color-primary);
+    }
+    .lead-title .em { text-decoration: underline; text-underline-offset: .18em; }
+    .lead-accent {
+      display: inline-block; width: 120px; height: 4px; border-radius: 999px;
+      margin-top: .6rem;
+      background: linear-gradient(90deg, #b22234 0%, var(--color-primary) 100%);
+    }
+    .lead-note { margin: .65rem 0 0; font-size: .95rem; color: var(--color-muted); }
+
+    .leadform {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 14px 36px rgba(0,0,0,.12);
+      outline: 1px solid var(--color-border);
+      outline-offset: -1px;
+      padding: clamp(1rem, 2.5vw, 1.5rem);
+      max-width: 100%;
+    }
+
+    .hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+    /* ---------- Grid ---------- */
+    .grid {
+      display: grid;
+      gap: clamp(.9rem, 2vw, 1.1rem);
+      grid-template-columns: 1fr;
+    }
+    .col-6, .col-12 { grid-column: 1 / -1; }
+    @media (min-width: 640px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .col-6 { grid-column: span 1; }
+      .col-12 { grid-column: 1 / -1; }
+    }
+
+    /* ---------- Fields with top labels ---------- */
+    :root { --control-h: 48px; --control-radius: .75rem; --control-px: 1rem; }
+
+    .field { display: grid; gap: .35rem; min-width: 0; }
+    .flabel { display: inline-block; font-weight: 600; color: var(--color-text); letter-spacing: .01em; margin-bottom: .25rem; }
+    .req { color: #b22234; }
+
+    .field :is(input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select) {
+      height: var(--control-h);
+      width: 100%; max-width: 100%; min-width: 0;
+      border: 1px solid var(--color-border);
+      background: #fff; color: var(--color-text);
+      border-radius: var(--control-radius);
+      padding: 0 var(--control-px);
+      font: inherit; line-height: 1;
+      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+
+    /* Select arrow */
+    select {
+      appearance: none; -webkit-appearance: none;
+      background:
+        linear-gradient(180deg, #fff, #fff) padding-box,
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="%23214a9c" d="M7 10l5 5 5-5z"/></svg>')
+        no-repeat right .9rem center / 18px;
+      padding-right: 2.5rem;
+    }
+
+    textarea {
+      width: 100%; max-width: 100%; min-width: 0;
+      border: 1px solid var(--color-border);
+      background: #fff; color: var(--color-text);
+      border-radius: var(--control-radius);
+      padding: .9rem var(--control-px);
+      font: inherit; line-height: 1.5;
+      resize: vertical; min-height: 8rem;
+      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+
+    .hint { display: block; min-height: 1.1rem; font-size: .8rem; color: var(--color-muted); margin-left: .25rem; }
+
+    .field :is(input, select, textarea):focus {
+      border-color: color-mix(in srgb, var(--color-primary) 70%, #ffffff 30%);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 18%, #ffffff);
+      outline: none;
+    }
+    .field :is(input, select, textarea):user-invalid {
+      border-color: #b22234;
+      box-shadow: 0 0 0 3px color-mix(in srgb, #b22234 25%, #ffffff);
+    }
+
+    /* ---------- Consent block ---------- */
+    .consent {
+      margin-top: clamp(1rem, 3vw, 1.5rem);
+      padding: clamp(1rem, 2.2vw, 1.25rem);
+      border: 1px solid var(--color-border);
+      border-radius: .9rem;
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-primary) 6%, #ffffff), #fff);
+    }
+    .consent-title {
+      font-weight: 800;
+      font-size: clamp(1.05rem, .6vw + 1rem, 1.2rem);
+      font-family: "Merriweather", Georgia, serif;
+      color: var(--color-text);
+      margin: 0 0 .5rem;
+      padding: 0;
+    }
+    .consent-copy {
+      margin: .25rem 0 1rem;
+      color: var(--color-text);
+      font-size: .98rem;
+      line-height: 1.6;
+    }
+    .consent-copy a { color: var(--color-primary); text-decoration: underline; text-underline-offset: .15em; }
+
+    .consent-items {
+      display: grid;
+      gap: .75rem;
+      margin: 0 0 1rem;
+    }
+
+    /* Accessible custom checkboxes (native + accent-color) */
+    .check {
+      display: grid;
+      grid-template-columns: 1.25rem auto;
+      align-items: start;
+      gap: .6rem;
+      font-size: 1rem;
+    }
+    .check input[type="checkbox"] {
+      width: 1.1rem; height: 1.1rem;
+      margin: .2rem 0 0;
+      accent-color: var(--color-primary);
+      border: 1px solid var(--color-border);
+      border-radius: .2rem;
+      flex: none;
+    }
+    .check .box { display: none; } /* reserved if you later want a fully custom box */
+    .check .text { color: var(--color-text); }
+
+    .legal-links {
+      margin: .25rem 0 0;
+      font-size: 1rem;
+    }
+    .legal-links a { color: var(--color-primary); text-decoration: underline; text-underline-offset: .15em; }
+
+    /* ---------- Submit ---------- */
+    .actions { display: grid; margin-top: clamp(1rem, 2.5vw, 1.25rem); }
+    .submit {
+      justify-self: center;
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: .75rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      background: var(--color-primary);
+      color: var(--color-bg);
+      box-shadow: 0 12px 28px rgba(0,0,0,.25);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease, background-color .2s ease;
+    }
+    .submit:hover, .submit:focus-visible {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 18px 36px rgba(0,0,0,.32);
+      outline: none;
+    }
+    .submit:active { transform: translateY(0) scale(.98); }
+
+    @media (min-width: 1024px) { :root { --control-h: 52px; } }
+    @media (prefers-reduced-motion: reduce) {
+      .field :is(input, select, textarea), .submit { transition: none; }
+    }
+  </style>
+</section>
