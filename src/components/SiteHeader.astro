@@ -1,5 +1,19 @@
 ---
-/*  No props for now  */
+/* In your .astro file */
+const normalize = (p: string) => {
+  if (!p) return '/';
+  try { p = new URL(p, Astro.url).pathname; } catch {}
+  return p.replace(/\/+$/, '') || '/';   // strip trailing slash, keep root
+};
+
+const currentPath = normalize(Astro.url.pathname);
+
+/** exact = only the page; section = page and any child routes */
+const isActive = (href: string, { section = false } = {}) => {
+  const h = normalize(href);
+  if (section) return currentPath === h || (h !== '/' && currentPath.startsWith(h + '/'));
+  return currentPath === h;
+};
 ---
 
 <header id="site_top" class="site-header" role="banner">
@@ -24,9 +38,9 @@
     <!-- Primary navigation -->
     <nav class="nav" id="primary-navigation" aria-label="Primary">
       <ul>
-        <li><a href="/" aria-current="page">Home</a></li>
-        <li><a href="/stats">2025 Disability Rates</a></li>
-        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/" aria-current={isActive('/') ? 'page' : undefined}>Home</a></li>
+        <li><a href="/stats" aria-current={isActive('/stats') ? 'page' : undefined}>2025 Disability Rates</a></li>
+        <li><a href="/faq" aria-current={isActive('/faq') ? 'page' : undefined}>FAQ</a></li>
 
         <!-- Mobile‑only CTA lives *inside* drawer -->
         <li class="mobile-cta">
