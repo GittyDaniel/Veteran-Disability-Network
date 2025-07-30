@@ -79,7 +79,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     `;
 
     await resend.emails.send({
-      from: "onboarding@resend.dev", // IMPORTANT: Replace with your verified domain, e.g., 'noreply@veteransdisabilitynetwork.org'
+      from: "advisor-gbogan@veteransdisabilitynetwork.org",
       to: "advisor-1@veteransdisabilitynetwork.org",
       subject: `New Consultation Request from ${leadData.firstName} ${leadData.lastName}`,
       html: emailHtmlBody,
