@@ -339,3 +339,44 @@
     }
   </style>
 </section>
+
+<script>
+    const form = document.getElementById('consultation-form') as HTMLFormElement;
+    const submitButton = form.querySelector('.submit') as HTMLButtonElement;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      // --- Provide instant user feedback ---
+      const originalButtonText = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Submitting...';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('/api/consultation', {
+          method: 'POST',
+          body: formData,
+        });
+
+        // If the submission is successful, the API will redirect the browser.
+        // The 'redirected' property of the response will be true.
+        if (response.redirected) {
+          window.location.href = response.url; // Follow the redirect to the thank-you page
+        } else {
+          // Handle cases where the API returns an error instead of redirecting
+          const data = await response.json();
+          throw new Error(data.error || 'An unexpected error occurred.');
+        }
+
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('There was an error submitting your form. Please try again.');
+        
+        // --- Restore the button on error ---
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
+    });
+  </script>
