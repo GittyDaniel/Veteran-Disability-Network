@@ -1,11 +1,15 @@
 import type { APIRoute } from "astro";
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
 
 // Initialize Supabase client
 const supabase = createClient(
   import.meta.env.PUBLIC_SUPABASE_URL,
-  import.meta.env.SUPABASE_SERVICE_KEY // Use the service role key for admin-level access
+  import.meta.env.SUPABASE_SERVICE_KEY
 );
+
+// Initialize Resend client with your API key
+const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const POST: APIRoute = async ({ request, redirect }) => {
   const formData = await request.formData();
@@ -23,18 +27,14 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   if (referralCode && referralCode.trim() !== "") {
     const { data: profile, error } = await supabase
       .from("profiles")
-      .select("id") // We just need to know if it exists
+      .select("id")
       .eq("referral_code", referralCode.trim().toUpperCase())
       .single();
 
     if (error) {
       console.error("Error validating referral code:", error.message);
-      // Don't block submission if there's a DB error, just log it.
-    }
-
-    if (profile) {
-      // The code is valid!
-      referredBy = profile.id; // Store the ID of the user who made the referral
+    } else if (profile) {
+      referredBy = profile.id;
       console.log(
         `Valid referral code used. Referred by user ID: ${referredBy}`
       );
@@ -45,22 +45,52 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     }
   }
 
-  // --- Step 2: Construct the lead summary ---
-  // Here, you would typically send an email or save the lead to a CRM.
-  // For now, we will log it to the server console.
+  // --- Step 2: Send the email notification ---
+  try {
+    const emailHtmlBody = `
+      <h1>New Consultation Request</h1>
+      <p>A new potential client has submitted a request for a consultation.</p>
+      <hr>
+      <h2>Contact Details</h2>
+      <ul>
+        <li><strong>Name:</strong> ${leadData.firstName} ${
+      leadData.lastName
+    }</li>
+        <li><strong>Email:</strong> ${leadData.email}</li>
+        <li><strong>Phone:</strong> ${leadData.phone}</li>
+        <li><strong>Location:</strong> ${leadData.state}, ${leadData.zip}</li>
+      </ul>
+      <h2>Referral Information</h2>
+      <ul>
+        <li><strong>How they heard about us:</strong> ${
+          leadData.referralSource
+        }</li>
+        <li><strong>Referral Code Provided:</strong> ${
+          leadData.referralCode || "N/A"
+        }</li>
+        <li><strong>Referring User ID (if valid code):</strong> ${
+          referredBy || "N/A"
+        }</li>
+      </ul>
+      <h2>Message</h2>
+      <p>${leadData.message || "No message provided."}</p>
+      <hr>
+      <p><em>This email was sent automatically from the website contact form.</em></p>
+    `;
 
-  const leadSummary = {
-    ...leadData,
-    submissionDate: new Date().toISOString(),
-    referredByUserId: referredBy, // Will be null if no valid code was used
-  };
+    await resend.emails.send({
+      from: "onboarding@resend.dev", // IMPORTANT: Replace with your verified domain, e.g., 'noreply@veteransdisabilitynetwork.org'
+      to: "advisor-1@veteransdisabilitynetwork.org",
+      subject: `New Consultation Request from ${leadData.firstName} ${leadData.lastName}`,
+      html: emailHtmlBody,
+    });
 
-  console.log("--- New Consultation Lead ---");
-  console.log(JSON.stringify(leadSummary, null, 2));
-  console.log("-----------------------------");
+    console.log("Consultation email sent successfully.");
+  } catch (error) {
+    console.error("Error sending email:", error);
+    // We don't block the user flow if the email fails, but we log the error.
+  }
 
   // --- Step 3: Redirect the user to a "Thank You" page ---
-  // This is a better user experience than just showing a JSON message.
-  // You should create a page at /thank-you in your `src/pages` directory.
   return redirect("/thank-you", 303);
 };
