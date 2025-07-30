@@ -92,5 +92,5 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   }
 
   // --- Step 3: Redirect the user to a "Thank You" page ---
-  return redirect("/thank-you", 303);
+  return redirect("/thankyou", 303);
 };

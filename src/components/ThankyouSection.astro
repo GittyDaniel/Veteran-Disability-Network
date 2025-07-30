@@ -1,0 +1,86 @@
+<section class="thank-you-section">
+    <div class="thank-you-container">
+        <div class="success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </div>
+        <h1>Thank You for Your Submission!</h1>
+        <p>
+            Your consultation request has been received. An advisor will review your information and contact you within the next 24-48 hours to discuss your case.
+        </p>
+        <a href="/" class="home-button">Return to Homepage</a>
+    </div>
+</section>
+
+    <style>
+
+      .thank-you-section {
+           --color-navy: #1a233f;
+            --color-white: #ffffff;
+            --color-off-white: #f3f4f6;
+            --color-text-dark: #374151;
+            --color-success: #059669; /* A nice green for success */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            width: 100%;
+        }
+       
+        .thank-you-container {
+            background-color: var(--color-white);
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: clamp(2rem, 8vw, 4rem);
+            max-width: 600px;
+            width: 100%;
+            transform: translateY(-20px);
+            animation: float-in 0.6s ease-out forwards;
+        }
+
+        @keyframes float-in {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            color: var(--color-success);
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: "Merriweather", Georgia, serif;
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            color: var(--color-navy);
+            margin: 0 0 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .home-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            background-color: var(--color-navy);
+            color: var(--color-white);
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .home-button:hover {
+            background-color: #0d152b;
+            transform: translateY(-2px);
+        }
+    </style>
