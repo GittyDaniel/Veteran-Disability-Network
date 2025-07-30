@@ -21,7 +21,7 @@ export async function POST({ request }) {
       options: {
         // This is the URL the user will be redirected to after clicking the magic link.
         // We'll create this page in the next step.
-        emailRedirectTo: new URL("/profile", request.url).href,
+        emailRedirectTo: new URL("/referral", request.url).href,
       },
     });
 
