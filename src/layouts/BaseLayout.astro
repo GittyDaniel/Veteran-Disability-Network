@@ -1,4 +1,8 @@
 ---
+import PrivacyPolicyModal from '../components/PrivacyPolicyModal.astro';
+import TermsConditionsModal from '../components/TermsConditionsModal.astro';
+import ReleaseOfInformationModal from '../components/ReleaseOfInformationModal.astro';
+
 const { title = 'Veterans Disability Network' } = Astro.props;
 ---
 <html lang="en" data-theme="light">
@@ -19,7 +23,55 @@ const { title = 'Veterans Disability Network' } = Astro.props;
   </head>
   <body>
     <slot />
-    <script type="module" src="/scripts/theme-toggle.js"></script>
+    <PrivacyPolicyModal />
+        <TermsConditionsModal />
+        <ReleaseOfInformationModal />
+    <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+                // This function opens a modal by its ID
+                function openModal(modalId) {
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.classList.add('is-open');
+                        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    }
+                }
+
+                // This function closes any open modal
+                function closeModal(modal) {
+                    modal.classList.remove('is-open');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+
+                // Use event delegation to listen for clicks on any modal trigger
+                document.body.addEventListener('click', (event) => {
+                    const trigger = event.target.closest('[data-modal-trigger]');
+                    if (trigger) {
+                        event.preventDefault();
+                        const modalId = trigger.dataset.modalTrigger;
+                        openModal(modalId);
+                    }
+                });
+
+                // Add listeners to all modals for closing
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.addEventListener('click', (event) => {
+                        // Close if the overlay or a close button is clicked
+                        if (event.target.classList.contains('modal-overlay') || event.target.closest('.modal-close-btn')) {
+                            closeModal(modal);
+                        }
+                    });
+                });
+
+                // Add keyboard support to close modals with the Escape key
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') {
+                        document.querySelectorAll('.modal.is-open').forEach(closeModal);
+                    }
+                });
+            });
+        </script>
   </body>
 </html>
 
