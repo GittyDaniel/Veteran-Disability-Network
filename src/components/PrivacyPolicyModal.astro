@@ -1,0 +1,65 @@
+<div id="privacy-policy" class="modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+    <div class="modal-overlay"></div>
+    <div class="modal-dialog">
+        <button class="modal-close-btn" aria-label="Close">&times;</button>
+        <h2 id="privacy-title" class="modal-title">Privacy Policy</h2>
+        <div class="modal-content">
+            <p><strong>Last Updated: July 30, 2025</strong></p>
+            <p>Veterans Disability Network ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
+            <h3>Information We Collect</h3>
+            <p>We may collect personal information from you such as your name, email address, phone number, and details related to your veteran status and disability claim when you voluntarily provide it to us through our consultation form.</p>
+            <h3>How We Use Your Information</h3>
+            <p>We use the information we collect to:</p>
+            <ul>
+                <li>Provide, operate, and maintain our services.</li>
+                <li>Contact you regarding your consultation request.</li>
+                <li>Improve, personalize, and expand our services.</li>
+                <li>Understand and analyze how you use our website.</li>
+            </ul>
+            <h3>Sharing Your Information</h3>
+            <p>We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information unless we provide users with advance notice. This does not include website hosting partners and other parties who assist us in operating our website, so long as those parties agree to keep this information confidential.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal {
+        position: fixed; inset: 0; z-index: 1000; display: flex;
+        align-items: center; justify-content: center; padding: 1rem;
+        visibility: hidden; opacity: 0;
+        transition: visibility 0s .3s, opacity .3s;
+    }
+    .modal.is-open {
+        visibility: visible; opacity: 1; transition-delay: 0s;
+    }
+    .modal-overlay {
+        position: absolute; inset: 0;
+        background-color: rgba(26, 35, 63, 0.8);
+        cursor: pointer;
+    }
+    .modal-dialog {
+        position: relative; background-color: #fff; border-radius: 1rem;
+        padding: 2rem; max-width: 700px; width: 100%;
+        max-height: 90vh; overflow-y: auto;
+        transform: scale(0.9); opacity: 0;
+        transition: transform .3s, opacity .3s;
+    }
+    .modal.is-open .modal-dialog {
+        transform: scale(1); opacity: 1;
+    }
+    .modal-close-btn {
+        position: absolute; top: 1rem; right: 1rem; border: none;
+        background: transparent; font-size: 1.5rem; cursor: pointer;
+        color: var(--color-text-dark, #374151);
+    }
+    .modal-title {
+        font-family: "Merriweather", Georgia, serif; font-size: 1.75rem;
+        color: var(--color-navy, #1a233f); margin: 0 0 1.5rem;
+    }
+    .modal-content { line-height: 1.7; }
+    .modal-content h3 { font-size: 1.2rem; margin: 1.5rem 0 0.5rem; }
+    .modal-content ul { padding-left: 1.5rem; }
+    @media (prefers-reduced-motion: reduce) {
+      .modal, .modal-dialog { transition: none; }
+    }
+</style>

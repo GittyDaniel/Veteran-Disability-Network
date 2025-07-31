@@ -1,0 +1,64 @@
+---
+// no props needed for this component
+---
+<div id="release-of-information" class="modal" role="dialog" aria-modal="true" aria-labelledby="release-title">
+    <div class="modal-overlay"></div>
+    <div class="modal-dialog">
+        <button class="modal-close-btn" aria-label="Close">&times;</button>
+        <h2 id="release-title" class="modal-title">Release of Information</h2>
+        <div class="modal-content">
+            <p>By checking the "I agree to the Release of Information" box, you authorize Veterans Disability Network to use the information you provide to evaluate your potential eligibility for VA disability benefits.</p>
+            <h3>Scope of Authorization</h3>
+            <p>This authorization permits our consulting team to:</p>
+            <ul>
+                <li>Review the details of your provided information.</li>
+                <li>Contact you via phone, email, or SMS to discuss your case and our services.</li>
+                <li>Use anonymized data for internal statistical analysis to improve our services.</li>
+            </ul>
+            <p>Your information will be handled with the strictest confidentiality in accordance with our Privacy Policy. This release does not authorize us to file any claim on your behalf or to share your personal data with any third party for marketing purposes.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styles are identical to PrivacyPolicyModal.astro for consistency */
+    .modal {
+        position: fixed; inset: 0; z-index: 1000; display: flex;
+        align-items: center; justify-content: center; padding: 1rem;
+        visibility: hidden; opacity: 0;
+        transition: visibility 0s .3s, opacity .3s;
+    }
+    .modal.is-open {
+        visibility: visible; opacity: 1; transition-delay: 0s;
+    }
+    .modal-overlay {
+        position: absolute; inset: 0;
+        background-color: rgba(26, 35, 63, 0.8);
+        cursor: pointer;
+    }
+    .modal-dialog {
+        position: relative; background-color: #fff; border-radius: 1rem;
+        padding: 2rem; max-width: 700px; width: 100%;
+        max-height: 90vh; overflow-y: auto;
+        transform: scale(0.9); opacity: 0;
+        transition: transform .3s, opacity .3s;
+    }
+    .modal.is-open .modal-dialog {
+        transform: scale(1); opacity: 1;
+    }
+    .modal-close-btn {
+        position: absolute; top: 1rem; right: 1rem; border: none;
+        background: transparent; font-size: 1.5rem; cursor: pointer;
+        color: var(--color-text-dark, #374151);
+    }
+    .modal-title {
+        font-family: "Merriweather", Georgia, serif; font-size: 1.75rem;
+        color: var(--color-navy, #1a233f); margin: 0 0 1.5rem;
+    }
+    .modal-content { line-height: 1.7; }
+    .modal-content h3 { font-size: 1.2rem; margin: 1.5rem 0 0.5rem; }
+    .modal-content ul { padding-left: 1.5rem; }
+    @media (prefers-reduced-motion: reduce) {
+      .modal, .modal-dialog { transition: none; }
+    }
+</style>
