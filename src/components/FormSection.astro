@@ -10,7 +10,7 @@
       <p class="lead-note"><span aria-hidden="true">*</span> indicates required fields</p>
     </header>
 
-    <form class="leadform" action="#" method="post" novalidate>
+    <form id="get-started-form" class="leadform" action="#" method="post" novalidate>
       <!-- Honeypot (basic spam trap) -->
       <div class="hp" aria-hidden="true">
         <label for="company">Company</label>
@@ -71,7 +71,7 @@
         <div class="field col-6">
           <label class="flabel" for="zip">Zip Code <span class="req" aria-hidden="true">*</span></label>
           <input id="zip" name="zip" type="text" required inputmode="numeric" autocomplete="postal-code"
-                 pattern="^\d{5}(?:-\d{4})?$" aria-describedby="zipHelp" />
+                  aria-describedby="zipHelp" />
           <small id="zipHelp" class="hint">5‑digit (or 5‑4)</small>
         </div>
 
@@ -144,7 +144,7 @@
 
       <!-- ===== Submit ===== -->
       <div class="actions">
-        <button class="submit" type="submit">Start My Risk‑Free Consultation</button>
+        <button id="get-started-submit-btn" class="submit" type="submit">Start My Risk‑Free Consultation</button>
       </div>
     </form>
   </div>
@@ -341,8 +341,8 @@
 </section>
 
 <script>
-    const form = document.getElementById('consultation-form') as HTMLFormElement;
-    const submitButton = form.querySelector('.submit') as HTMLButtonElement;
+    const form = document.getElementById('get-started-form') as HTMLFormElement;
+    const submitButton = document.getElementById('get-started-submit-btn') as HTMLButtonElement;
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
