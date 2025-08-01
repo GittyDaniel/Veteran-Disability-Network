@@ -79,8 +79,8 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     `;
 
     await resend.emails.send({
-      from: "advisor-gbogan@veteransdisabilitynetwork.org",
-      to: "vetteam@veteransdisabilitynetwork.net",
+      from: "Veterans Disability Network <advisor-gbogan@veteransdisabilitynetwork.org>",
+      to: ["vetteam@veteransdisabilitynetwork.net"],
       subject: `New Consultation Request from ${leadData.firstName} ${leadData.lastName}`,
       html: emailHtmlBody,
     });
