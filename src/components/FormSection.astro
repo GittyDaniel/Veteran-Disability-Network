@@ -1,6 +1,4 @@
----
-/* No props — wire up `action`/`method` as needed */
----
+
 
 <section id="get-started" class="lead" aria-labelledby="lead-title">
   <div class="lead-inner">
@@ -10,7 +8,7 @@
       <p class="lead-note"><span aria-hidden="true">*</span> indicates required fields</p>
     </header>
 
-    <form id="get-started-form" class="leadform" action="#" method="post" novalidate>
+    <form id="get-started-form" class="leadform" method="post" novalidate>
       <!-- Honeypot (basic spam trap) -->
       <div class="hp" aria-hidden="true">
         <label for="company">Company</label>
@@ -347,7 +345,11 @@
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
-      // --- Provide instant user feedback ---
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
       const originalButtonText = submitButton.textContent;
       submitButton.disabled = true;
       submitButton.textContent = 'Submitting...';
@@ -360,21 +362,28 @@
           body: formData,
         });
 
-        // If the submission is successful, the API will redirect the browser.
-        // The 'redirected' property of the response will be true.
         if (response.redirected) {
-          window.location.href = response.url; // Follow the redirect to the thank-you page
-        } else {
-          // Handle cases where the API returns an error instead of redirecting
-          const data = await response.json();
-          throw new Error(data.error || 'An unexpected error occurred.');
+          window.location.href = response.url;
+          return;
+        }
+        
+        if (!response.ok) {
+            const contentType = response.headers.get("content-type");
+            let errorMessage = 'An unexpected error occurred.';
+            
+            if (contentType && contentType.includes("application/json")) {
+                const data = await response.json();
+                errorMessage = data.error || errorMessage;
+            } else {
+                errorMessage = await response.text(); // Get plain text error
+            }
+            throw new Error(errorMessage);
         }
 
-      } catch (error) {
+      } catch (error : any) {
         console.error('Form submission error:', error);
-        alert('There was an error submitting your form. Please try again.');
+        alert(`Submission failed: ${error.message}`);
         
-        // --- Restore the button on error ---
         submitButton.disabled = false;
         submitButton.textContent = originalButtonText;
       }
