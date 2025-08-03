@@ -16,20 +16,6 @@
   const nav = header.querySelector<HTMLElement>("#primary-navigation");
   const backdrop = header.querySelector<HTMLDivElement>(".nav-backdrop");
 
-  // --- "Call Us" Pop-up Elements ---
-  const desktopCallBtn = document.getElementById(
-    "desktop-call-cta"
-  ) as HTMLAnchorElement;
-  const phonePopup = document.getElementById("phone-popup") as HTMLDivElement;
-  const copyPhoneBtn = document.getElementById(
-    "copy-phone-btn"
-  ) as HTMLButtonElement;
-  const copyFeedback = document.getElementById(
-    "copy-feedback"
-  ) as HTMLDivElement;
-  const phoneNumber = "800-387-1705";
-  let popupTimeout: number;
-
   /**
    * Mobile Drawer Logic
    */
@@ -87,41 +73,70 @@
   }
 
   /**
-   * Desktop "Call Us" Pop-up Logic
+   * Desktop "Call Us" Pop-up Logic (for multiple buttons)
    */
+  const phoneNumber = "800-387-1705";
   const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
 
-  if (desktopCallBtn && phonePopup && !isMobile) {
-    desktopCallBtn.addEventListener("click", (event: MouseEvent) => {
-      phonePopup.classList.add("is-visible");
-      phonePopup.hidden = false;
+  if (!isMobile) {
+    // A function to set up a pop-up for a given button
+    const setupCallPopup = (
+      btnId: string,
+      popupId: string,
+      copyBtnId: string,
+      feedbackId: string
+    ) => {
+      const callBtn = document.getElementById(btnId) as HTMLAnchorElement;
+      const popup = document.getElementById(popupId) as HTMLDivElement;
+      const copyBtn = document.getElementById(copyBtnId) as HTMLButtonElement;
+      const feedback = document.getElementById(feedbackId) as HTMLDivElement;
+      let popupTimeout: number;
 
-      clearTimeout(popupTimeout);
+      if (!callBtn || !popup || !copyBtn || !feedback) return;
 
-      popupTimeout = window.setTimeout(() => {
-        phonePopup.classList.remove("is-visible");
-        phonePopup.hidden = true;
-      }, 5000);
-    });
+      callBtn.addEventListener("click", (event: MouseEvent) => {
+        popup.classList.add("is-visible");
+        popup.hidden = false;
+        clearTimeout(popupTimeout);
+        popupTimeout = window.setTimeout(() => {
+          popup.classList.remove("is-visible");
+          popup.hidden = true;
+        }, 5000);
+      });
 
-    if (copyPhoneBtn) {
-      copyPhoneBtn.addEventListener("click", () => {
+      copyBtn.addEventListener("click", () => {
         navigator.clipboard
           .writeText(phoneNumber)
           .then(() => {
-            if (copyFeedback) copyFeedback.textContent = "Copied!";
+            feedback.textContent = "Copied!";
             clearTimeout(popupTimeout);
             setTimeout(() => {
-              if (copyFeedback) copyFeedback.textContent = "";
-              phonePopup.classList.remove("is-visible");
-              phonePopup.hidden = true;
+              feedback.textContent = "";
+              popup.classList.remove("is-visible");
+              popup.hidden = true;
             }, 2000);
           })
           .catch((err) => {
             console.error("Failed to copy text: ", err);
-            if (copyFeedback) copyFeedback.textContent = "Failed!";
+            feedback.textContent = "Failed!";
           });
       });
-    }
+    };
+
+    // Set up the pop-up for the header button
+    setupCallPopup(
+      "desktop-call-cta",
+      "phone-popup",
+      "copy-phone-btn",
+      "copy-feedback"
+    );
+
+    // Set up the pop-up for the "About Us" section button
+    setupCallPopup(
+      "about-us-call-cta",
+      "about-phone-popup",
+      "about-copy-phone-btn",
+      "about-copy-feedback"
+    );
   }
 })();

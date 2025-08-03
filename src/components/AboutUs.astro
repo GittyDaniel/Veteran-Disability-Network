@@ -14,24 +14,30 @@ import GuideImg from '../assets/about_us.jpg';
           Veterans Disability Network is dedicated to Educating and providing detailed Consultation for men and women in our
           military on how to navigate the VA disability claims process successfully.
         </p>
-
         <p>
           Our mission is simple: to empower veterans with the knowledge, support, and expert resources they need to secure the
           benefits they’ve earned. We partner with top professionals across the country — Doctors, Attorneys, and Claim Advisors
           who are focused solely on Veteran Disability claims.
         </p>
-
         <p>
           Whether your case requires a fresh medical opinion, a tailored plan of action, or in-depth legal analysis, we are
           committed to going the distance for you. Don’t let the process frustrate you or confuse you. Call Veterans Disability
           Network today. Our Advisors will listen to you and explain the process.
         </p>
-
         <p>Veterans’ disability is not just what we do but what we believe in.</p>
 
-        <a href="tel:+18003871705" class="action-btn" aria-label="Call Veterans Disability Network now">
-          Call Us Now
-        </a>
+        <!-- MODIFIED: Wrapped button and pop-up in a container -->
+        <div class="action-btn-container">
+          <a href="tel:+18003871705" class="action-btn" id="about-us-call-cta" aria-label="Call Veterans Disability Network now">
+            Call Us Now
+          </a>
+          <!-- ADDED: Pop-up for desktop users -->
+          <div id="about-phone-popup" class="phone-popup" hidden>
+            <span class="phone-popup-number">800-387-1705</span>
+            <button id="about-copy-phone-btn" class="copy-btn">Copy</button>
+            <div id="about-copy-feedback" class="copy-feedback"></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -101,10 +107,13 @@ import GuideImg from '../assets/about_us.jpg';
     .about-copy p { margin: 0; }
 
     /* ===== CTA ===== */
-    .action-btn {
+    .action-btn-container {
+      position: relative;
       justify-self: start;
-      display: inline-block;
       margin-top: .5rem;
+    }
+    .action-btn {
+      display: inline-block;
       padding: .9rem 1.5rem;
       border-radius: 9999px;
       font-weight: 700;
@@ -126,6 +135,56 @@ import GuideImg from '../assets/about_us.jpg';
       box-shadow: 0 4px 10px rgba(0,0,0,.18);
     }
 
+    /* ADDED: Pop-up styles (copied from header) */
+    .phone-popup {
+        position: absolute;
+        bottom: 120%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--color-primary);
+        color: var(--color-bg, #fff);
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+        z-index: 5;
+    }
+    .phone-popup.is-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    .phone-popup::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: var(--color-primary) transparent transparent transparent;
+    }
+    .phone-popup-number { font-weight: 600; }
+    .copy-btn {
+        background-color: rgba(255,255,255,0.2);
+        color: inherit;
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        cursor: pointer;
+    }
+    .copy-feedback {
+        font-size: 0.8rem;
+        font-style: italic;
+        min-width: 50px;
+        text-align: left;
+    }
+
     /* ===== Image (rounded rectangle) ===== */
     .about-figure {
       margin: 0;
@@ -134,11 +193,11 @@ import GuideImg from '../assets/about_us.jpg';
     .about-figure img {
       display: block;
       width: min(100%, 32rem);
-      aspect-ratio: 4 / 5;      /* avoids CLS while loading */
+      aspect-ratio: 4 / 5;
       height: auto;
       object-fit: cover;
       object-position: right;
-      border-radius: 1rem;      /* rounded box */
+      border-radius: 1rem;
       box-shadow: 0 12px 28px rgba(0,0,0,.12);
       outline: 1px solid var(--color-border);
       outline-offset: -1px;
@@ -158,7 +217,7 @@ import GuideImg from '../assets/about_us.jpg';
     /* ===== Large screens: two columns, text left / image right ===== */
     @media (min-width: 900px) {
       .about-inner {
-        grid-template-columns: 1.1fr .9fr;  /* slight bias to copy */
+        grid-template-columns: 1.1fr .9fr;
         grid-template-areas: "text image";
         align-items: center;
         gap: 3rem;
@@ -167,7 +226,6 @@ import GuideImg from '../assets/about_us.jpg';
       .about-figure { grid-area: image; justify-self: end; }
       .about-figure img { width: clamp(22rem, 30vw, 32rem); }
 
-      /* Subtle drop cap on first paragraph (desktop only) */
       .about-copy p:first-of-type::first-letter {
         font-family: "Merriweather", Georgia, serif;
         font-weight: 800;
