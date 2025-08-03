@@ -45,7 +45,7 @@ const isActive = (href: string, { section = false } = {}) => {
 
         <!-- Mobile‑only CTA lives *inside* drawer -->
         <li class="mobile-cta">
-          <a href="tel:+18003871705" class="cta-inline">
+          <a href="tel:+1-800-387-1705" class="cta-inline">
             Call&nbsp;Us&nbsp;Now
           </a>
         </li>
@@ -54,14 +54,20 @@ const isActive = (href: string, { section = false } = {}) => {
 
     <!-- Desktop CTA (hidden on mobile) -->
     <div class="header-actions">
-      <a href="tel:+18003871705" class="cta"
-         aria-label="Call us now at 1‑800‑387‑1705">
+      <a href="tel:+1-800-387-1705" class="cta" id="desktop-call-cta"
+         aria-label="Call us now at 800-387-1705">
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor"
                 d="M6.6 10.2c1.2 2.3 3 4.1 5.3 5.3l1.8-1.8c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3.1.6.7 0 1.2.5 1.2 1.2v2.9c0 .7-.5 1.2-1.2 1.2C10.4 20.4 3.6 13.6 3.6 5.2c0-.7.5-1.2 1.2-1.2H7.7c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.1.6 3.1.1.4 0 .9-.3 1.2l-1.6 1.7Z"/>
         </svg>
         <span>Call&nbsp;Us&nbsp;Now</span>
       </a>
+      <!-- Pop-up for desktop users -->
+      <div id="phone-popup" class="phone-popup" hidden>
+        <span class="phone-popup-number">800-387-1705</span>
+        <button id="copy-phone-btn" class="copy-btn">Copy</button>
+        <div id="copy-feedback" class="copy-feedback"></div>
+      </div>
     </div>
   </div>
 
@@ -88,14 +94,14 @@ const isActive = (href: string, { section = false } = {}) => {
 
     /* ─── Brand ────────────────────────────────────── */
     .brand { display:flex; align-items:center; gap:.75rem; text-decoration:none; }
-    .brand-logo { width:80px; height:80px; object-fit:contain; display:block; }
+    .brand-logo { width:96px; height:96px; object-fit:contain; display:block; }
     .brand-text { display:flex; flex-direction:column; line-height:1.1; }
     .brand-name   { font:700 1.6rem "Merriweather", Georgia, serif; color:var(--color-primary); }
     .brand-slogan { font-size:1rem; font-style:italic; color:var(--color-muted); }
 
     /* ─── Hamburger toggle ─────────────────────────── */
     .menu-toggle {
-      display:none;                              /* shown via media query */
+      display:none;
       flex-direction:column; gap:4px;
       background:none; border:none; padding:.5rem;
       cursor:pointer;
@@ -104,14 +110,12 @@ const isActive = (href: string, { section = false } = {}) => {
       width:24px; height:3px; background:var(--color-text); border-radius:2px;
       transition:transform .3s ease, opacity .3s ease;
     }
-    /*  Animate into "X" when nav is open  */
     .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
     .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity:0; }
     .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
     /* ─── Navigation ──────────────────────────────── */
     .nav ul { list-style:none; margin:0; padding:0; display:flex; gap:1.5rem; }
-
     .nav a {
       position:relative; font-weight:600; color:var(--color-text);
       text-decoration:none; padding:.5rem .25rem; border-radius:.25rem;
@@ -127,12 +131,11 @@ const isActive = (href: string, { section = false } = {}) => {
     .nav a:hover, .nav a:focus-visible { color:var(--color-primary); }
 
     /* ─── CTA (desktop) ───────────────────────────── */
-    .header-actions { display:flex; align-items:center; }
+    .header-actions { position: relative; display:flex; align-items:center; }
     .cta {
-      --cta-border:2px;
       display:inline-flex; align-items:center; gap:.5rem;
       font-weight:600; padding:.6rem 1.25rem;
-      border:var(--cta-border) solid var(--color-primary);
+      border:2px solid var(--color-primary);
       color:var(--color-primary); background:transparent;
       border-radius:9999px; text-decoration:none;
       transition:background .25s ease, color .25s ease, transform .25s cubic-bezier(.34,1.56,.64,1);
@@ -142,41 +145,79 @@ const isActive = (href: string, { section = false } = {}) => {
       transform:translateY(-2px) scale(1.03); box-shadow:0 6px 12px rgba(0,0,0,.12);
     }
 
+    /* Phone Pop-up Styles */
+    .phone-popup {
+        position: absolute;
+        top: 120%; /* MODIFIED: Was bottom: 120% */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--color-primary);
+        color: var(--color-bg, #fff);
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+    }
+    .phone-popup.is-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    .phone-popup::after {
+        content: '';
+        position: absolute;
+        bottom: 100%; /* MODIFIED: Was top: 100% */
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent transparent var(--color-primary) transparent; /* MODIFIED: Triangle now points up */
+    }
+    .phone-popup-number { font-weight: 600; }
+    .copy-btn {
+        background-color: rgba(255,255,255,0.2);
+        color: inherit;
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        cursor: pointer;
+    }
+    .copy-feedback {
+        font-size: 0.8rem;
+        font-style: italic;
+        min-width: 50px; /* Reserve space for "Copied!" text */
+        text-align: left;
+    }
+
     /* ─── Mobile drawer styles (≤768 px) ───────────── */
     @media (max-width: 768px) {
-      .menu-toggle { display:flex; }            /* show burger */
-      .header-actions { display:none; }         /* hide desktop CTA */
-
-      .header-inner {
-        padding: 1rem;
-      }
-
-      /* Drawer */
+      .menu-toggle { display:flex; }
+      .header-actions { display:none; }
+      .header-inner { padding: 1rem; }
       .nav {
-        position:fixed; inset:0 0 0 auto;      /* right‑side drawer */
+        position:fixed; inset:0 0 0 auto;
         width:75%; max-width:18rem;
         background:var(--color-bg); box-shadow:-2px 0 6px rgba(0,0,0,.12);
         transform:translateX(100%); transition:transform .35s ease-out;
-        padding-top:5rem;                      /* leave space for header */
+        padding-top:5rem;
       }
       .nav.open { transform:translateX(0); }
-
       .nav ul { flex-direction:column; gap:1.6rem; padding-inline:1.5rem; }
       .nav a { font-size:1rem; padding:.75rem 0; }
-
-      /* Mobile CTA inside drawer */
       .mobile-cta { margin-top:1rem; }
       .cta-inline {
         display:block; font-weight:700; color:var(--color-primary);
         background:rgba(33,74,156,.08); border-radius:.5rem; padding:.85rem 1rem;
         text-align:center; text-decoration:none;
       }
-      
-      .brand-logo   { width: 56px; height: 56px; }      /* was 80 × 80 */
-      .brand-name   { font-size: 1.25rem; }             /* ~20 px */
-      .brand-slogan { font-size: .85rem; }              /* ~14 px, still legible */
-
-
+      .brand-logo   { width: 64px; height: 64px; }
+      .brand-name   { font-size: 1.25rem; }
+      .brand-slogan { font-size: .85rem; }
     }
 
     /* ─── Desktop reset (≥769 px) ─────────────────── */
@@ -187,10 +228,9 @@ const isActive = (href: string, { section = false } = {}) => {
     }
   </style>
 
-  <!-- Body scroll lock when drawer is open -->
   <style is:global>
     body.navlock { overflow: hidden; }
   </style>
-
-  <script src='../scripts/siteHeader.ts'></script>
 </header>
+
+<script src="../scripts/siteHeader.ts"></script>
