@@ -339,6 +339,18 @@
 </section>
 
 <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const referralCode = params.get("referral");
+
+      if (referralCode) {
+        const referralInput = document.getElementById("referralCode") as HTMLInputElement;
+        if (referralInput) {
+          referralInput.value = referralCode.toUpperCase(); // optional normalization
+        }
+      }
+    });
+    
     const form = document.getElementById('get-started-form') as HTMLFormElement;
     const submitButton = document.getElementById('get-started-submit-btn') as HTMLButtonElement;
 

@@ -100,7 +100,10 @@ async function updateUI(session: Session | null): Promise<void> {
     const user = session.user;
     userEmailSpan.textContent = user.email || "No email found";
     const code = await getReferralCode(user.id);
-    referralCodeDiv.textContent = code || "Loading...";
+    referralCodeDiv.textContent = code
+      ? `https://veteransdisabilitynetwork.org/?referral=${code}#get-started`
+      : "Loading...";
+    referralCodeDiv.setAttribute("title", "Click to copy link");
   } else {
     registrationView.hidden = false;
     referralCodeView.hidden = true;
@@ -114,7 +117,7 @@ signOutBtn.addEventListener("click", async (): Promise<void> => {
 referralCodeDiv.addEventListener("click", (): void => {
   if (referralCodeDiv.textContent) {
     navigator.clipboard.writeText(referralCodeDiv.textContent).then(() => {
-      copyFeedback.textContent = "Copied to clipboard!";
+      copyFeedback.textContent = "Referral link copied!";
       setTimeout(() => {
         copyFeedback.textContent = "";
       }, 2000);
