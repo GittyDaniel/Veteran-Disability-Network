@@ -6,7 +6,8 @@ const supabase = createClient(
   import.meta.env.PUBLIC_SUPABASE_ANON_KEY
 );
 
-export async function POST({ request }) {
+// The 'context' object (which contains 'Astro') is passed as the second argument
+export const POST = async ({ request, redirect, url }) => {
   try {
     const { email } = await request.json();
 
@@ -19,9 +20,8 @@ export async function POST({ request }) {
     const { error } = await supabase.auth.signInWithOtp({
       email: email,
       options: {
-        // This is the URL the user will be redirected to after clicking the magic link.
-        // We'll create this page in the next step.
-        emailRedirectTo: new URL("/referral", request.url).href,
+        // MODIFIED: Use the site's origin for a reliable production URL
+        emailRedirectTo: new URL("/referral", url.origin).href,
       },
     });
 
@@ -38,4 +38,4 @@ export async function POST({ request }) {
       status: 500,
     });
   }
-}
+};
