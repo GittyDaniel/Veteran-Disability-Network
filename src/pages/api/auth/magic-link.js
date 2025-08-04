@@ -20,8 +20,7 @@ export const POST = async ({ request, redirect, url }) => {
     const { error } = await supabase.auth.signInWithOtp({
       email: email,
       options: {
-        // MODIFIED: Use the site's origin for a reliable production URL
-        emailRedirectTo: new URL("/referral", url.origin).href,
+        emailRedirectTo: "https://veteransdisabilitynetwork.org/referral",
       },
     });
 
