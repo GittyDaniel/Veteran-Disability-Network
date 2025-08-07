@@ -1,0 +1,151 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const prerender = true;
+
+
+// This function is required for dynamic routes in Astro.
+// It tells Astro which pages to generate at build time.
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+// Get the specific post data for this page from Astro's props
+const {post} = Astro.props;
+if (!post) {
+  console.error('Post not found in Astro.props:', Astro.props);
+  throw new Error('Post not found in Astro.props — check getStaticPaths().');
+}
+const { Content } = await post.render();
+
+// Dynamic SEO for each post
+const seo = {
+  title: `${post.data.title} | Front Line Facts`,
+  description: post.data.description,
+  image: post.data.coverImage,
+}
+---
+<BaseLayout seo={seo}>
+  <article class="post-container">
+    <header class="post-header">
+      <!-- Back link to the main blog page -->
+      <a href="/blog" class="back-link">&larr; Back to all articles</a>
+      <h1 class="post-title">{post.data.title}</h1>
+      <div class="post-meta">
+        <time datetime={new Date(post.data.pubDate).toISOString()}>
+          Published on {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+      </div>
+    </header>
+
+    <!-- Full-width cover image -->
+    <img 
+      src={post.data.coverImage} 
+      alt={post.data.coverAlt} 
+      class="post-cover-image"
+      width="1200"
+      height="600"
+    />
+
+    <!-- The main content from your markdown file -->
+    <div class="post-content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-container {
+    max-width: 75ch; /* Optimal width for reading text */
+    margin-inline: auto;
+    padding: 2rem 1.5rem 6rem;
+  }
+
+  .post-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--color-accent, #005A9C);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .post-title {
+    font-size: clamp(2.25rem, 8vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    color: var(--color-muted, #555);
+    font-size: 1rem;
+  }
+
+  .post-cover-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 8;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .post-content {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  /* Styling the content that comes from markdown */
+  .post-content :global(h2) {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-border, #eee);
+    padding-bottom: 0.5rem;
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.375rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(a) {
+    color: var(--color-accent, #005A9C);
+    text-decoration: underline;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.75rem;
+  }
+  
+  .post-content :global(strong) {
+    font-weight: 700;
+  }
+</style>
