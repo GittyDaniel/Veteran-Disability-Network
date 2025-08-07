@@ -171,10 +171,7 @@ const seo = {
 
   /* --- Pagination & No Results (No Changes) --- */
   .pagination-container { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 3rem; }
-  .pagination-button { border: 1px solid var(--color-border, #ccc); background-color: white; color: var(--color-primary, #333); border-radius: 6px; padding: 0.5rem 1rem; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s, color 0.2s, border-color 0.2s; }
-  .pagination-button:hover:not([disabled]):not(.active) { background-color: #f0f0f0; border-color: #bbb; }
-  .pagination-button.active { background-color: var(--color-accent, #005A9C); color: white; border-color: var(--color-accent, #005A9C); font-weight: 700; cursor: default; }
-  .pagination-button[disabled] { opacity: 0.6; cursor: not-allowed; }
+  
   .no-results-message { text-align: center; padding: 3rem 1rem; border: 2px dashed var(--color-border, #ddd); border-radius: 12px; margin-top: 2rem; }
   .no-results-message.hidden { display: none; }
   .no-results-message h3 { font-size: 1.5rem; color: var(--color-primary, #333); margin-bottom: 0.5rem; }
@@ -277,7 +274,7 @@ const seo = {
           filteredPosts.sort((a, b) => new Date(a.data.pubDate) - new Date(b.data.pubDate));
           break;
         case 'title-asc':
-          filteredPosts.sort((a, b) => a.data.title.localeCompare(a.data.title));
+          filteredPosts.sort((a, b) => a.data.title.localeCompare(b.data.title));
           break;
         case 'title-desc':
           filteredPosts.sort((a, b) => b.data.title.localeCompare(a.data.title));
@@ -345,6 +342,10 @@ const seo = {
         }
       });
       paginationContainer.appendChild(prevButton);
+      Array.from(paginationContainer.children).forEach((btn) =>
+        btn.classList.remove('active')
+      );
+
       for (let i = 1; i <= totalPages; i++) {
         const pageButton = document.createElement('button');
         pageButton.textContent = i;

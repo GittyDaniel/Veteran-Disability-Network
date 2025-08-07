@@ -71,3 +71,30 @@ button.btn-accent {
   outline: 3px solid var(--color-focus);
   outline-offset: 2px;
 }
+
+.pagination-button {
+  border: 1px solid var(--color-border, #ccc);
+  background-color: white;
+  color: var(--color-primary, #333);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.pagination-button:hover:not([disabled]):not(.active) {
+  background-color: #f0f0f0;
+  border-color: #bbb;
+}
+.pagination-button.active {
+  background-color: var(--color-accent, #005a9c);
+  color: white;
+  border-color: var(--color-accent, #005a9c);
+  font-weight: 700;
+  cursor: default;
+}
+.pagination-button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
