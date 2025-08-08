@@ -1,0 +1,202 @@
+---
+// src/components/Comments.astro
+
+// This prop will receive the unique slug of the blog post
+// so we know which comments to fetch.
+const { postSlug } = Astro.props;
+---
+
+<div id="comments-section" class="comments-container">
+  <h3 class="comments-title">Join the Conversation</h3>
+  
+  <!-- Form for submitting a new comment -->
+  <form id="comment-form" class="comment-form">
+    <div class="form-group">
+      <label for="author_name">Your Name</label>
+      <input type="text" id="author_name" required placeholder="e.g., John Doe" />
+    </div>
+    <div class="form-group">
+      <label for="content">Your Comment</label>
+      <textarea id="content" rows="4" required placeholder="Share your thoughts..."></textarea>
+    </div>
+    <button type="submit" id="submit-button">Post Comment</button>
+    <div id="form-message" class="form-message"></div>
+  </form>
+  
+  <!-- Area where comments will be displayed -->
+  <div id="comments-list" class="comments-list">
+    <p>Loading comments...</p>
+  </div>
+</div>
+
+<script type="module" define:vars={{ postSlug }}>
+  const commentsList = document.getElementById('comments-list');
+  const commentForm = document.getElementById('comment-form');
+  const submitButton = document.getElementById('submit-button');
+  const formMessage = document.getElementById('form-message');
+
+  // --- 1. Function to fetch comments from YOUR API ---
+  async function fetchComments() {
+    try {
+      // Call the GET endpoint
+      const response = await fetch(`/api/comments?post_slug=${postSlug}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch comments');
+      }
+      const comments = await response.json();
+
+      if (comments.length === 0) {
+        commentsList.innerHTML = '<p>No comments yet. Be the first!</p>';
+        return;
+      }
+
+      commentsList.innerHTML = '';
+      comments.forEach(comment => {
+        const commentEl = document.createElement('div');
+        commentEl.classList.add('comment');
+        const formattedDate = new Date(comment.created_at).toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+        commentEl.innerHTML = `
+          <div class="comment-header">
+            <strong class="comment-author">${comment.author_name}</strong>
+            <time class="comment-date">${formattedDate}</time>
+          </div>
+          <p class="comment-content">${comment.content}</p>
+        `;
+        commentsList.appendChild(commentEl);
+      });
+    } catch (error) {
+      commentsList.innerHTML = '<p>Could not fetch comments.</p>';
+      console.error('Error fetching comments:', error);
+    }
+  }
+
+  // --- 2. Function to handle form submission to YOUR API ---
+  commentForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const author_name = document.getElementById('author_name').value.trim();
+    const content = document.getElementById('content').value.trim();
+
+    if (!author_name || !content) {
+      formMessage.textContent = 'Please fill out all fields.';
+      formMessage.style.color = 'red';
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'Posting...';
+
+    try {
+      // Call the POST endpoint
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ post_slug: postSlug, author_name, content }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to post comment');
+      }
+
+      formMessage.textContent = 'Comment posted successfully!';
+      formMessage.style.color = 'green';
+      document.getElementById('author_name').value = '';
+      document.getElementById('content').value = '';
+      
+      setTimeout(() => {
+        formMessage.textContent = '';
+        fetchComments(); // Refresh the comments list
+      }, 2000);
+
+    } catch (error) {
+      formMessage.textContent = 'Error posting comment. Please try again.';
+      formMessage.style.color = 'red';
+      console.error('Error inserting comment:', error);
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Post Comment';
+    }
+  });
+
+  // --- 3. Initial fetch when the page loads ---
+  fetchComments();
+</script>
+
+<style>
+  .comments-container {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border, #eee);
+  }
+  .comments-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .form-group input,
+  .form-group textarea {
+    padding: 0.75rem;
+    border: 1px solid var(--color-border, #ccc);
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  .comment-form button {
+    align-self: flex-start;
+    padding: 0.75rem 2rem;
+    background-color: var(--color-accent, #005A9C);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .comment-form button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  .form-message {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+  }
+  .comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .comment {
+    border-bottom: 1px solid var(--color-border, #eee);
+    padding-bottom: 1.5rem;
+  }
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  .comment-author {
+    font-weight: 700;
+  }
+  .comment-date {
+    font-size: 0.875rem;
+    color: var(--color-muted, #777);
+  }
+  .comment-content {
+    line-height: 1.6;
+  }
+</style>
