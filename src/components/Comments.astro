@@ -1,202 +1,351 @@
 ---
 // src/components/Comments.astro
-
-// This prop will receive the unique slug of the blog post
-// so we know which comments to fetch.
 const { postSlug } = Astro.props;
 ---
 
-<div id="comments-section" class="comments-container">
-  <h3 class="comments-title">Join the Conversation</h3>
-  
-  <!-- Form for submitting a new comment -->
-  <form id="comment-form" class="comment-form">
-    <div class="form-group">
-      <label for="author_name">Your Name</label>
-      <input type="text" id="author_name" required placeholder="e.g., John Doe" />
+<div id="comments-section" class="cmt-container">
+  <!-- Header (collapsible) -->
+  <div id="comments-header-bar" class="cmt-header">
+    <h3 class="cmt-title">
+      Comments
+      <span id="comment-count-badge" class="cmt-count" aria-live="polite"></span>
+    </h3>
+    <button id="toggle-comments-btn" class="cmt-toggle" aria-label="Toggle comments visibility">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Collapsible content -->
+  <div id="comments-content-area" class="cmt-content">
+    <!-- List -->
+    <div id="comments-list" class="cmt-list">
+      <div class="cmt-loader"></div>
     </div>
-    <div class="form-group">
-      <label for="content">Your Comment</label>
-      <textarea id="content" rows="4" required placeholder="Share your thoughts..."></textarea>
-    </div>
-    <button type="submit" id="submit-button">Post Comment</button>
-    <div id="form-message" class="form-message"></div>
-  </form>
-  
-  <!-- Area where comments will be displayed -->
-  <div id="comments-list" class="comments-list">
-    <p>Loading comments...</p>
+
+    <!-- New comment -->
+    <form id="comment-form" class="cmt-form">
+      <div class="cmt-group">
+        <label for="author_name" class="sr-only">Your Name</label>
+        <input type="text" id="author_name" required placeholder="Your Name" autocomplete="name" />
+      </div>
+      <div class="cmt-group">
+        <label for="content" class="sr-only">Your Comment</label>
+        <textarea id="content" rows="4" required placeholder="Join the conversation…"></textarea>
+      </div>
+      <div class="cmt-formFooter">
+        <button type="submit" class="cmt-submit">Post Comment</button>
+        <div class="cmt-msg" aria-live="polite"></div>
+      </div>
+    </form>
   </div>
 </div>
 
 <script type="module" define:vars={{ postSlug }}>
-  const commentsList = document.getElementById('comments-list');
-  const commentForm = document.getElementById('comment-form');
-  const submitButton = document.getElementById('submit-button');
-  const formMessage = document.getElementById('form-message');
+  const commentsHeaderBar = document.getElementById('comments-header-bar');
+  const commentsContentArea = document.getElementById('comments-content-area');
+  const commentCountBadge = document.getElementById('comment-count-badge');
+  const commentsListEl = document.getElementById('comments-list');
+  const mainCommentForm = document.getElementById('comment-form');
 
-  // --- 1. Function to fetch comments from YOUR API ---
-  async function fetchComments() {
-    try {
-      // Call the GET endpoint
-      const response = await fetch(`/api/comments?post_slug=${postSlug}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch comments');
-      }
-      const comments = await response.json();
-
-      if (comments.length === 0) {
-        commentsList.innerHTML = '<p>No comments yet. Be the first!</p>';
-        return;
-      }
-
-      commentsList.innerHTML = '';
-      comments.forEach(comment => {
-        const commentEl = document.createElement('div');
-        commentEl.classList.add('comment');
-        const formattedDate = new Date(comment.created_at).toLocaleDateString('en-US', {
-          year: 'numeric', month: 'long', day: 'numeric'
-        });
-        commentEl.innerHTML = `
-          <div class="comment-header">
-            <strong class="comment-author">${comment.author_name}</strong>
-            <time class="comment-date">${formattedDate}</time>
-          </div>
-          <p class="comment-content">${comment.content}</p>
-        `;
-        commentsList.appendChild(commentEl);
-      });
-    } catch (error) {
-      commentsList.innerHTML = '<p>Could not fetch comments.</p>';
-      console.error('Error fetching comments:', error);
+  // Persistent per-browser viewer id (for liking)
+  const LS_KEY = 'comments_viewer_id';
+  function uuidFallback() {
+    // RFC4122-ish fallback if crypto.randomUUID not available
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+      const r = (Math.random() * 16) | 0;
+      const v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+  function ensureViewerId() {
+    let id = localStorage.getItem(LS_KEY);
+    if (!id) {
+      id = (crypto && crypto.randomUUID) ? crypto.randomUUID() : uuidFallback();
+      localStorage.setItem(LS_KEY, id);
     }
+    return id;
+  }
+  const viewerId = ensureViewerId();
+
+  // Avatar colors + initials
+  const AVATAR_COLORS = ['#005A9C', '#1a73e8', '#5f6368', '#d93025', '#f09300', '#1e8e3e'];
+  function generateAvatar(name) {
+    const initials = (name || '?').split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase();
+    const sum = (name || '').split('').reduce((s,c)=>s+c.charCodeAt(0),0);
+    const color = AVATAR_COLORS[sum % AVATAR_COLORS.length];
+    return { initials, color };
+  }
+  function el(tag, classNames = [], attrs = {}, text = '') {
+    const node = document.createElement(tag);
+    classNames.filter(Boolean).forEach(c => node.classList.add(c));
+    Object.entries(attrs).forEach(([k,v]) => node.setAttribute(k, v));
+    if (text) node.textContent = text;
+    return node;
   }
 
-  // --- 2. Function to handle form submission to YOUR API ---
-  commentForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const author_name = document.getElementById('author_name').value.trim();
-    const content = document.getElementById('content').value.trim();
-
-    if (!author_name || !content) {
-      formMessage.textContent = 'Please fill out all fields.';
-      formMessage.style.color = 'red';
+  // Render
+  function renderComments(comments, container) {
+    container.innerHTML = '';
+    if (comments.length === 0 && container === commentsListEl) {
+      container.appendChild(el('p', ['cmt-empty'], {}, 'Be the first to comment.'));
       return;
     }
 
-    submitButton.disabled = true;
-    submitButton.textContent = 'Posting...';
+    comments.forEach(comment => {
+      const { initials, color } = generateAvatar(comment.author_name);
+      const timeAgo = new Date(comment.created_at).toLocaleDateString('en-US',{ month:'short', day:'numeric' });
 
-    try {
-      // Call the POST endpoint
-      const response = await fetch('/api/comments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ post_slug: postSlug, author_name, content }),
-      });
+      const wrap = el('div', ['cmt-itemWrap']);
+      const item = el('article', ['cmt-item'], { id: `comment-${comment.id}` });
 
-      if (!response.ok) {
-        throw new Error('Failed to post comment');
+      const avatar = el('div', ['cmt-avatar'], { style: `background-color:${color};` }, initials);
+      const body = el('div', ['cmt-body']);
+
+      const header = el('div', ['cmt-head']);
+      const author = el('strong', ['cmt-author'], {}, comment.author_name);
+      const dot = el('span', ['cmt-dot'], {}, '•');
+      const date = el('time', ['cmt-date'], { datetime: comment.created_at }, `${timeAgo}`);
+      header.append(author, dot, date);
+
+      const content = el('p', ['cmt-text'], {}, comment.content);
+
+      const actions = el('div', ['cmt-actions']);
+      const replyBtn = el('button', ['cmt-action','reply-btn'], { 'data-comment-id': comment.id, type:'button' }, 'Reply');
+
+      const likeBtn = el(
+        'button',
+        ['cmt-action','like-btn'],
+        { 'data-comment-id': comment.id, type:'button', 'aria-pressed': String(!!comment.liked_by_viewer) },
+        comment.liked_by_viewer ? 'You Like' : 'Like?'
+      );
+      const likeCount = el('span', ['cmt-likeCount'], {}, String(comment.like_count ?? 0));
+
+      actions.append(replyBtn, likeBtn, likeCount);
+      body.append(header, content, actions);
+      item.append(avatar, body);
+
+      const replies = el('div', ['cmt-replies'], { id: `replies-for-${comment.id}` });
+      wrap.append(item, replies);
+      container.appendChild(wrap);
+
+      if (comment.replies && comment.replies.length) {
+        renderComments(comment.replies, replies);
       }
+    });
+  }
 
-      formMessage.textContent = 'Comment posted successfully!';
-      formMessage.style.color = 'green';
-      document.getElementById('author_name').value = '';
-      document.getElementById('content').value = '';
-      
-      setTimeout(() => {
-        formMessage.textContent = '';
-        fetchComments(); // Refresh the comments list
-      }, 2000);
-
-    } catch (error) {
-      formMessage.textContent = 'Error posting comment. Please try again.';
-      formMessage.style.color = 'red';
-      console.error('Error inserting comment:', error);
-    } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = 'Post Comment';
+  // Collapse
+  commentsHeaderBar.addEventListener('click', (e) => {
+    if (e.target.closest('.cmt-toggle') || e.target.closest('.cmt-title')) {
+      commentsContentArea.classList.toggle('is-hidden');
+      commentsHeaderBar.classList.toggle('is-collapsed');
     }
   });
 
-  // --- 3. Initial fetch when the page loads ---
-  fetchComments();
+  // Reply form injection
+  commentsListEl.addEventListener('click', (e) => {
+    const rBtn = e.target.closest('.reply-btn');
+    if (!rBtn) return;
+    const commentId = rBtn.dataset.commentId;
+    const replies = document.getElementById(`replies-for-${commentId}`);
+
+    const existing = replies.querySelector('.cmt-form.reply-form');
+    if (existing) return existing.remove();
+
+    const form = el('form', ['cmt-form','reply-form'], { 'data-parent-id': commentId });
+    form.innerHTML = `
+      <div class="cmt-group">
+        <input type="text" class="reply-author" required placeholder="Your Name" />
+        <textarea class="reply-content" rows="2" required placeholder="Write a reply…"></textarea>
+      </div>
+      <div class="cmt-formFooter">
+        <button type="submit" class="cmt-submit">Post Reply</button>
+      </div>
+    `;
+    replies.appendChild(form);
+    form.querySelector('.reply-author').focus();
+  });
+
+  // LIKE: Optimistic toggle (instant UI), then reconcile or rollback
+  commentsListEl.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.like-btn');
+    if (!btn) return;
+
+    const id = Number(btn.dataset.commentId);
+    const actions = btn.closest('.cmt-actions');
+    const countEl = actions?.querySelector('.cmt-likeCount');
+    if (!countEl) return;
+
+    const wasLiked = btn.getAttribute('aria-pressed') === 'true';
+    const prevCount = parseInt(countEl.textContent || '0', 10) || 0;
+
+    // optimistic UI
+    btn.setAttribute('aria-pressed', String(!wasLiked));
+    btn.textContent = !wasLiked ? 'You Like' : 'Like?';
+    countEl.textContent = String(prevCount + (wasLiked ? -1 : 1));
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('/api/comments/like', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json' },
+        body: JSON.stringify({ comment_id: id, viewer_id: viewerId, action: 'toggle' })
+      });
+      if (!res.ok) throw new Error('like failed');
+      const payload = await res.json();
+
+      // authoritative reconcile
+      btn.setAttribute('aria-pressed', String(!!payload.liked_by_viewer));
+      btn.textContent = payload.liked_by_viewer ? 'You Like' : 'Like?';
+      countEl.textContent = String(payload.like_count ?? 0);
+    } catch (err) {
+      // rollback
+      btn.setAttribute('aria-pressed', String(wasLiked));
+      btn.textContent = wasLiked ? 'You Like' : 'Like?';
+      countEl.textContent = String(prevCount);
+      console.error(err);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  // Submit handlers (comments & replies)
+  async function handleFormSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const isReply = form.classList.contains('reply-form');
+
+    const authorInput = isReply ? form.querySelector('.reply-author') : form.querySelector('#author_name');
+    const contentInput = isReply ? form.querySelector('.reply-content') : form.querySelector('#content');
+    const parentId = isReply ? form.dataset.parentId : null;
+    const btn = form.querySelector('.cmt-submit');
+
+    const author_name = authorInput.value.trim();
+    const content = contentInput.value.trim();
+    if (!author_name || !content) return alert('Please fill out all fields.');
+
+    btn.disabled = true; btn.textContent = 'Posting…';
+    try {
+      const res = await fetch('/api/comments', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ post_slug: postSlug, author_name, content, parent_id: parentId }),
+      });
+      if (!res.ok) throw new Error('Failed to post comment');
+
+      authorInput.value = ''; contentInput.value = '';
+      if (isReply) form.remove();
+      fetchAndRenderComments();
+    } catch (err) {
+      console.error(err);
+      alert('Error posting comment.');
+    } finally {
+      btn.disabled = false; btn.textContent = isReply ? 'Post Reply' : 'Post Comment';
+    }
+  }
+  mainCommentForm.addEventListener('submit', handleFormSubmit);
+  commentsListEl.addEventListener('submit', (e) => {
+    if (e.target.matches('.reply-form')) handleFormSubmit(e);
+  });
+
+  // Fetch & render
+  async function fetchAndRenderComments() {
+    try {
+      const res = await fetch(`/api/comments?post_slug=${postSlug}&viewer_id=${viewerId}`);
+      if (!res.ok) throw new Error('Network error');
+      const nested = await res.json();
+
+      let count = 0;
+      (function walk(arr){ arr.forEach(c => { count++; if (c.replies) walk(c.replies); }); })(nested);
+      commentCountBadge.textContent = count ? String(count) : '';
+
+      renderComments(nested, commentsListEl);
+    } catch (e) {
+      console.error(e);
+      commentsListEl.innerHTML = '<p class="cmt-error">Could not load comments.</p>';
+    }
+  }
+  fetchAndRenderComments();
 </script>
 
-<style>
-  .comments-container {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--color-border, #eee);
+<style is:global>
+  :root {
+    --cmt-accent: #005A9C;
+    --cmt-border: #e7e7ea;
+    --cmt-text: #1f2328;
+    --cmt-muted: #6b7280;
+    --cmt-like: #e02424;
   }
-  .comments-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
+
+  #comments-section.cmt-container { margin-top: 3.5rem; }
+
+  /* Header */
+  #comments-section .cmt-header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding-bottom:1rem; border-bottom:1px solid var(--cmt-border); cursor:pointer;
   }
-  .comment-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 3rem;
+  #comments-section .cmt-title { margin:0; display:flex; align-items:center; gap:.6rem; font-size:1.5rem; font-weight:700; }
+  #comments-section .cmt-count {
+    min-width:2rem; height:2rem; padding:0 .5rem; display:inline-grid; place-items:center;
+    border-radius:999px; font-weight:700; background:#ffe55c;
+    box-shadow: 0 0 0 .25rem rgba(255,229,92,.35) inset, 0 0 1.5rem rgba(255,229,92,.65);
   }
-  .form-group {
-    display: flex;
-    flex-direction: column;
+  #comments-section .cmt-toggle { background:none; border:0; padding:.25rem; color:var(--cmt-muted); transition:transform .25s ease; }
+  #comments-section .cmt-header.is-collapsed .cmt-toggle { transform:rotate(-45deg); }
+
+  /* Collapsible */
+  #comments-section .cmt-content { padding-top:1.5rem; transition:opacity .25s, transform .25s, max-height .35s, padding-top .2s; transform-origin:top; max-height:5000px; opacity:1; }
+  #comments-section .cmt-content.is-hidden { max-height:0; opacity:0; transform:scaleY(.96); padding-top:0; overflow:hidden; }
+
+  /* List & item */
+  #comments-section .cmt-list { display:flex; flex-direction:column; gap:1.75rem; }
+  #comments-section .cmt-itemWrap { display:flex; flex-direction:column; }
+  #comments-section .cmt-item { display:flex; gap:1rem; }
+  #comments-section .cmt-avatar { flex:0 0 44px; width:44px; height:44px; border-radius:50%; color:#fff; display:grid; place-items:center; font-weight:700; letter-spacing:.5px; }
+
+  #comments-section .cmt-body { flex:1; min-width:0; }
+  #comments-section .cmt-head { display:flex; align-items:center; gap:.5rem; margin-bottom:.25rem; }
+  #comments-section .cmt-author { color:var(--cmt-text); font-weight:700; }
+  #comments-section .cmt-dot { color:var(--cmt-muted); }
+  #comments-section .cmt-date { color:var(--cmt-muted); font-size:.95rem; }
+
+  #comments-section .cmt-text { margin:.25rem 0 0; color:var(--cmt-text); line-height:1.6; word-wrap:break-word; }
+
+  /* Actions row */
+  #comments-section .cmt-actions { display:flex; align-items:center; gap:1rem; margin-top:.5rem; }
+  #comments-section .cmt-action { appearance:none; background:none; border:0; padding:0; color:var(--cmt-muted); font-weight:600; font-size:.95rem; cursor:pointer; }
+  #comments-section .cmt-action:hover { text-decoration:underline; }
+  #comments-section .like-btn[aria-pressed="true"] { color:var(--cmt-accent); }
+  #comments-section .cmt-likeCount { margin-left:auto; display:inline-flex; align-items:center; gap:.4rem; color:var(--cmt-muted); font-weight:600; }
+  #comments-section .cmt-likeCount::before { content:'❤'; color:var(--cmt-like); font-size:1.05rem; }
+
+  /* Replies */
+  #comments-section .cmt-replies { margin-left:2.25rem; padding-left:1.25rem; margin-top:1rem; border-left:2px solid var(--cmt-border); display:flex; flex-direction:column; gap:1.25rem; }
+
+  /* Forms */
+  #comments-section .cmt-form { display:flex; flex-direction:column; gap:.75rem; margin-top:2rem; }
+  #comments-section .reply-form { margin-top:1rem; }
+  #comments-section .cmt-group { display:flex; flex-direction:column; gap:.5rem; }
+  #comments-section .cmt-group input, #comments-section .cmt-group textarea {
+    width:100%; font:inherit; font-size:1rem; padding:.75rem 1rem; border:1px solid var(--cmt-border); border-radius:10px;
   }
-  .form-group label {
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
-  .form-group input,
-  .form-group textarea {
-    padding: 0.75rem;
-    border: 1px solid var(--color-border, #ccc);
-    border-radius: 8px;
-    font-size: 1rem;
-  }
-  .comment-form button {
-    align-self: flex-start;
-    padding: 0.75rem 2rem;
-    background-color: var(--color-accent, #005A9C);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .comment-form button:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
-  }
-  .form-message {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-  }
-  .comments-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-  .comment {
-    border-bottom: 1px solid var(--color-border, #eee);
-    padding-bottom: 1.5rem;
-  }
-  .comment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-  }
-  .comment-author {
-    font-weight: 700;
-  }
-  .comment-date {
-    font-size: 0.875rem;
-    color: var(--color-muted, #777);
-  }
-  .comment-content {
-    line-height: 1.6;
+  #comments-section .cmt-formFooter { display:flex; align-items:center; gap:1rem; }
+  #comments-section .cmt-submit { background:var(--cmt-accent); color:#fff; border:0; border-radius:10px; padding:.55rem 1.2rem; font-weight:700; cursor:pointer; }
+  #comments-section .cmt-submit:disabled { opacity:.7; cursor:progress; }
+  #comments-section .cmt-msg { color:var(--cmt-muted); font-size:.95rem; }
+
+  /* Loader & messages */
+  #comments-section .cmt-loader { width:30px; height:30px; margin:2rem auto; border-radius:50%; border:4px solid #f3f3f3; border-top:4px solid var(--cmt-accent); animation:cmt-spin 1s linear infinite; }
+  @keyframes cmt-spin { to { transform: rotate(360deg); } }
+  #comments-section .cmt-empty { text-align:center; color:var(--cmt-muted); padding:2rem 0; }
+  #comments-section .cmt-error { text-align:center; color:#d73a49; padding:2rem 0; }
+
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #comments-section .cmt-content, #comments-section .cmt-toggle { transition: none; }
   }
 </style>
