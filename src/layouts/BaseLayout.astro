@@ -20,6 +20,18 @@ const { title = 'Veterans Disability Network' } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="stylesheet" href="/styles/theme.css" />
+    {import.meta.env.MODE === 'production' && (
+    <>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GC3EFSX2HB"></script>
+      <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GC3EFSX2HB');
+      </script>
+    </>
+  )}
   </head>
   <body>
     <slot />
