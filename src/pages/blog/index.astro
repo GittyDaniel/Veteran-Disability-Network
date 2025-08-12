@@ -23,13 +23,13 @@ const staffPicks = sortedPosts.filter(post => staffPickSlugs.includes(post.slug)
 
 // SEO configuration for the page
 const seo = {
-  title: "Front Line Facts – Straight Talk on VA Claims",
-  description: "No-nonsense insights, updates, and tactical guides on winning your VA disability claims. For veterans, by someone who gets it.",
+  title: "VA Claims Blog - Front Line | Veterans Disability Network",
+  description: "Straight talk on VA disability claims with no fluff or politics. Expert insights and practical advice for veterans navigating the VA benefits process.",
   image: "./blog_cover.jpg",
   canonicalURL: "https://veteransdisabilitynetwork.org/blog"
 }
 ---
-<BaseLayout seo={seo}>
+<BaseLayout  title={seo.title} description={seo.description}>
   <SiteHeader />
   <section class="hero" style={`background-image: url(${seo.image})`}>
     <div class="hero-content">

@@ -31,7 +31,7 @@ const seo = {
   image: post.data.coverImage,
 }
 ---
-<BaseLayout seo={seo}>
+<BaseLayout title={seo.title} description={seo.description}>
   <article class="post-container">
     <header class="post-header">
       <!-- Back link to the main blog page -->
