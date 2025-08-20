@@ -112,7 +112,7 @@
 
         <p class="consent-copy">
           You authorize Veteran Disability Network Advisors to contact you by SMS and message and data rates may apply.
-          See our <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms">Terms and Conditions</a> for more info.
+          See our <button type="button" class="link-button" data-modal-trigger="privacy-policy">Privacy Policy</button> and <button type="button" class="link-button" data-modal-trigger="terms-conditions">Terms and Conditions</button> for more info.
           We are not affiliated with the U.S. Department of Veterans Affairs (VA), any state VA office, or any other
           veterans’ service organization. Other organizations may offer similar services at no cost. Our products and
           services are not necessarily endorsed by any veterans’ organization. Veterans may be eligible for additional
@@ -134,9 +134,9 @@
         </div>
 
         <p class="legal-links">
-          <a href="#" data-modal-trigger="terms-conditions">Terms and Conditions</a>,
-          <a href="#" data-modal-trigger="release-of-information">Release of Information</a>, and
-          <a href="#" data-modal-trigger="privacy-policy">Privacy Policy</a>
+          <button class="link-button" data-modal-trigger="terms-conditions">Terms and Conditions</button>,
+          <button class="link-button" data-modal-trigger="release-of-information">Release of Information</button>, and
+          <button class="link-button" data-modal-trigger="privacy-policy">Privacy Policy</button>
         </p>
       </fieldset>
 
@@ -330,6 +330,18 @@
       outline: none;
     }
     .submit:active { transform: translateY(0) scale(.98); }
+
+    .link-button {
+      display: inline;
+      background: none;
+      border: none;
+      outline: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+  }
 
     @media (min-width: 1024px) { :root { --control-h: 52px; } }
     @media (prefers-reduced-motion: reduce) {

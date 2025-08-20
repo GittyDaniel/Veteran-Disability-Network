@@ -19,7 +19,8 @@ const year = new Date().getFullYear();
         you authorize us to reach you by phone, email, and SMS; message and data rates may apply. Our services are not legal or
         medical advice. Other organizations may provide similar assistance at no cost. Veterans may be eligible for additional
         benefits beyond those offered through our programs. Review our
-        <a href="#" data-modal-trigger="privacy-policy">Privacy Policy</a> and <a href="#" data-modal-trigger="terms-conditions">Terms &amp; Conditions</a> for details.
+        <button type="button" class="link-button" data-modal-trigger="privacy-policy">Privacy Policy</button> and 
+        <button type="button" class="link-button" data-modal-trigger="terms-conditions">Terms & Conditions</button> for details.
       </p>
     </div>
   </section>
@@ -82,9 +83,9 @@ const year = new Date().getFullYear();
     <nav class="col resources" aria-label="Resources">
       <h3 class="col-title">Resources</h3>
       <ul>
-        <li><a href="#" data-modal-trigger="terms-conditions">Terms &amp; Conditions</a></li>
-        <li><a href="#" data-modal-trigger="privacy-policy">Privacy Policy</a></li>
-        <li><a href="#" data-modal-trigger="release-of-information">Release of Information</a></li>
+        <li><button class="link-button" data-modal-trigger="terms-conditions">Terms &amp; Conditions</button></li>
+        <li><button class="link-button" data-modal-trigger="privacy-policy">Privacy Policy</button></li>
+        <li><button class="link-button" data-modal-trigger="release-of-information">Release of Information</button></li>
       </ul>
     </nav>
   </div>
@@ -145,6 +146,19 @@ const year = new Date().getFullYear();
       box-shadow: 0 16px 32px rgba(0,0,0,.4);
       outline: none;
     }
+
+    .link-button {
+      display: inline;
+      background: none;
+      border: none;
+      outline: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+  }
+
 
     /* Disclaimer block */
     .footer-disclaimer {
@@ -215,8 +229,8 @@ const year = new Date().getFullYear();
 
     /* Lists */
     .links ul, .resources ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
-    .links a, .resources a { color: var(--footer-muted); text-decoration: none; }
-    .links a:focus-visible, .resources a:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    .links a, .resources button { color: var(--footer-muted); text-decoration: none; }
+    .links a:focus-visible, .resources button:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
 
     /* Social */
     .social { list-style: none; padding: 0; margin: .75rem 0 0; display: flex; gap: .5rem; }
