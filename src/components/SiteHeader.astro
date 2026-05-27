@@ -1,4 +1,6 @@
 ---
+import vaRates from '../data/vaRates.json';
+
 /* In your .astro file */
 const normalize = (p: string) => {
   if (!p) return "/";
@@ -70,7 +72,7 @@ const isActive = (href: string, { section = false } = {}) => {
           <a
             href="/stats"
             aria-current={isActive("/stats") ? "page" : undefined}
-            >2025 Disability Rates</a
+            >{vaRates.metadata.year} Disability Rates</a
           >
         </li>
         <li>
