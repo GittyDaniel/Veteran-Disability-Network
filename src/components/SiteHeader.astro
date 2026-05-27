@@ -16,6 +16,13 @@ const isActive = (href: string, { section = false } = {}) => {
 };
 ---
 
+<div class="bbb-top-banner">
+  <div class="bbb-top-inner">
+    <a href="https://www.bbb.org/" target="_blank" rel="noopener noreferrer" class="bbb-link" aria-label="BBB Accredited Business" title="Better Business Bureau A+ Rating">
+      <img src="/images/bbb_a_plus.png" alt="Better Business Bureau A+ Rating" class="bbb-badge-img" />
+    </a>
+  </div>
+</div>
 <header id="site_top" class="site-header" role="banner">
   <div class="header-inner">
     <!-- Brand -->
@@ -74,6 +81,29 @@ const isActive = (href: string, { section = false } = {}) => {
 
   <!-- ======== Scoped styles ======== -->
   <style>
+    /* ─── BBB Top Banner ────────────────────────────── */
+    .bbb-top-banner {
+      background-color: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      width: 100%;
+      z-index: 11;
+      position: relative;
+    }
+    .bbb-top-inner {
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0.5rem 3rem;
+    }
+    .bbb-badge-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
     /* ─── Base header layout ───────────────────────── */
     .site-header {
       background: var(--color-bg);
@@ -197,6 +227,8 @@ const isActive = (href: string, { section = false } = {}) => {
 
     /* ─── Mobile drawer styles (≤768 px) ───────────── */
     @media (max-width: 768px) {
+      .bbb-top-inner { padding: 0.5rem 1rem; justify-content: center; }
+      .bbb-badge-img { height: 35px; }
       .menu-toggle { display:flex; }
       .header-actions { display:none; }
       .header-inner { padding: 1rem; }
