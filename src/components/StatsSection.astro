@@ -1,500 +1,417 @@
+---
+import vaRates from '../data/vaRates.json';
 
+const formatCurrency = (val: number) => {
+  return `$${val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+};
+---
 
 <section class="stats-section">
   <header class="hero-header">
-        <h1>2025 VA Disability Pay Rates to Increase by 2.5%</h1>
-        <p>
-            Effective December 1, 2024, the 2025 VA disability pay rates will reflect a 2.5% increase, as announced by the Social Security Administration on October 10, 2024. This adjustment is based on the latest cost-of-living adjustment (COLA). Refer to the charts provided on this page to determine your eligibility and estimated monthly payout based on this increase.
-        </p>
-    </header>
+    <h1>{vaRates.metadata.headerTitle}</h1>
+    <p>{vaRates.metadata.headerDescription}</p>
+  </header>
 
-    <main class="main-content">
-        
-        <!-- Table Section 1: Without Children -->
-        <section class="table-section" id="rates-without-children">
-            <h2>Rates Without Dependent Children</h2>
-            <div class="table-wrapper">
-                <table class="rate-table" aria-labelledby="rates-without-children">
-                    <caption>Monthly payment amounts for veterans without dependent children.</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Disability Rating</th>
-                            <th scope="col">
-                                Veteran Alone
-                            </th>
-                            <th scope="col">
-                                Veteran with Spouse
-                            </th>
-                            <th scope="col">
-                                Veteran, Spouse & One Parent
-                            </th>
-                            <th scope="col">
-                                Veteran, Spouse and Two Parents
-                            </th>
-                             <th scope="col">
-                                Veteran with One Parent
-                            </th>
-                             <th scope="col">
-                                Veteran with Two Parents
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">100%</th>
-                            <td data-label="Veteran Alone">$3,831.30</td>
-                            <td data-label="Veteran with Spouse">$4,044.91</td>
-                            <td data-label="Veteran, Spouse & One Parent">$4,216.35</td>
-                            <td data-label="Veteran, Spouse and Two Parents">$4,387.79</td>
-                            <td data-label="Veteran with One Parent">$4,002.74</td>
-                            <td data-label="Veteran with Two Parents">$4,174.18</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">90%</th>
-                            <td data-label="Veteran Alone">$2,297.96</td>
-                            <td data-label="Veteran with Spouse">$2,489.63</td>
-                            <td data-label="Veteran, Spouse & One Parent">$2,643.38</td>
-                            <td data-label="Veteran, Spouse and Two Parents">$2,797.13</td>
-                            <td data-label="Veteran with One Parent">$2,451.71</td>
-                            <td data-label="Veteran with Two Parents">$2,605.46</td>
-                        </tr>
-                         <tr>
-                            <th scope="row">80%</th>
-                            <td data-label="Veteran Alone">$2,044.89</td>
-                            <td data-label="Veteran with Spouse">$2,214.89</td>
-                            <td data-label="Veteran, Spouse & One Parent">$2,351.89</td>
-                            <td data-label="Veteran, Spouse and Two Parents">$2,488.89</td>
-                            <td data-label="Veteran with One Parent">$2,181.89</td>
-                            <td data-label="Veteran with Two Parents">$2,318.89</td>
-                        </tr>
-                         <tr>
-                            <th scope="row">70%</th>
-                            <td data-label="Veteran Alone">$1,759.19</td>
-                            <td data-label="Veteran with Spouse">$1,908.19</td>
-                            <td data-label="Veteran, Spouse & One Parent">$2,028.19</td>
-                            <td data-label="Veteran, Spouse and Two Parents">$2,148.19</td>
-                            <td data-label="Veteran with One Parent">$1,879.19</td>
-                            <td data-label="Veteran with Two Parents">$1,999.19</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">60%</th>
-                            <td data-label="Veteran Alone">$1,395.93</td>
-                            <td data-label="Veteran with Spouse">$1,523.93</td>
-                            <td data-label="Veteran, Spouse & One Parent">$1,625.93</td>
-                            <td data-label="Veteran, Spouse and Two Parents">$1,727.93</td>
-                            <td data-label="Veteran with One Parent">$1,497.93</td>
-                            <td data-label="Veteran with Two Parents">$1,599.93</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">50%</th>
-                            <td data-label="Veteran Alone">$1,102.04</td>
-                            <td data-label="Veteran with Spouse">$1,208.04</td>
-                            <td data-label="Veteran, Spouse & One Parent">$1,293.04</td>
-                            <td data-label="Veteran, Spouse and Two Parents">$1,378.04</td>
-                            <td data-label="Veteran with One Parent">$1,187.04</td>
-                            <td data-label="Veteran with Two Parents">$1,272.04</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">40%</th>
-                            <td data-label="Veteran Alone">$774.16</td>
-                            <td data-label="Veteran with Spouse">$859.16</td>
-                            <td data-label="Veteran, Spouse & One Parent">$927.16</td>
-                            <td data-label="Veteran, Spouse and Two Parents">$995.16</td>
-                            <td data-label="Veteran with One Parent">$842.16</td>
-                            <td data-label="Veteran with Two Parents">$910.16</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">30%</th>
-                            <td data-label="Veteran Alone">$537.42</td>
-                            <td data-label="Veteran with Spouse">$601.42</td>
-                            <td data-label="Veteran, Spouse & One Parent">$652.42</td>
-                            <td data-label="Veteran, Spouse and Two Parents">$703.42</td>
-                            <td data-label="Veteran with One Parent">$588.42</td>
-                            <td data-label="Veteran with Two Parents">$639.42</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+  <main class="main-content">
+    
+    <!-- Table Section 1: Without Children -->
+    <section class="table-section" id="rates-without-children">
+      <h2>Rates Without Dependent Children</h2>
+      <div class="table-wrapper">
+        <table class="rate-table" aria-labelledby="rates-without-children">
+          <caption>Monthly payment amounts for veterans without dependent children.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Disability Rating</th>
+              <th scope="col">Veteran Alone</th>
+              <th scope="col">Veteran with Spouse</th>
+              <th scope="col">Veteran, Spouse & One Parent</th>
+              <th scope="col">Veteran, Spouse and Two Parents</th>
+              <th scope="col">Veteran with One Parent</th>
+              <th scope="col">Veteran with Two Parents</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vaRates.withoutChildren.map((row) => (
+              <tr>
+                <th scope="row">{row.rating}</th>
+                <td data-label="Veteran Alone">{formatCurrency(row.alone)}</td>
+                <td data-label="Veteran with Spouse">{formatCurrency(row.spouse)}</td>
+                <td data-label="Veteran, Spouse & One Parent">{formatCurrency(row.spouseOneParent)}</td>
+                <td data-label="Veteran, Spouse and Two Parents">{formatCurrency(row.spouseTwoParents)}</td>
+                <td data-label="Veteran with One Parent">{formatCurrency(row.oneParent)}</td>
+                <td data-label="Veteran with Two Parents">{formatCurrency(row.twoParents)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        
-        
-        <!-- Table Section 3: Additional Compensation -->
-        <section class="table-section" id="additional-compensation">
-            <h2>Additional Compensation for Aid & Attendance (A/A)</h2>
-            <div class="table-wrapper">
-                <table class="rate-table" aria-labelledby="additional-compensation">
-                    <caption>Additional monthly payment amounts for spouses requiring Aid and Attendance.</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Dependent Status</th>
-                            <th scope="col">100%</th>
-                            <th scope="col">90%</th>
-                            <th scope="col">80%</th>
-                            <th scope="col">70%</th>
-                            <th scope="col">60%</th>
-                            <th scope="col">50%</th>
-                            <th scope="col">40%</th>
-                            <th scope="col">30%</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Additional for A/A Spouse</th>
-                            <td data-label="100%">$195.92</td>
-                            <td data-label="90%">$176.00</td>
-                            <td data-label="80%">$157.00</td>
-                            <td data-label="70%">$137.00</td>
-                            <td data-label="60%">$117.00</td>
-                            <td data-label="50%">$98.00</td>
-                            <td data-label="40%">$78.00</td>
-                            <td data-label="30%">$58.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+    <!-- Table Section 3: Additional Compensation -->
+    <section class="table-section" id="additional-compensation">
+      <h2>Additional Compensation for Aid & Attendance (A/A)</h2>
+      <div class="table-wrapper">
+        <table class="rate-table" aria-labelledby="additional-compensation">
+          <caption>Additional monthly payment amounts for spouses requiring Aid and Attendance.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Dependent Status</th>
+              <th scope="col">100%</th>
+              <th scope="col">90%</th>
+              <th scope="col">80%</th>
+              <th scope="col">70%</th>
+              <th scope="col">60%</th>
+              <th scope="col">50%</th>
+              <th scope="col">40%</th>
+              <th scope="col">30%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Additional for A/A Spouse</th>
+              <td data-label="100%">{formatCurrency(vaRates.aidAndAttendance["100"])}</td>
+              <td data-label="90%">{formatCurrency(vaRates.aidAndAttendance["90"])}</td>
+              <td data-label="80%">{formatCurrency(vaRates.aidAndAttendance["80"])}</td>
+              <td data-label="70%">{formatCurrency(vaRates.aidAndAttendance["70"])}</td>
+              <td data-label="60%">{formatCurrency(vaRates.aidAndAttendance["60"])}</td>
+              <td data-label="50%">{formatCurrency(vaRates.aidAndAttendance["50"])}</td>
+              <td data-label="40%">{formatCurrency(vaRates.aidAndAttendance["40"])}</td>
+              <td data-label="30%">{formatCurrency(vaRates.aidAndAttendance["30"])}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <!-- Info Notice Section -->
-        <section class="info-notice">
-            <p>Veterans with ratings of 10%-20% do not receive extra compensation for dependents</p>
-            <div class="rates">
-                <span>10% Rate = $175.51</span>
-                <span>•</span>
-                <span>20% Rate = $346.95</span>
-            </div>
-        </section>
+    <!-- Info Notice Section -->
+    <section class="info-notice">
+      <p>Veterans with ratings of 10%-20% do not receive extra compensation for dependents</p>
+      <div class="rates">
+        <span>10% Rate = {formatCurrency(vaRates.flatRates["10"])}</span>
+        <span>•</span>
+        <span>20% Rate = {formatCurrency(vaRates.flatRates["20"])}</span>
+      </div>
+    </section>
 
-        <!-- Call to Action Section -->
-        <section class="cta-section">
-            <a href="/#get-started" class="cta-button">Schedule Free Consultation</a>
-        </section>
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+      <a href="/#get-started" class="cta-button">Schedule Free Consultation</a>
+    </section>
 
-        <!-- Table Section 2: With Children -->
-        <section class="table-section" id="rates-with-children">
-            <h2>Rates With Dependent Children</h2>
-            <div class="table-wrapper">
-                <table class="rate-table" aria-labelledby="rates-with-children">
-                    <caption>Monthly payment amounts for veterans with dependent children.</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Disability Rating</th>
-                            <th scope="col">
-                                Veteran and Child
-                            </th>
-                            <th scope="col">
-                                Veteran, Spouse, & Child
-                            </th>
-                            <th scope="col">
-                                Veteran, Spouse, Child, One Parent
-                            </th>
-                            <th scope="col">
-                                Veteran, Spouse, Child, Two Parents
-                            </th>
-                             <th scope="col">
-                                Veteran, Child, One Parent
-                            </th>
-                             <th scope="col">
-                                Veteran, Child, Two Parents
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><th scope="row">100%</th><td data-label="Veteran and Child">$3,974.15</td><td data-label="Veteran, Spouse, & Child">$4,201.35</td><td data-label="Veteran, Spouse, Child, One Parent">$4,372.79</td><td data-label="Veteran, Spouse, Child, Two Parents">$4,544.23</td><td data-label="Veteran, Child, One Parent">$4,145.59</td><td data-label="Veteran, Child, Two Parents">$4,317.03</td></tr>
-                        <tr><th scope="row">90%</th><td data-label="Veteran and Child">$2,425.96</td><td data-label="Veteran, Spouse, & Child">$2,630.96</td><td data-label="Veteran, Spouse, Child, One Parent">$2,784.96</td><td data-label="Veteran, Spouse, Child, Two Parents">$2,938.96</td><td data-label="Veteran, Child, One Parent">$2,579.96</td><td data-label="Veteran, Child, Two Parents">$2,733.96</td></tr>
-                        <tr><th scope="row">80%</th><td data-label="Veteran and Child">$2,158.89</td><td data-label="Veteran, Spouse, & Child">$2,340.89</td><td data-label="Veteran, Spouse, Child, One Parent">$2,477.89</td><td data-label="Veteran, Spouse, Child, Two Parents">$2,614.89</td><td data-label="Veteran, Child, One Parent">$2,295.89</td><td data-label="Veteran, Child, Two Parents">$2,432.89</td></tr>
-                        <tr><th scope="row">70%</th><td data-label="Veteran and Child">$1,858.19</td><td data-label="Veteran, Spouse, & Child">$2,018.19</td><td data-label="Veteran, Spouse, Child, One Parent">$2,138.19</td><td data-label="Veteran, Spouse, Child, Two Parents">$2,258.19</td><td data-label="Veteran, Child, One Parent">$1,978.19</td><td data-label="Veteran, Child, Two Parents">$2,098.19</td></tr>
-                        <tr><th scope="row">60%</th><td data-label="Veteran and Child">$1,480.93</td><td data-label="Veteran, Spouse, & Child">$1,617.93</td><td data-label="Veteran, Spouse, Child, One Parent">$1,719.93</td><td data-label="Veteran, Spouse, Child, Two Parents">$1,821.93</td><td data-label="Veteran, Child, One Parent">$1,582.93</td><td data-label="Veteran, Child, Two Parents">$1,684.93</td></tr>
-                        <tr><th scope="row">50%</th><td data-label="Veteran and Child">$1,173.04</td><td data-label="Veteran, Spouse, & Child">$1,287.04</td><td data-label="Veteran, Spouse, Child, One Parent">$1,372.04</td><td data-label="Veteran, Spouse, Child, Two Parents">$1,457.04</td><td data-label="Veteran, Child, One Parent">$1,258.04</td><td data-label="Veteran, Child, Two Parents">$1,343.04</td></tr>
-                        <tr><th scope="row">40%</th><td data-label="Veteran and Child">$831.16</td><td data-label="Veteran, Spouse, & Child">$922.16</td><td data-label="Veteran, Spouse, Child, One Parent">$990.16</td><td data-label="Veteran, Spouse, Child, Two Parents">$1,058.16</td><td data-label="Veteran, Child, One Parent">$899.16</td><td data-label="Veteran, Child, Two Parents">$967.16</td></tr>
-                        <tr><th scope="row">30%</th><td data-label="Veteran and Child">$579.42</td><td data-label="Veteran, Spouse, & Child">$648.42</td><td data-label="Veteran, Spouse, Child, One Parent">$699.42</td><td data-label="Veteran, Spouse, Child, Two Parents">$750.42</td><td data-label="Veteran, Child, One Parent">$630.42</td><td data-label="Veteran, Child, Two Parents">$681.42</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+    <!-- Table Section 2: With Children -->
+    <section class="table-section" id="rates-with-children">
+      <h2>Rates With Dependent Children</h2>
+      <div class="table-wrapper">
+        <table class="rate-table" aria-labelledby="rates-with-children">
+          <caption>Monthly payment amounts for veterans with dependent children.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Disability Rating</th>
+              <th scope="col">Veteran and Child</th>
+              <th scope="col">Veteran, Spouse, & Child</th>
+              <th scope="col">Veteran, Spouse, Child, One Parent</th>
+              <th scope="col">Veteran, Spouse, Child, Two Parents</th>
+              <th scope="col">Veteran, Child, One Parent</th>
+              <th scope="col">Veteran, Child, Two Parents</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vaRates.withChildren.map((row) => (
+              <tr>
+                <th scope="row">{row.rating}</th>
+                <td data-label="Veteran and Child">{formatCurrency(row.child)}</td>
+                <td data-label="Veteran, Spouse, & Child">{formatCurrency(row.spouseChild)}</td>
+                <td data-label="Veteran, Spouse, Child, One Parent">{formatCurrency(row.spouseChildOneParent)}</td>
+                <td data-label="Veteran, Spouse, Child, Two Parents">{formatCurrency(row.spouseChildTwoParents)}</td>
+                <td data-label="Veteran, Child, One Parent">{formatCurrency(row.childOneParent)}</td>
+                <td data-label="Veteran, Child, Two Parents">{formatCurrency(row.childTwoParents)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <!-- Table Section 4: Additional Children -->
-        <section class="table-section" id="additional-children">
-            <h2>Additional Amounts for Dependent Children</h2>
-            <div class="table-wrapper">
-                <table class="rate-table" aria-labelledby="additional-children">
-                     <caption>Additional monthly payment amounts for each additional child.</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Dependent Status</th>
-                            <th scope="col">100%</th>
-                            <th scope="col">90%</th>
-                            <th scope="col">80%</th>
-                            <th scope="col">70%</th>
-                            <th scope="col">60%</th>
-                            <th scope="col">50%</th>
-                            <th scope="col">40%</th>
-                            <th scope="col">30%</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Each Additional Child Under Age 18</th>
-                            <td data-label="100%">$106.14</td>
-                            <td data-label="90%">$95.00</td>
-                            <td data-label="80%">$84.00</td>
-                            <td data-label="70%">$74.00</td>
-                            <td data-label="60%">$63.00</td>
-                            <td data-label="50%">$53.00</td>
-                            <td data-label="40%">$42.00</td>
-                            <td data-label="30%">$31.00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Each Additional Schoolchild Over Age 18</th>
-                            <td data-label="100%">$342.85</td>
-                            <td data-label="90%">$308.00</td>
-                            <td data-label="80%">$274.00</td>
-                            <td data-label="70%">$239.00</td>
-                            <td data-label="60%">$205.00</td>
-                            <td data-label="50%">$171.00</td>
-                            <td data-label="40%">$137.00</td>
-                            <td data-label="30%">$102.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+    <!-- Table Section 4: Additional Children -->
+    <section class="table-section" id="additional-children">
+      <h2>Additional Amounts for Dependent Children</h2>
+      <div class="table-wrapper">
+        <table class="rate-table" aria-labelledby="additional-children">
+          <caption>Additional monthly payment amounts for each additional child.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Dependent Status</th>
+              <th scope="col">100%</th>
+              <th scope="col">90%</th>
+              <th scope="col">80%</th>
+              <th scope="col">70%</th>
+              <th scope="col">60%</th>
+              <th scope="col">50%</th>
+              <th scope="col">40%</th>
+              <th scope="col">30%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Each Additional Child Under Age 18</th>
+              <td data-label="100%">{formatCurrency(vaRates.additionalChildUnder18["100"])}</td>
+              <td data-label="90%">{formatCurrency(vaRates.additionalChildUnder18["90"])}</td>
+              <td data-label="80%">{formatCurrency(vaRates.additionalChildUnder18["80"])}</td>
+              <td data-label="70%">{formatCurrency(vaRates.additionalChildUnder18["70"])}</td>
+              <td data-label="60%">{formatCurrency(vaRates.additionalChildUnder18["60"])}</td>
+              <td data-label="50%">{formatCurrency(vaRates.additionalChildUnder18["50"])}</td>
+              <td data-label="40%">{formatCurrency(vaRates.additionalChildUnder18["40"])}</td>
+              <td data-label="30%">{formatCurrency(vaRates.additionalChildUnder18["30"])}</td>
+            </tr>
+            <tr>
+              <th scope="row">Each Additional Schoolchild Over Age 18</th>
+              <td data-label="100%">{formatCurrency(vaRates.additionalSchoolchildOver18["100"])}</td>
+              <td data-label="90%">{formatCurrency(vaRates.additionalSchoolchildOver18["90"])}</td>
+              <td data-label="80%">{formatCurrency(vaRates.additionalSchoolchildOver18["80"])}</td>
+              <td data-label="70%">{formatCurrency(vaRates.additionalSchoolchildOver18["70"])}</td>
+              <td data-label="60%">{formatCurrency(vaRates.additionalSchoolchildOver18["60"])}</td>
+              <td data-label="50%">{formatCurrency(vaRates.additionalSchoolchildOver18["50"])}</td>
+              <td data-label="40%">{formatCurrency(vaRates.additionalSchoolchildOver18["40"])}</td>
+              <td data-label="30%">{formatCurrency(vaRates.additionalSchoolchildOver18["30"])}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-    </main>
+  </main>
 </section>
 
-
 <style>
-      
+  .stats-section {
+    --color-navy: #1a233f;
+    --color-dark-navy: #111827;
+    --color-white: #ffffff;
+    --color-off-white: #f3f4f6;
+    --color-text-light: #d1d5db;
+    --color-text-dark: #374151;
+    --color-accent-red: #b91c1c;
+    --color-border: #e5e7eb;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-off-white);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+  }
 
-        .stats-section {
-           --color-navy: #1a233f;
-            --color-dark-navy: #111827;
-            --color-white: #ffffff;
-            --color-off-white: #f3f4f6;
-            --color-text-light: #d1d5db;
-            --color-text-dark: #374151;
-            --color-accent-red: #b91c1c;
-            --color-border: #e5e7eb;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--color-off-white);
-            color: var(--color-text-dark);
-            line-height: 1.6;
-        }
+  /* Main Header/Hero Section */
+  .hero-header {
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    padding: 4rem 1.5rem;
+    text-align: center;
+    /* Subtle star pattern for a patriotic feel */
+    background-image: radial-gradient(var(--color-dark-navy) 1px, transparent 1px);
+    background-size: 15px 15px;
+  }
 
-        /* Main Header/Hero Section */
-        .hero-header {
-            background-color: var(--color-navy);
-            color: var(--color-white);
-            padding: 4rem 1.5rem;
-            text-align: center;
-            /* Subtle star pattern for a patriotic feel */
-            background-image: radial-gradient(var(--color-dark-navy) 1px, transparent 1px);
-            background-size: 15px 15px;
-        }
+  .hero-header h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
 
-        .hero-header h1 {
-            font-family: 'Merriweather', serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
+  .hero-header p {
+    font-size: 1.125rem;
+    color: var(--color-text-light);
+    max-width: 65ch; /* Optimal line length for readability */
+    margin: 0 auto;
+  }
 
-        .hero-header p {
-            font-size: 1.125rem;
-            color: var(--color-text-light);
-            max-width: 65ch; /* Optimal line length for readability */
-            margin: 0 auto;
-        }
+  /* Main Content Container */
+  .main-content {
+    padding: 2rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-        /* Main Content Container */
-        .main-content {
-            padding: 2rem 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+  /* Table Section Styling */
+  .table-section {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2.5rem;
+    overflow: hidden; /* Ensures border-radius is respected by table */
+  }
 
-        /* Table Section Styling */
-        .table-section {
-            background-color: var(--color-white);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2.5rem;
-            overflow: hidden; /* Ensures border-radius is respected by table */
-        }
+  .table-section h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 1.75rem;
+    padding: 1.5rem;
+    color: var(--color-dark-navy);
+    border-bottom: 2px solid var(--color-accent-red);
+    margin: 0;
+  }
 
-        .table-section h2 {
-            font-family: 'Merriweather', serif;
-            font-size: 1.75rem;
-            padding: 1.5rem;
-            color: var(--color-dark-navy);
-            border-bottom: 2px solid var(--color-accent-red);
-            margin: 0;
-        }
+  /* Responsive Table Wrapper */
+  .table-wrapper {
+    overflow-x: auto; /* Allows horizontal scrolling on medium screens if needed */
+  }
 
-        /* Responsive Table Wrapper */
-        .table-wrapper {
-            overflow-x: auto; /* Allows horizontal scrolling on medium screens if needed */
-        }
+  /* Table Styles */
+  .rate-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
 
-        /* Table Styles */
-        .rate-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: center;
-        }
+  .rate-table caption {
+    font-size: 0.875rem;
+    color: var(--color-text-dark);
+    padding: 1rem;
+    caption-side: bottom;
+    text-align: left;
+  }
 
-        .rate-table caption {
-            font-size: 0.875rem;
-            color: var(--color-text-dark);
-            padding: 1rem;
-            caption-side: bottom;
-            text-align: left;
-        }
+  .rate-table thead th {
+    background-color: var(--color-off-white);
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+  }
 
-        .rate-table thead th {
-            background-color: var(--color-off-white);
-            padding: 1rem;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            vertical-align: middle;
-        }
+  .rate-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+  }
+  
+  .rate-table tbody tr:hover {
+    background-color: #f0f3ff;
+  }
 
-        .rate-table tbody tr:nth-child(even) {
-            background-color: #fafafa;
-        }
-        
-        .rate-table tbody tr:hover {
-            background-color: #f0f3ff;
-        }
+  .rate-table th, .rate-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
 
-        .rate-table th, .rate-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--color-border);
-        }
+  .rate-table tbody th {
+    font-weight: 700;
+    text-align: right;
+    border-right: 1px solid var(--color-border);
+  }
+  
+  /* Icon Styles */
+  .dependent-icon {
+    display: block;
+    margin: 0 auto 0.5rem auto;
+    height: 28px;
+    width: auto;
+    fill: var(--color-navy);
+  }
 
-        .rate-table tbody th {
-            font-weight: 700;
-            text-align: right;
-            border-right: 1px solid var(--color-border);
-        }
-        
-        /* Icon Styles */
-        .dependent-icon {
-            display: block;
-            margin: 0 auto 0.5rem auto;
-            height: 28px;
-            width: auto;
-            fill: var(--color-navy);
-        }
+  /* Info Notice Section */
+  .info-notice {
+    text-align: center;
+    padding: 2rem;
+    margin: 2.5rem 0;
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
 
-        /* Info Notice Section */
-        .info-notice {
-            text-align: center;
-            padding: 2rem;
-            margin: 2.5rem 0;
-            background-color: var(--color-white);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
+  .info-notice p {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-dark);
+    margin-bottom: 1rem;
+  }
 
-        .info-notice p {
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--color-text-dark);
-            margin-bottom: 1rem;
-        }
+  .info-notice .rates {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+  
+  .info-notice .rates span {
+    margin: 0 1rem;
+  }
 
-        .info-notice .rates {
-            font-size: 1.125rem;
-            font-weight: 500;
-        }
-        
-        .info-notice .rates span {
-            margin: 0 1rem;
-        }
+  /* Call to Action Button */
+  .cta-section {
+    text-align: center;
+    margin: 2rem 0rem;
+  }
 
-        /* Call to Action Button */
-        .cta-section {
-            text-align: center;
-            margin: 2rem 0rem;
-        }
+  .cta-button {
+    display: inline-block;
+    background-color: var(--color-accent-red);
+    color: var(--color-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
 
-        .cta-button {
-            display: inline-block;
-            background-color: var(--color-accent-red);
-            color: var(--color-white);
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            text-decoration: none;
-            padding: 1rem 2.5rem;
-            border-radius: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
+  .cta-button:hover {
+    background-color: #991b1b; /* Darker red */
+    transform: translateY(-2px);
+  }
 
-        .cta-button:hover {
-            background-color: #991b1b; /* Darker red */
-            transform: translateY(-2px);
-        }
+  /* Responsive Design for Tables on Mobile */
+  @media (max-width: 900px) {
+    .hero-header h1 {
+      font-size: 2rem;
+    }
 
-        /* Responsive Design for Tables on Mobile */
-        @media (max-width: 900px) {
-            .hero-header h1 {
-                font-size: 2rem;
-            }
+    /* Hides the regular table header on small screens */
+    .rate-table thead {
+      display: none;
+    }
+    
+    /* Transforms table rows into cards */
+    .rate-table tr {
+      display: block;
+      border-bottom: 2px solid var(--color-navy);
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Hides empty rows */
+    .rate-table tr:empty {
+      display: none;
+    }
+    
+     .rate-table tbody tr:nth-child(even) {
+      background-color: transparent;
+    }
 
-            /* Hides the regular table header on small screens */
-            .rate-table thead {
-                display: none;
-            }
-            
-            /* Transforms table rows into cards */
-            .rate-table tr {
-                display: block;
-                border-bottom: 2px solid var(--color-navy);
-                margin-bottom: 1.5rem;
-            }
-            
-            /* Hides empty rows */
-            .rate-table tr:empty {
-                display: none;
-            }
-            
-             .rate-table tbody tr:nth-child(even) {
-                background-color: transparent;
-            }
+    .rate-table td {
+      display: flex; /* Use flexbox for alignment */
+      justify-content: space-between; /* Pushes label and value apart */
+      text-align: right;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--color-border);
+    }
 
-            .rate-table td {
-                display: flex; /* Use flexbox for alignment */
-                justify-content: space-between; /* Pushes label and value apart */
-                text-align: right;
-                font-size: 1rem;
-                border-bottom: 1px solid var(--color-border);
-            }
+    /* Adds the header label before each data cell */
+    .rate-table td::before {
+      content: attr(data-label);
+      font-weight: 700;
+      text-align: left;
+      padding-right: 1rem; /* Space between label and value */
+      white-space: nowrap;
+    }
 
-            /* Adds the header label before each data cell */
-            .rate-table td::before {
-                content: attr(data-label);
-                font-weight: 700;
-                text-align: left;
-                padding-right: 1rem; /* Space between label and value */
-                white-space: nowrap;
-            }
-
-            /* First cell (percentage) becomes a card header */
-            .rate-table tbody th {
-                display: block;
-                text-align: center;
-                font-size: 1.25rem;
-                background-color: var(--color-off-white);
-                border-right: none;
-            }
-        }
-    </style>
+    /* First cell (percentage) becomes a card header */
+    .rate-table tbody th {
+      display: block;
+      text-align: center;
+      font-size: 1.25rem;
+      background-color: var(--color-off-white);
+      border-right: none;
+    }
+  }
+</style>

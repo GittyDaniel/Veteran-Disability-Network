@@ -1,0 +1,192 @@
+{
+  "metadata": {
+    "year": "2025",
+    "colaIncrease": "2.5%",
+    "effectiveDate": "December 1, 2024",
+    "announcementDate": "October 10, 2024",
+    "headerTitle": "2025 VA Disability Pay Rates to Increase by 2.5%",
+    "headerDescription": "Effective December 1, 2024, the 2025 VA disability pay rates will reflect a 2.5% increase, as announced by the Social Security Administration on October 10, 2024. This adjustment is based on the latest cost-of-living adjustment (COLA). Refer to the charts provided on this page to determine your eligibility and estimated monthly payout based on this increase."
+  },
+  "flatRates": {
+    "10": 175.51,
+    "20": 346.95
+  },
+  "withoutChildren": [
+    {
+      "rating": "100%",
+      "alone": 3831.30,
+      "spouse": 4044.91,
+      "spouseOneParent": 4216.35,
+      "spouseTwoParents": 4387.79,
+      "oneParent": 4002.74,
+      "twoParents": 4174.18
+    },
+    {
+      "rating": "90%",
+      "alone": 2297.96,
+      "spouse": 2489.63,
+      "spouseOneParent": 2643.38,
+      "spouseTwoParents": 2797.13,
+      "oneParent": 2451.71,
+      "twoParents": 2605.46
+    },
+    {
+      "rating": "80%",
+      "alone": 2044.89,
+      "spouse": 2214.89,
+      "spouseOneParent": 2351.89,
+      "spouseTwoParents": 2488.89,
+      "oneParent": 2181.89,
+      "twoParents": 2318.89
+    },
+    {
+      "rating": "70%",
+      "alone": 1759.19,
+      "spouse": 1908.19,
+      "spouseOneParent": 2028.19,
+      "spouseTwoParents": 2148.19,
+      "oneParent": 1879.19,
+      "twoParents": 1999.19
+    },
+    {
+      "rating": "60%",
+      "alone": 1395.93,
+      "spouse": 1523.93,
+      "spouseOneParent": 1625.93,
+      "spouseTwoParents": 1727.93,
+      "oneParent": 1497.93,
+      "twoParents": 1599.93
+    },
+    {
+      "rating": "50%",
+      "alone": 1102.04,
+      "spouse": 1208.04,
+      "spouseOneParent": 1293.04,
+      "spouseTwoParents": 1378.04,
+      "oneParent": 1187.04,
+      "twoParents": 1272.04
+    },
+    {
+      "rating": "40%",
+      "alone": 774.16,
+      "spouse": 859.16,
+      "spouseOneParent": 927.16,
+      "spouseTwoParents": 995.16,
+      "oneParent": 842.16,
+      "twoParents": 910.16
+    },
+    {
+      "rating": "30%",
+      "alone": 537.42,
+      "spouse": 601.42,
+      "spouseOneParent": 652.42,
+      "spouseTwoParents": 703.42,
+      "oneParent": 588.42,
+      "twoParents": 639.42
+    }
+  ],
+  "withChildren": [
+    {
+      "rating": "100%",
+      "child": 3974.15,
+      "spouseChild": 4201.35,
+      "spouseChildOneParent": 4372.79,
+      "spouseChildTwoParents": 4544.23,
+      "childOneParent": 4145.59,
+      "childTwoParents": 4317.03
+    },
+    {
+      "rating": "90%",
+      "child": 2425.96,
+      "spouseChild": 2630.96,
+      "spouseChildOneParent": 2784.96,
+      "spouseChildTwoParents": 2938.96,
+      "childOneParent": 2579.96,
+      "childTwoParents": 2733.96
+    },
+    {
+      "rating": "80%",
+      "child": 2158.89,
+      "spouseChild": 2340.89,
+      "spouseChildOneParent": 2477.89,
+      "spouseChildTwoParents": 2614.89,
+      "childOneParent": 2295.89,
+      "childTwoParents": 2432.89
+    },
+    {
+      "rating": "70%",
+      "child": 1858.19,
+      "spouseChild": 2018.19,
+      "spouseChildOneParent": 2138.19,
+      "spouseChildTwoParents": 2258.19,
+      "childOneParent": 1978.19,
+      "childTwoParents": 2098.19
+    },
+    {
+      "rating": "60%",
+      "child": 1480.93,
+      "spouseChild": 1617.93,
+      "spouseChildOneParent": 1719.93,
+      "spouseChildTwoParents": 1821.93,
+      "childOneParent": 1582.93,
+      "childTwoParents": 1684.93
+    },
+    {
+      "rating": "50%",
+      "child": 1173.04,
+      "spouseChild": 1287.04,
+      "spouseChildOneParent": 1372.04,
+      "spouseChildTwoParents": 1457.04,
+      "childOneParent": 1258.04,
+      "childTwoParents": 1343.04
+    },
+    {
+      "rating": "40%",
+      "child": 831.16,
+      "spouseChild": 922.16,
+      "spouseChildOneParent": 990.16,
+      "spouseChildTwoParents": 1058.16,
+      "childOneParent": 899.16,
+      "childTwoParents": 967.16
+    },
+    {
+      "rating": "30%",
+      "child": 579.42,
+      "spouseChild": 648.42,
+      "spouseChildOneParent": 699.42,
+      "spouseChildTwoParents": 750.42,
+      "childOneParent": 630.42,
+      "childTwoParents": 681.42
+    }
+  ],
+  "aidAndAttendance": {
+    "100": 195.92,
+    "90": 176.00,
+    "80": 157.00,
+    "70": 137.00,
+    "60": 117.00,
+    "50": 98.00,
+    "40": 78.00,
+    "30": 58.00
+  },
+  "additionalChildUnder18": {
+    "100": 106.14,
+    "90": 95.00,
+    "80": 84.00,
+    "70": 74.00,
+    "60": 63.00,
+    "50": 53.00,
+    "40": 42.00,
+    "30": 31.00
+  },
+  "additionalSchoolchildOver18": {
+    "100": 342.85,
+    "90": 308.00,
+    "80": 274.00,
+    "70": 239.00,
+    "60": 205.00,
+    "50": 171.00,
+    "40": 137.00,
+    "30": 102.00
+  }
+}
