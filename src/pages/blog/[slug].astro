@@ -1,23 +1,26 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Comments from '../../components/Comments.astro';
 
 export const prerender = true;
 
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
 
 // This function is required for dynamic routes in Astro.
 // It tells Astro which pages to generate at build time.
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map(post => ({
+  return posts.map((post: CollectionEntry<'blog'>) => ({
     params: { slug: post.slug },
     props: { post },
   }));
 }
 
 // Get the specific post data for this page from Astro's props
-const {post} = Astro.props;
+const { post } = Astro.props;
 if (!post) {
   console.error('Post not found in Astro.props:', Astro.props);
   throw new Error('Post not found in Astro.props — check getStaticPaths().');
