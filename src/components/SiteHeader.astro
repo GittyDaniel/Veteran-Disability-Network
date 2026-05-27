@@ -1,9 +1,11 @@
 ---
 /* In your .astro file */
 const normalize = (p: string) => {
-  if (!p) return '/';
-  try { p = new URL(p, Astro.url).pathname; } catch {}
-  return p.replace(/\/+$/, '') || '/';   // strip trailing slash, keep root
+  if (!p) return "/";
+  try {
+    p = new URL(p, Astro.url).pathname;
+  } catch {}
+  return p.replace(/\/+$/, "") || "/"; // strip trailing slash, keep root
 };
 
 const currentPath = normalize(Astro.url.pathname);
@@ -11,15 +13,27 @@ const currentPath = normalize(Astro.url.pathname);
 /** exact = only the page; section = page and any child routes */
 const isActive = (href: string, { section = false } = {}) => {
   const h = normalize(href);
-  if (section) return currentPath === h || (h !== '/' && currentPath.startsWith(h + '/'));
+  if (section)
+    return currentPath === h || (h !== "/" && currentPath.startsWith(h + "/"));
   return currentPath === h;
 };
 ---
 
 <div class="bbb-top-banner">
   <div class="bbb-top-inner">
-    <a href="https://www.bbb.org/" target="_blank" rel="noopener noreferrer" class="bbb-link" aria-label="BBB Accredited Business" title="Better Business Bureau A+ Rating">
-      <img src="/images/bbb_a_plus.png" alt="Better Business Bureau A+ Rating" class="bbb-badge-img" />
+    <a
+      href="https://www.bbb.org/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="bbb-link"
+      aria-label="BBB Accredited Business"
+      title="Better Business Bureau A+ Rating"
+    >
+      <img
+        src="/images/bbb_a_plus.jpg"
+        alt="Better Business Bureau A+ Rating"
+        class="bbb-badge-img"
+      />
     </a>
   </div>
 </div>
@@ -30,26 +44,52 @@ const isActive = (href: string, { section = false } = {}) => {
       <img src="/logo_2.png" alt="" class="brand-logo" />
       <span class="brand-text">
         <span class="brand-name">Veterans Disability Network</span>
-        <span class="brand-slogan">They Served with Honor. We Serve with Purpose</span>
+        <span class="brand-slogan"
+          >They Served with Honor. We Serve with Purpose</span
+        >
       </span>
     </a>
 
     <!-- Hamburger (shown on ≤768 px) -->
-    <button class="menu-toggle"
-            aria-controls="primary-navigation"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+    <button
+      class="menu-toggle"
+      aria-controls="primary-navigation"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span></span><span></span><span></span>
     </button>
 
     <!-- Primary navigation -->
     <nav class="nav" id="primary-navigation" aria-label="Primary">
       <ul>
-        <li><a href="/" aria-current={isActive('/') ? 'page' : undefined}>Home</a></li>
-        <li><a href="/stats" aria-current={isActive('/stats') ? 'page' : undefined}>2025 Disability Rates</a></li>
-        <li><a href="/referral" aria-current={isActive('/referral') ? 'page' : undefined}>Referral</a></li>
-        <li><a href="/faq" aria-current={isActive('/faq') ? 'page' : undefined}>FAQ</a></li>
-        <li><a href="/blog" aria-current={isActive('/blog') ? 'page' : undefined}>Blog</a></li>
+        <li>
+          <a href="/" aria-current={isActive("/") ? "page" : undefined}>Home</a>
+        </li>
+        <li>
+          <a
+            href="/stats"
+            aria-current={isActive("/stats") ? "page" : undefined}
+            >2025 Disability Rates</a
+          >
+        </li>
+        <li>
+          <a
+            href="/referral"
+            aria-current={isActive("/referral") ? "page" : undefined}
+            >Referral</a
+          >
+        </li>
+        <li>
+          <a href="/faq" aria-current={isActive("/faq") ? "page" : undefined}
+            >FAQ</a
+          >
+        </li>
+        <li>
+          <a href="/blog" aria-current={isActive("/blog") ? "page" : undefined}
+            >Blog</a
+          >
+        </li>
 
         <!-- Mobile‑only CTA lives *inside* drawer -->
         <li class="mobile-cta">
@@ -62,11 +102,17 @@ const isActive = (href: string, { section = false } = {}) => {
 
     <!-- Desktop CTA (hidden on mobile) -->
     <div class="header-actions">
-      <a href="tel:+1-800-387-1705" class="cta" id="desktop-call-cta"
-         aria-label="Call us now at 800-387-1705">
+      <a
+        href="tel:+1-800-387-1705"
+        class="cta"
+        id="desktop-call-cta"
+        aria-label="Call us now at 800-387-1705"
+      >
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor"
-                d="M6.6 10.2c1.2 2.3 3 4.1 5.3 5.3l1.8-1.8c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3.1.6.7 0 1.2.5 1.2 1.2v2.9c0 .7-.5 1.2-1.2 1.2C10.4 20.4 3.6 13.6 3.6 5.2c0-.7.5-1.2 1.2-1.2H7.7c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.1.6 3.1.1.4 0 .9-.3 1.2l-1.6 1.7Z"/>
+          <path
+            fill="currentColor"
+            d="M6.6 10.2c1.2 2.3 3 4.1 5.3 5.3l1.8-1.8c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3.1.6.7 0 1.2.5 1.2 1.2v2.9c0 .7-.5 1.2-1.2 1.2C10.4 20.4 3.6 13.6 3.6 5.2c0-.7.5-1.2 1.2-1.2H7.7c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.1.6 3.1.1.4 0 .9-.3 1.2l-1.6 1.7Z"
+          ></path>
         </svg>
         <span>Call&nbsp;Us&nbsp;Now</span>
       </a>
@@ -98,10 +144,13 @@ const isActive = (href: string, { section = false } = {}) => {
       padding: 0.5rem 3rem;
     }
     .bbb-badge-img {
-      height: 40px;
+      height: 44px;
       width: auto;
       display: block;
       object-fit: contain;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      background-color: #ffffff;
     }
 
     /* ─── Base header layout ───────────────────────── */
@@ -109,7 +158,7 @@ const isActive = (href: string, { section = false } = {}) => {
       background: var(--color-bg);
       border-bottom: 1px solid var(--color-border);
       width: 100%;
-      box-shadow: 0 3px 5px rgba(115,146,193,.3);
+      box-shadow: 0 3px 5px rgba(115, 146, 193, 0.3);
       position: relative;
       z-index: 10;
     }
@@ -124,145 +173,267 @@ const isActive = (href: string, { section = false } = {}) => {
     }
 
     /* ─── Brand ────────────────────────────────────── */
-    .brand { display:flex; align-items:center; gap:.75rem; text-decoration:none; }
-    .brand-logo { width:140px; height:96px; object-fit:contain; display:block; }
-    .brand-text { display:flex; flex-direction:column; line-height:1.1; }
-    .brand-name   { font:700 1.6rem "Merriweather", Georgia, serif; color:var(--color-primary); }
-    .brand-slogan { font-size:1rem; font-style:italic; color:var(--color-muted); }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .brand-logo {
+      width: 140px;
+      height: 96px;
+      object-fit: contain;
+      display: block;
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .brand-name {
+      font: 700 1.6rem "Merriweather", Georgia, serif;
+      color: var(--color-primary);
+    }
+    .brand-slogan {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--color-muted);
+    }
 
     /* ─── Hamburger toggle ─────────────────────────── */
     .menu-toggle {
-      display:none;
-      flex-direction:column; gap:4px;
-      background:none; border:none; padding:.5rem;
-      cursor:pointer;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
     }
     .menu-toggle span {
-      width:24px; height:3px; background:var(--color-text); border-radius:2px;
-      transition:transform .3s ease, opacity .3s ease;
+      width: 24px;
+      height: 3px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-    .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity:0; }
-    .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
 
     /* ─── Navigation ──────────────────────────────── */
-    .nav ul { list-style:none; margin:0; padding:0; display:flex; gap:1.5rem; }
+    .nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+    }
     .nav a {
-      position:relative; font-weight:600; color:var(--color-text);
-      text-decoration:none; padding:.5rem .25rem; border-radius:.25rem;
+      position: relative;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+      padding: 0.5rem 0.25rem;
+      border-radius: 0.25rem;
     }
     .nav a::after {
-      content:""; position:absolute; bottom:0; left:0; width:100%; height:2px;
-      background:var(--color-primary); transform:scaleX(0); transform-origin:left;
-      transition:transform .3s cubic-bezier(.4,0,.2,1);
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--color-primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .nav a:hover::after,
     .nav a:focus-visible::after,
-    .nav a[aria-current="page"]::after { transform:scaleX(1); }
-    .nav a:hover, .nav a:focus-visible { color:var(--color-primary); }
+    .nav a[aria-current="page"]::after {
+      transform: scaleX(1);
+    }
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--color-primary);
+    }
 
     /* ─── CTA (desktop) ───────────────────────────── */
-    .header-actions { position: relative; display:flex; align-items:center; }
-    .cta {
-      display:inline-flex; align-items:center; gap:.5rem;
-      font-weight:600; padding:.6rem 1.25rem;
-      border:2px solid var(--color-primary);
-      color:var(--color-primary); background:transparent;
-      border-radius:9999px; text-decoration:none;
-      transition:background .25s ease, color .25s ease, transform .25s cubic-bezier(.34,1.56,.64,1);
+    .header-actions {
+      position: relative;
+      display: flex;
+      align-items: center;
     }
-    .cta:hover, .cta:focus-visible {
-      background:var(--color-primary); color:var(--color-bg);
-      transform:translateY(-2px) scale(1.03); box-shadow:0 6px 12px rgba(0,0,0,.12);
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      padding: 0.6rem 1.25rem;
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+      background: transparent;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease,
+        transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .cta:hover,
+    .cta:focus-visible {
+      background: var(--color-primary);
+      color: var(--color-bg);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
     }
 
     /* Phone Pop-up Styles */
     .phone-popup {
-        position: absolute;
-        top: 120%; /* MODIFIED: Was bottom: 120% */
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: var(--color-primary);
-        color: var(--color-bg, #fff);
-        padding: 0.75rem 1rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        white-space: nowrap;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s, visibility 0.3s;
+      position: absolute;
+      top: 120%; /* MODIFIED: Was bottom: 120% */
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--color-primary);
+      color: var(--color-bg, #fff);
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
     }
     .phone-popup.is-visible {
-        opacity: 1;
-        visibility: visible;
+      opacity: 1;
+      visibility: visible;
     }
     .phone-popup::after {
-        content: '';
-        position: absolute;
-        bottom: 100%; /* MODIFIED: Was top: 100% */
-        left: 50%;
-        transform: translateX(-50%);
-        border-width: 5px;
-        border-style: solid;
-        border-color: transparent transparent var(--color-primary) transparent; /* MODIFIED: Triangle now points up */
+      content: "";
+      position: absolute;
+      bottom: 100%; /* MODIFIED: Was top: 100% */
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent var(--color-primary) transparent; /* MODIFIED: Triangle now points up */
     }
-    .phone-popup-number { font-weight: 600; }
+    .phone-popup-number {
+      font-weight: 600;
+    }
     .copy-btn {
-        background-color: rgba(255,255,255,0.2);
-        color: inherit;
-        border: none;
-        border-radius: 0.25rem;
-        padding: 0.25rem 0.5rem;
-        cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: inherit;
+      border: none;
+      border-radius: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
     }
     .copy-feedback {
-        font-size: 0.8rem;
-        font-style: italic;
-        min-width: 50px; /* Reserve space for "Copied!" text */
-        text-align: left;
+      font-size: 0.8rem;
+      font-style: italic;
+      min-width: 50px; /* Reserve space for "Copied!" text */
+      text-align: left;
     }
 
     /* ─── Mobile drawer styles (≤768 px) ───────────── */
     @media (max-width: 768px) {
-      .bbb-top-inner { padding: 0.5rem 1rem; justify-content: center; }
-      .bbb-badge-img { height: 35px; }
-      .menu-toggle { display:flex; }
-      .header-actions { display:none; }
-      .header-inner { padding: 1rem; }
+      .bbb-top-inner {
+        padding: 0.5rem 1rem;
+        justify-content: center;
+      }
+      .bbb-badge-img {
+        height: 36px;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .header-actions {
+        display: none;
+      }
+      .header-inner {
+        padding: 1rem;
+      }
       .nav {
-        position:fixed; inset:0 0 0 auto;
-        width:75%; max-width:18rem;
-        background:var(--color-bg); box-shadow:-2px 0 6px rgba(0,0,0,.12);
-        transform:translateX(100%); transition:transform .35s ease-out;
-        padding-top:5rem;
+        position: fixed;
+        inset: 0 0 0 auto;
+        width: 75%;
+        max-width: 18rem;
+        background: var(--color-bg);
+        box-shadow: -2px 0 6px rgba(0, 0, 0, 0.12);
+        transform: translateX(100%);
+        transition: transform 0.35s ease-out;
+        padding-top: 5rem;
       }
-      .nav.open { transform:translateX(0); }
-      .nav ul { flex-direction:column; gap:1.6rem; padding-inline:1.5rem; }
-      .nav a { font-size:1rem; padding:.75rem 0; }
-      .mobile-cta { margin-top:1rem; }
+      .nav.open {
+        transform: translateX(0);
+      }
+      .nav ul {
+        flex-direction: column;
+        gap: 1.6rem;
+        padding-inline: 1.5rem;
+      }
+      .nav a {
+        font-size: 1rem;
+        padding: 0.75rem 0;
+      }
+      .mobile-cta {
+        margin-top: 1rem;
+      }
       .cta-inline {
-        display:block; font-weight:700; color:var(--color-primary);
-        background:rgba(33,74,156,.08); border-radius:.5rem; padding:.85rem 1rem;
-        text-align:center; text-decoration:none;
+        display: block;
+        font-weight: 700;
+        color: var(--color-primary);
+        background: rgba(33, 74, 156, 0.08);
+        border-radius: 0.5rem;
+        padding: 0.85rem 1rem;
+        text-align: center;
+        text-decoration: none;
       }
-      .brand-logo   { width: 100px; height: 64px; }
-      .brand-name   { font-size: 1.25rem; }
-      .brand-slogan { font-size: .85rem; }
+      .brand-logo {
+        width: 100px;
+        height: 64px;
+      }
+      .brand-name {
+        font-size: 1.25rem;
+      }
+      .brand-slogan {
+        font-size: 0.85rem;
+      }
     }
 
     /* ─── Desktop reset (≥769 px) ─────────────────── */
     @media (min-width: 769px) {
-      .nav { position:static; transform:none; width:auto; background:none; box-shadow:none; padding:0; }
-      .nav ul { flex-direction:row; gap:1.5rem; }
-      .mobile-cta { display:none; }
+      .nav {
+        position: static;
+        transform: none;
+        width: auto;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+      }
+      .nav ul {
+        flex-direction: row;
+        gap: 1.5rem;
+      }
+      .mobile-cta {
+        display: none;
+      }
     }
   </style>
 
   <style is:global>
-    body.navlock { overflow: hidden; }
+    body.navlock {
+      overflow: hidden;
+    }
   </style>
 </header>
 
