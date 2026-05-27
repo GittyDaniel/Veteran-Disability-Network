@@ -1,192 +1,192 @@
 {
   "metadata": {
-    "year": "2025",
-    "colaIncrease": "2.5%",
-    "effectiveDate": "December 1, 2024",
-    "announcementDate": "October 10, 2024",
-    "headerTitle": "2025 VA Disability Pay Rates to Increase by 2.5%",
-    "headerDescription": "Effective December 1, 2024, the 2025 VA disability pay rates will reflect a 2.5% increase, as announced by the Social Security Administration on October 10, 2024. This adjustment is based on the latest cost-of-living adjustment (COLA). Refer to the charts provided on this page to determine your eligibility and estimated monthly payout based on this increase."
+    "year": "2026",
+    "colaIncrease": "2.8%",
+    "effectiveDate": "December 1, 2025",
+    "announcementDate": "October 24, 2025",
+    "headerTitle": "2026 VA Disability Pay Rates to Increase by 2.8%",
+    "headerDescription": "Effective December 1, 2025, the 2026 VA disability pay rates will reflect a 2.8% increase, as announced by the Social Security Administration on October 24, 2025. This adjustment is based on the latest cost-of-living adjustment (COLA). Refer to the charts provided on this page to determine your eligibility and estimated monthly payout based on this increase."
   },
   "flatRates": {
-    "10": 175.51,
-    "20": 346.95
+    "10": 180.42,
+    "20": 356.66
   },
   "withoutChildren": [
     {
       "rating": "100%",
-      "alone": 3831.30,
-      "spouse": 4044.91,
-      "spouseOneParent": 4216.35,
-      "spouseTwoParents": 4387.79,
-      "oneParent": 4002.74,
-      "twoParents": 4174.18
+      "alone": 3938.58,
+      "spouse": 4158.17,
+      "spouseOneParent": 4334.41,
+      "spouseTwoParents": 4510.65,
+      "oneParent": 4114.82,
+      "twoParents": 4291.06
     },
     {
       "rating": "90%",
-      "alone": 2297.96,
-      "spouse": 2489.63,
-      "spouseOneParent": 2643.38,
-      "spouseTwoParents": 2797.13,
-      "oneParent": 2451.71,
-      "twoParents": 2605.46
+      "alone": 2362.30,
+      "spouse": 2559.34,
+      "spouseOneParent": 2717.39,
+      "spouseTwoParents": 2875.45,
+      "oneParent": 2520.36,
+      "twoParents": 2678.41
     },
     {
       "rating": "80%",
-      "alone": 2044.89,
-      "spouse": 2214.89,
-      "spouseOneParent": 2351.89,
-      "spouseTwoParents": 2488.89,
-      "oneParent": 2181.89,
-      "twoParents": 2318.89
+      "alone": 2102.15,
+      "spouse": 2277.06,
+      "spouseOneParent": 2417.20,
+      "spouseTwoParents": 2557.34,
+      "oneParent": 2242.28,
+      "twoParents": 2382.43
     },
     {
       "rating": "70%",
-      "alone": 1759.19,
-      "spouse": 1908.19,
-      "spouseOneParent": 2028.19,
-      "spouseTwoParents": 2148.19,
-      "oneParent": 1879.19,
-      "twoParents": 1999.19
+      "alone": 1808.45,
+      "spouse": 1961.23,
+      "spouseOneParent": 2084.52,
+      "spouseTwoParents": 2207.79,
+      "oneParent": 1931.73,
+      "twoParents": 2055.01
     },
     {
       "rating": "60%",
-      "alone": 1395.93,
-      "spouse": 1523.93,
-      "spouseOneParent": 1625.93,
-      "spouseTwoParents": 1727.93,
-      "oneParent": 1497.93,
-      "twoParents": 1599.93
+      "alone": 1435.02,
+      "spouse": 1566.72,
+      "spouseOneParent": 1672.09,
+      "spouseTwoParents": 1777.46,
+      "oneParent": 1540.39,
+      "twoParents": 1645.76
     },
     {
       "rating": "50%",
-      "alone": 1102.04,
-      "spouse": 1208.04,
-      "spouseOneParent": 1293.04,
-      "spouseTwoParents": 1378.04,
-      "oneParent": 1187.04,
-      "twoParents": 1272.04
+      "alone": 1132.90,
+      "spouse": 1242.48,
+      "spouseOneParent": 1329.93,
+      "spouseTwoParents": 1417.40,
+      "oneParent": 1220.35,
+      "twoParents": 1307.81
     },
     {
       "rating": "40%",
-      "alone": 774.16,
-      "spouse": 859.16,
-      "spouseOneParent": 927.16,
-      "spouseTwoParents": 995.16,
-      "oneParent": 842.16,
-      "twoParents": 910.16
+      "alone": 795.84,
+      "spouse": 883.30,
+      "spouseOneParent": 952.84,
+      "spouseTwoParents": 1022.39,
+      "oneParent": 865.38,
+      "twoParents": 934.92
     },
     {
       "rating": "30%",
-      "alone": 537.42,
-      "spouse": 601.42,
-      "spouseOneParent": 652.42,
-      "spouseTwoParents": 703.42,
-      "oneParent": 588.42,
-      "twoParents": 639.42
+      "alone": 552.47,
+      "spouse": 617.80,
+      "spouseOneParent": 670.48,
+      "spouseTwoParents": 723.17,
+      "oneParent": 605.05,
+      "twoParents": 657.84
     }
   ],
   "withChildren": [
     {
       "rating": "100%",
-      "child": 3974.15,
-      "spouseChild": 4201.35,
-      "spouseChildOneParent": 4372.79,
-      "spouseChildTwoParents": 4544.23,
-      "childOneParent": 4145.59,
-      "childTwoParents": 4317.03
+      "child": 4085.43,
+      "spouseChild": 4318.98,
+      "spouseChildOneParent": 4495.22,
+      "spouseChildTwoParents": 4671.46,
+      "childOneParent": 4261.67,
+      "childTwoParents": 4437.91
     },
     {
       "rating": "90%",
-      "child": 2425.96,
-      "spouseChild": 2630.96,
-      "spouseChildOneParent": 2784.96,
-      "spouseChildTwoParents": 2938.96,
-      "childOneParent": 2579.96,
-      "childTwoParents": 2733.96
+      "child": 2494.01,
+      "spouseChild": 2703.70,
+      "spouseChildOneParent": 2861.76,
+      "spouseChildTwoParents": 3019.81,
+      "childOneParent": 2652.07,
+      "childTwoParents": 2810.12
     },
     {
       "rating": "80%",
-      "child": 2158.89,
-      "spouseChild": 2340.89,
-      "spouseChildOneParent": 2477.89,
-      "spouseChildTwoParents": 2614.89,
-      "childOneParent": 2295.89,
-      "childTwoParents": 2432.89
+      "child": 2219.10,
+      "spouseChild": 2405.61,
+      "spouseChildOneParent": 2545.75,
+      "spouseChildTwoParents": 2685.90,
+      "childOneParent": 2359.25,
+      "childTwoParents": 2499.39
     },
     {
       "rating": "70%",
-      "child": 1858.19,
-      "spouseChild": 2018.19,
-      "spouseChildOneParent": 2138.19,
-      "spouseChildTwoParents": 2258.19,
-      "childOneParent": 1978.19,
-      "childTwoParents": 2098.19
+      "child": 1910.65,
+      "spouseChild": 2073.98,
+      "spouseChildOneParent": 2197.26,
+      "spouseChildTwoParents": 2320.55,
+      "childOneParent": 2033.94,
+      "childTwoParents": 2157.22
     },
     {
       "rating": "60%",
-      "child": 1480.93,
-      "spouseChild": 1617.93,
-      "spouseChildOneParent": 1719.93,
-      "spouseChildTwoParents": 1821.93,
-      "childOneParent": 1582.93,
-      "childTwoParents": 1684.93
+      "child": 1521.71,
+      "spouseChild": 1662.62,
+      "spouseChildOneParent": 1767.99,
+      "spouseChildTwoParents": 1873.36,
+      "childOneParent": 1627.84,
+      "childTwoParents": 1733.21
     },
     {
       "rating": "50%",
-      "child": 1173.04,
-      "spouseChild": 1287.04,
-      "spouseChildOneParent": 1372.04,
-      "spouseChildTwoParents": 1457.04,
-      "childOneParent": 1258.04,
-      "childTwoParents": 1343.04
+      "child": 1205.08,
+      "spouseChild": 1322.56,
+      "spouseChildOneParent": 1410.02,
+      "spouseChildTwoParents": 1497.48,
+      "childOneParent": 1293.06,
+      "childTwoParents": 1380.51
     },
     {
       "rating": "40%",
-      "child": 831.16,
-      "spouseChild": 922.16,
-      "spouseChildOneParent": 990.16,
-      "spouseChildTwoParents": 1058.16,
-      "childOneParent": 899.16,
-      "childTwoParents": 967.16
+      "child": 853.80,
+      "spouseChild": 947.57,
+      "spouseChildOneParent": 1017.11,
+      "spouseChildTwoParents": 1086.66,
+      "childOneParent": 923.34,
+      "childTwoParents": 992.88
     },
     {
       "rating": "30%",
-      "child": 579.42,
-      "spouseChild": 648.42,
-      "spouseChildOneParent": 699.42,
-      "spouseChildTwoParents": 750.42,
-      "childOneParent": 630.42,
-      "childTwoParents": 681.42
+      "child": 595.66,
+      "spouseChild": 666.27,
+      "spouseChildOneParent": 718.95,
+      "spouseChildTwoParents": 771.64,
+      "childOneParent": 648.35,
+      "childTwoParents": 701.03
     }
   ],
   "aidAndAttendance": {
-    "100": 195.92,
-    "90": 176.00,
-    "80": 157.00,
-    "70": 137.00,
-    "60": 117.00,
-    "50": 98.00,
-    "40": 78.00,
-    "30": 58.00
+    "100": 201.41,
+    "90": 181.24,
+    "80": 161.22,
+    "70": 141.20,
+    "60": 120.12,
+    "50": 100.11,
+    "40": 80.08,
+    "30": 60.07
   },
   "additionalChildUnder18": {
-    "100": 106.14,
-    "90": 95.00,
-    "80": 84.00,
-    "70": 74.00,
-    "60": 63.00,
-    "50": 53.00,
-    "40": 42.00,
-    "30": 31.00
+    "100": 109.11,
+    "90": 98.00,
+    "80": 86.40,
+    "70": 75.87,
+    "60": 65.33,
+    "50": 53.74,
+    "40": 43.21,
+    "30": 32.67
   },
   "additionalSchoolchildOver18": {
-    "100": 342.85,
-    "90": 308.00,
-    "80": 274.00,
-    "70": 239.00,
-    "60": 205.00,
-    "50": 171.00,
-    "40": 137.00,
-    "30": 102.00
+    "100": 352.45,
+    "90": 317.17,
+    "80": 281.34,
+    "70": 246.57,
+    "60": 210.74,
+    "50": 175.97,
+    "40": 140.15,
+    "30": 105.37
   }
 }
