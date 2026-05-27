@@ -22,7 +22,7 @@ if (!post) {
   console.error('Post not found in Astro.props:', Astro.props);
   throw new Error('Post not found in Astro.props — check getStaticPaths().');
 }
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 // Dynamic SEO for each post
 const seo = {
