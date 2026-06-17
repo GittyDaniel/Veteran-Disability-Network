@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
+import { createHmac, timingSafeEqual } from "node:crypto";
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -8,16 +9,76 @@ const supabase = createClient(
   import.meta.env.SUPABASE_SERVICE_KEY
 );
 
-// Initialize Resend client with your API key
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
+const MIN_FORM_AGE_MS = 2500;
+const MAX_FORM_AGE_MS = 2 * 60 * 60 * 1000;
+
+const getFormSpamSecret = () =>
+  import.meta.env.FORM_SPAM_SECRET ||
+  import.meta.env.SUPABASE_SERVICE_KEY ||
+  "dev-form-spam-secret";
+
+const signFormIssuedAt = (issuedAt: string) =>
+  createHmac("sha256", getFormSpamSecret()).update(issuedAt).digest("hex");
+
+const hexToBytes = (hex: string) => {
+  if (!/^[a-f0-9]+$/i.test(hex) || hex.length % 2 !== 0) {
+    return null;
+  }
+
+  const bytes = new Uint8Array(hex.length / 2);
+  for (let index = 0; index < hex.length; index += 2) {
+    bytes[index / 2] = Number.parseInt(hex.slice(index, index + 2), 16);
+  }
+
+  return bytes;
+};
+
+const signaturesMatch = (expected: string, received: string) => {
+  const expectedBytes = hexToBytes(expected);
+  const receivedBytes = hexToBytes(received);
+
+  if (!expectedBytes || !receivedBytes || expectedBytes.length !== receivedBytes.length) {
+    return false;
+  }
+
+  return timingSafeEqual(expectedBytes, receivedBytes);
+};
+
+const verifyFormSubmission = (formData: FormData) => {
+  const issuedAt = formData.get("_formIssuedAt");
+  const signature = formData.get("_formSignature");
+  const interaction = formData.get("_formInteraction");
+
+  if (typeof issuedAt !== "string" || typeof signature !== "string") {
+    return false;
+  }
+
+  if (interaction !== "started") {
+    return false;
+  }
+
+  const issuedAtTime = Number(issuedAt);
+  if (!Number.isFinite(issuedAtTime)) {
+    return false;
+  }
+
+  const formAge = Date.now() - issuedAtTime;
+  if (formAge < MIN_FORM_AGE_MS || formAge > MAX_FORM_AGE_MS) {
+    return false;
+  }
+
+  return signaturesMatch(signFormIssuedAt(issuedAt), signature);
+};
 
 export const POST: APIRoute = async ({ request, redirect }) => {
   const formData = await request.formData();
   const leadData = Object.fromEntries(formData);
 
-  // Basic spam check (honeypot)
-  if (leadData.company) {
-    return new Response("Spam detected", { status: 400 });
+  if (!verifyFormSubmission(formData)) {
+    return new Response(JSON.stringify({ error: "Please refresh the page and try again." }), {
+      status: 400,
+      headers: { "content-type": "application/json" },
+    });
   }
 
   let referredBy: string | null = null;
@@ -47,6 +108,12 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 
   // --- Step 2: Send the email notification ---
   try {
+    const resendApiKey = import.meta.env.RESEND_API_KEY;
+    if (!resendApiKey) {
+      throw new Error("RESEND_API_KEY is not configured.");
+    }
+
+    const resend = new Resend(resendApiKey);
     const emailHtmlBody = `
       <h1>New Consultation Request</h1>
       <p>A new potential client has submitted a request for a consultation.</p>
@@ -63,7 +130,7 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       <h2>Referral Information</h2>
       <ul>
         <li><strong>How they heard about us:</strong> ${
-          leadData.referralSource
+          leadData.referral
         }</li>
         <li><strong>Referral Code Provided:</strong> ${
           leadData.referralCode || "N/A"

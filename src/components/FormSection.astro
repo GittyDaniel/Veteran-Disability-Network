@@ -1,4 +1,13 @@
+---
+import { createHmac } from "node:crypto";
 
+const formIssuedAt = Date.now().toString();
+const formSpamSecret =
+  import.meta.env.FORM_SPAM_SECRET ||
+  import.meta.env.SUPABASE_SERVICE_KEY ||
+  "dev-form-spam-secret";
+const formSignature = createHmac("sha256", formSpamSecret).update(formIssuedAt).digest("hex");
+---
 
 <section id="get-started" class="lead" aria-labelledby="lead-title">
   <div class="lead-inner">
@@ -9,11 +18,9 @@
     </header>
 
     <form id="get-started-form" class="leadform" method="post" novalidate>
-      <!-- Honeypot (basic spam trap) -->
-      <div class="hp" aria-hidden="true">
-        <label for="company">Company</label>
-        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
-      </div>
+      <input type="hidden" name="_formIssuedAt" value={formIssuedAt} />
+      <input type="hidden" name="_formSignature" value={formSignature} />
+      <input id="form-interaction" type="hidden" name="_formInteraction" value="" />
 
       <!-- ===== Your existing form grid (kept) ===== -->
       <div class="grid">
@@ -183,8 +190,6 @@
       padding: clamp(1rem, 2.5vw, 1.5rem);
       max-width: 100%;
     }
-
-    .hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 
     /* ---------- Grid ---------- */
     .grid {
@@ -365,6 +370,16 @@
     
     const form = document.getElementById('get-started-form') as HTMLFormElement;
     const submitButton = document.getElementById('get-started-submit-btn') as HTMLButtonElement;
+    const interactionInput = document.getElementById('form-interaction') as HTMLInputElement;
+
+    const markInteraction = () => {
+      interactionInput.value = 'started';
+    };
+
+    form.addEventListener('input', markInteraction, { once: true });
+    form.addEventListener('change', markInteraction, { once: true });
+    form.addEventListener('pointerdown', markInteraction, { once: true });
+    form.addEventListener('keydown', markInteraction, { once: true });
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -373,6 +388,8 @@
         form.reportValidity();
         return;
       }
+
+      markInteraction();
 
       const originalButtonText = submitButton.textContent;
       submitButton.disabled = true;
